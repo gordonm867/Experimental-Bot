@@ -22,17 +22,25 @@ public class Point {
     }
 
     public double angle(double newX, double newY, AngleUnit unit) {
-        if(unit == AngleUnit.DEGREES) {
-            return(Math.toDegrees(Math.atan2(newY - y, newX - x)));
-        }
-        return Math.atan2(newY - y, newX - x);
+        Point point = new Point(newX, newY);
+        return angle(point, unit);
     }
 
     public double angle(Point newPoint, AngleUnit unit) {
+        double angle;
         if(unit == AngleUnit.DEGREES) {
-            return(Math.toDegrees(Math.atan2(newPoint.getY() - y, newPoint.getX() - x)));
+            angle = Math.toDegrees(Math.atan2(newPoint.getY() - y, newPoint.getX() - x));
+            while(angle < -180 || angle > 180) {
+                angle += 360;
+            }
         }
-        return Math.atan2(newPoint.getY() - y, newPoint.getX() - x);
+        else {
+            angle = Math.atan2(newPoint.getY() - y, newPoint.getX() - x);
+            while(angle < -Math.PI || angle > Math.PI) {
+                angle += 2 * Math.PI;
+            }
+        }
+        return angle;
     }
 
     public double getX() {

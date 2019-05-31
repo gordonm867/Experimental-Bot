@@ -3,12 +3,14 @@ package org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.openftc.revextensions2.ExpansionHubEx;
 import org.openftc.revextensions2.RevBulkData;
@@ -32,6 +34,8 @@ public class TrashHardware {
 
     public              boolean         enabled         = true;
 
+    private             Orientation     angles;
+
 
     /* Constructor */
     public static TrashHardware getInstance() {
@@ -50,12 +54,16 @@ public class TrashHardware {
             ex2 = null;
         }
         try { // Gyro
+            gyro = hwMap.get(BNO055IMU.class, "g0");
             BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
             parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
             parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
             parameters.loggingEnabled = true;
             parameters.loggingTag = "IMU";
             parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+            if(ex2 != null) {
+                gyro = LynxOptimizedI2cFactory.createLynxEmbeddedImu(ex2.getStandardModule(), 0);
+            }
             gyro.initialize(parameters);
         } catch (Exception p_exception) {
             gyro = null;
@@ -122,10 +130,7 @@ public class TrashHardware {
     }
 
     public double getAngle() {
-        if(gyro != null) {
-            return gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
-        }
-        return 0;
+        return gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
     }
 
     public RevBulkData bulkRead() {

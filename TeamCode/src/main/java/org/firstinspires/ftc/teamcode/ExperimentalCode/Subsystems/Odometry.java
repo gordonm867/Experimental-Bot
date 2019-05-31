@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Point;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Vector2;
 
 public class Odometry {
+
     private static TrashHardware robot;
     private static double lastAngle;
     private double lastXPos = Globals.START_X;
@@ -45,7 +46,7 @@ public class Odometry {
     }
 
     public double getAngle() {
-        return angle;
+        return robot.getAngle() + angleOffset;
     }
 
     public Point getPoint() {
