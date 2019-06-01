@@ -27,7 +27,7 @@ public class TrashAutonomous extends LinearOpMode {
     private Odometry odometry;
     private Drivetrain wheels = new Drivetrain(Drivetrain.State.STOPPED);
     private double angleOffset = 3;
-    private double radius = 0.65;
+    private double radius = 1.5;
 
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
@@ -41,8 +41,9 @@ public class TrashAutonomous extends LinearOpMode {
         telemetry.update();
         waitForStart();
         wheels.setState(Drivetrain.State.DRIVING);
-        turnToPoint(new Point(1, 1));
+        turnToPoint(new Point(-5, -1));
         ArrayList<Line> path = new ArrayList<>();
+        /*
         path.add(new Line(odometry.getPoint(), new Point(1, 1)));
         path.add(new Line(new Point(1, 1), new Point(0, Math.sqrt(2))));
         path.add(new Line(new Point(0, Math.sqrt(2)), new Point(-1, 1)));
@@ -52,9 +53,17 @@ public class TrashAutonomous extends LinearOpMode {
         path.add(new Line(new Point(0, -Math.sqrt(2)), new Point(1, -1)));
         path.add(new Line(new Point(1, -1), new Point(Math.sqrt(2), 0)));
         path.add(new Line(new Point(Math.sqrt(2), 0), new Point(0, 0)));
+        */
+        path.add(new Line(odometry.getPoint(), new Point(-4.5, 0)));
+        path.add(new Line(new Point(-4.5, 0), new Point(-5, -3.5)));
         follow(path);
-        runToPoint(new Point(0, 0));
-        turn(-robot.getAngle());
+        robot.setDrivePower(0, 0, 0, 0);
+        path.clear();
+        path.add(new Line(new Point(-5, -3.5), new Point(-4.5, 0)));
+        path.add(new Line(new Point(-4.5, 0), new Point(-2, 2)));
+        backFollow(path);
+        // runToPoint(new Point(0, 0));
+        turn((((-robot.getAngle() + 135) + 180) % 360) - 180);
         while(opModeIsActive()) {
             telemetry.addData("Point", odometry.getPoint());
             telemetry.addData("Odometry update time", odometry.getUpdateTime());
@@ -73,14 +82,49 @@ public class TrashAutonomous extends LinearOpMode {
             while(opModeIsActive() && nextPoint.size() > 0) {
                 while(opModeIsActive() && !Functions.isPassed(line, odometry.getPoint(), nextPoint.get(0))) {
                     double relAngle = odometry.getPoint().angle(nextPoint.get(0), AngleUnit.DEGREES) - odometry.getAngle();
-                    if(Math.abs(relAngle + 360) < Math.abs(relAngle)) {
+                    if (Math.abs(relAngle + 360) < Math.abs(relAngle)) {
                         relAngle += 360;
                     }
-                    if(Math.abs(relAngle - 360) < Math.abs(relAngle)) {
+                    if (Math.abs(relAngle - 360) < Math.abs(relAngle)) {
                         relAngle -= 360;
                     }
                     double drive = -Math.cos(Math.toRadians(relAngle));
-                    double turn = 0.005 * relAngle;
+                    double turn = 0.0055 * relAngle;
+                    double scaleFactor;
+                    if (Math.max(Math.abs((drive + turn)), Math.abs((drive - turn))) > 1) {
+                        scaleFactor = Globals.MAX_SPEED / (Math.max(Math.abs(drive + turn), Math.abs(drive - turn)));
+                    } else {
+                        scaleFactor = Globals.MAX_SPEED;
+                    }
+                    robot.setDrivePower(scaleFactor * (drive + turn), scaleFactor * (drive + turn), scaleFactor * (drive - turn), scaleFactor * (drive - turn));
+                    odometry.update();
+                }
+                line = new Line(odometry.getPoint(), line.getPoint2());
+                nextPoint = Functions.lineCircleIntersection(new Circle(odometry.getPoint(), radius), line);
+            }
+        }
+        robot.setDrivePower(0, 0, 0, 0);
+    }
+
+    public void backFollow(ArrayList<Line> path) {
+        robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        for(Line line : path) {
+            odometry.update();
+            ArrayList<Point> nextPoint = Functions.lineCircleIntersection(new Circle(odometry.getPoint(), radius), line);
+            while (opModeIsActive() && nextPoint.size() > 0) {
+                while (opModeIsActive() && !Functions.isPassed(line, odometry.getPoint(), nextPoint.get(0))) {
+                    double relAngle = odometry.getPoint().angle(nextPoint.get(0), AngleUnit.DEGREES) - odometry.getAngle();
+                    if (Math.abs(relAngle + 360) < Math.abs(relAngle)) {
+                        relAngle += 360;
+                    }
+                    if (Math.abs(relAngle - 360) < Math.abs(relAngle)) {
+                        relAngle -= 360;
+                    }
+                    double drive = -Math.cos(Math.toRadians(relAngle));
+                    double turn = 0.0055 * (relAngle - (180 * Math.signum(relAngle)));
                     double scaleFactor;
                     if (Math.max(Math.abs((drive + turn)), Math.abs((drive - turn))) > 1) {
                         scaleFactor = Globals.MAX_SPEED / (Math.max(Math.abs(drive + turn), Math.abs(drive - turn)));
@@ -157,7 +201,7 @@ public class TrashAutonomous extends LinearOpMode {
                         error = lastError;
                     }
                 }
-                robot.setDrivePower(Math.min(-0.0115 * error, -0.1), Math.min(-0.0115 * error, -0.1), Math.max(0.0115 * error, 0.1), Math.max(0.0115 * error, 0.1));
+                robot.setDrivePower(Math.min(-0.03 * error, -0.1), Math.min(-0.03 * error, -0.1), Math.max(0.03 * error, 0.1), Math.max(0.03 * error, 0.1));
                 robotAngle = robot.getAngle();
             }
             robot.setDrivePower(0, 0, 0, 0);
@@ -188,7 +232,7 @@ public class TrashAutonomous extends LinearOpMode {
                         error = lastError;
                     }
                 }
-                robot.setDrivePower(Math.max(0.0115 * error, 0.1), Math.max(0.0115 * error, 0.1), Math.min(-0.0115 * error, -0.1), Math.min(-0.0115 * error, -0.1));
+                robot.setDrivePower(Math.max(0.03 * error, 0.1), Math.max(0.03 * error, 0.1), Math.min(-0.03 * error, -0.1), Math.min(-0.03 * error, -0.1));
                 robotAngle = robot.getAngle();
             }
             robot.setDrivePower(0, 0, 0, 0);

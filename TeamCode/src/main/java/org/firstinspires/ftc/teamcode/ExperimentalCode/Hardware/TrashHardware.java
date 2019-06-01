@@ -130,7 +130,7 @@ public class TrashHardware {
     }
 
     public double getAngle() {
-        return gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+        return (((gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle + Globals.START_THETA) + 180) % 360) - 180;
     }
 
     public RevBulkData bulkRead() {

@@ -7,14 +7,14 @@ public class Functions {
 
     public static ArrayList<Point> lineCircleIntersection(Circle circle, Line line) {
         if (abs(line.getYComp()) < 0.003) {
-            if (line.getYComp() > 0) {
+            if (line.getYComp() >= 0) {
                 line = new Line(new Point(line.getPoint2().getX(), line.getPoint2().getY() - 0.003), line.getPoint2());
             } else {
                 line = new Line(new Point(line.getPoint2().getX(), line.getPoint2().getY() + 0.003), line.getPoint2());
             }
         }
         if (abs(line.getXComp()) < 0.003) {
-            if (line.getXComp() > 0) {
+            if (line.getXComp() >= 0) {
                 line = new Line(new Point(line.getPoint2().getX() - 0.003, line.getPoint1().getY()), line.getPoint2());
             } else {
                 line = new Line(new Point(line.getPoint2().getX(), line.getPoint2().getY() + 0.003), line.getPoint2());
