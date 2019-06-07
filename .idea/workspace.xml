@@ -3,21 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="48b20a30-f799-4178-b88c-af640454e1b2" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle___Blocks_release__aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle___FtcCommon_release__aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle___Hardware_release__aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle___Inspection_release__aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle___RobotCore_release__aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle___WirelessP2p_release__aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle___tensorflow_lite_0_0_0_nightly__aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle___tfod_release__aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle__com_acmerobotics_dashboard_dashboard_0_3_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle__com_android_support_multidex_1_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle__com_android_support_multidex_instrumentation_1_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle__org_nanohttpd_nanohttpd_websocket_2_3_1_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/libraries/Gradle__org_openftc_rev_extensions_2_1_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../516-Gears-Of-Fire/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle___Blocks_release__aar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle___FtcCommon_release__aar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle___Hardware_release__aar.xml" afterDir="false" />
@@ -47,6 +32,8 @@
       <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/GyroTest.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/SimpleAutoOdometry.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/SimpleTrashTeleOp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/Strafe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/StrafeTurn.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/TestTrashAutonomous.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,6 +41,11 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
@@ -66,54 +58,14 @@
     <favorites_list name="Experimental-Bot" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Subsystems/Odometry.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="71" column="32" selection-start-line="71" selection-start-column="32" selection-end-line="71" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Functions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
-              <folding>
-                <element signature="method#isPassed#0;class#Functions#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/TestTrashAutonomous.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="91" column="39" selection-start-line="91" selection-start-column="39" selection-end-line="91" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#runOpMode#0;class#TrashAutonomous#0" expanded="true" />
-                <element signature="method#backFollow#0;class#TestTrashAutonomous#0" expanded="true" />
-                <element signature="method#turnToPoint#0;class#TrashAutonomous#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashAutonomous.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="234" column="94" selection-start-line="234" selection-start-column="94" selection-end-line="234" selection-end-column="94" />
+            <state relative-caret-position="910">
+              <caret line="164" column="114" selection-start-line="164" selection-start-column="114" selection-end-line="164" selection-end-column="114" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#runOpMode#0;class#TrashAutonomous#0" expanded="true" />
                 <element signature="method#follow#0;class#TrashAutonomous#0" expanded="true" />
                 <element signature="method#backFollow#0;class#TrashAutonomous#0" expanded="true" />
               </folding>
@@ -122,33 +74,45 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Globals/Globals.java">
+        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/Strafe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="48" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
+            <state relative-caret-position="15">
+              <caret line="57" column="13" lean-forward="true" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Hardware/TrashHardware.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/StrafeTurn.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="132" column="157" selection-start-line="132" selection-start-column="157" selection-end-line="132" selection-end-column="157" />
+            <state relative-caret-position="210">
+              <caret line="30" column="27" lean-forward="true" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
               <folding>
-                <element signature="method#init#0;class#TrashHardware#0" expanded="true" />
-                <element signature="method#getVOmniPos#0;class#TrashHardware#0" expanded="true" />
-                <element signature="method#getHOmniPos#0;class#TrashHardware#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#strafeTurn#0;class#StrafeTurn#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/SimpleAutoOdometry.java">
+        <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Point.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="287" selection-start-line="287" selection-end-line="387" />
+            <state relative-caret-position="136">
+              <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+              <folding>
+                <element signature="method#distance#1;class#Point#0" expanded="true" />
+                <element signature="method#angle#1;class#Point#0" expanded="true" />
+                <element signature="e#1470#1471#0" expanded="true" />
+                <element signature="e#1494#1495#0" expanded="true" />
+                <element signature="e#1546#1547#0" expanded="true" />
+                <element signature="e#1578#1579#0" expanded="true" />
+                <element signature="e#1635#1636#0" expanded="true" />
+                <element signature="method#equals#0;class#Point#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -174,27 +138,43 @@
       <find>0.005</find>
       <find>0.005 * re</find>
       <find>0.0115</find>
+      <find>angleOffset =</find>
+      <find>Radians) - odometry.getAngle()</find>
+      <find>RADIANS) - odometry.getAngle()</find>
+      <find>double PIDd</find>
+      <find>double PIDd =</find>
+      <find>gamepad</find>
+      <find>0.0055</find>
+      <find>turnCoeff</find>
+      <find>strafeTurn</find>
+      <find>stuck</find>
+      <find>Stop</find>
+      <find>AngleU</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/GyroTest.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashTeleOp.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Point.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Functions.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/TestTrashAutonomous.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Globals/Globals.java" />
-        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Hardware/TrashHardware.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Subsystems/Odometry.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/GyroTest.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/SimpleTrashTeleOp.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Globals/Globals.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Subsystems/Drivetrain.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/Strafe.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/StrafeTurn.java" />
+        <option value="$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Hardware/TrashHardware.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashTeleOp.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Functions.java" />
+        <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Point.java" />
         <option value="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashAutonomous.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1366" />
-    <option name="height" value="678" />
+    <option name="height" value="768" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -202,6 +182,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -214,19 +195,18 @@
               <item name="Experimental-Bot" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="libs" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Experimental-Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
-            <path>
-              <item name="Experimental-Bot" type="1abcf292:AndroidViewProjectNode" />
-              <item name="FtcRobotController" type="feadf853:AndroidModuleNode" />
-            </path>
             <path>
               <item name="Experimental-Bot" type="1abcf292:AndroidViewProjectNode" />
               <item name="TeamCode" type="feadf853:AndroidModuleNode" />
@@ -295,7 +275,7 @@
     <property name="device.picker.selection" value="ZY223JGB3D" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
-    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
     <property name="sync.plugin.last.upgrade.timestamp" value="1559181342744" />
   </component>
   <component name="RunDashboard">
@@ -381,7 +361,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1366" height="678" extended-state="0" />
+    <frame x="0" y="0" width="1366" height="768" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.5026455" side_tool="true" weight="0.32930514" />
@@ -393,92 +373,28 @@
       <window_info id="Favorites" order="6" side_tool="true" weight="0.32930514" />
       <window_info active="true" content_ui="combo" id="Project" order="7" sideWeight="0.4973545" visible="true" weight="0.33912387" />
       <window_info id="Captures" order="8" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" order="0" />
-      <window_info anchor="bottom" id="TODO" order="1" />
-      <window_info anchor="bottom" id="Debug" order="2" />
-      <window_info anchor="bottom" id="Run" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" weight="0.3285968" />
-      <window_info anchor="bottom" id="Build" order="5" visible="true" weight="0.3285968" />
-      <window_info anchor="bottom" id="Terminal" order="6" weight="0.3285968" />
-      <window_info anchor="bottom" id="Android Profiler" order="7" />
-      <window_info anchor="bottom" id="Logcat" order="8" />
-      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="right" id="Gradle" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Path Designer" order="5" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4973545" visible="true" weight="0.32930514" />
-      <window_info id="Structure" order="1" sideWeight="0.5026455" side_tool="true" weight="0.32930514" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="Build Variants" order="5" sideWeight="0.5026455" side_tool="true" weight="0.32930514" />
-      <window_info id="Resources Explorer" order="6" sideWeight="0.4973545" weight="0.32930514" />
-      <window_info id="Favorites" order="7" side_tool="true" weight="0.32930514" />
-      <window_info id="Captures" order="8" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" order="0" />
-      <window_info anchor="bottom" id="TODO" order="1" />
-      <window_info anchor="bottom" id="Logcat" order="2" />
+      <window_info anchor="bottom" id="Find" order="0" />
+      <window_info anchor="bottom" id="Version Control" order="1" />
+      <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Run" order="4" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" weight="0.3285968" />
-      <window_info anchor="bottom" id="Build" order="6" weight="0.3285968" />
+      <window_info anchor="bottom" id="Build" order="6" visible="true" weight="0.27407408" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3285968" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
+      <window_info anchor="bottom" id="Logcat" order="9" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Path Designer" order="5" />
-    </layout-to-restore>
+      <window_info anchor="right" id="Path Designer" order="5" weight="0.32930514" />
+    </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Circle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/navigation/Rotation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="37" column="12" selection-start-line="37" selection-start-column="12" selection-end-line="37" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/com/qualcomm/robotcore/hardware/DcMotorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1651">
-          <caret line="296" column="46" selection-start-line="296" selection-start-column="46" selection-end-line="296" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6201#6202#0" expanded="true" />
-            <element signature="e#6237#6238#0" expanded="true" />
-            <element signature="e#9184#9497#0" expanded="true" />
-            <element signature="e#9794#9935#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/com/qualcomm/robotcore/eventloop/opmode/OpMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/navigation/Rotation.java" />
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/com/qualcomm/robotcore/hardware/DcMotorImpl.java" />
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/com/qualcomm/robotcore/eventloop/opmode/OpMode.java" />
     <entry file="file://$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/external/samples/BasicOpMode_Linear.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -510,26 +426,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/GyroTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/com/qualcomm/robotcore/eventloop/opmode/OpMode.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="36" column="28" lean-forward="true" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
-          <folding>
-            <element signature="method#init_loop#0;class#OpMode#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/RobotCore-release-sources/org/firstinspires/ftc/robotcore/external/Telemetry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -537,60 +433,114 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/com/qualcomm/robotcore/eventloop/opmode/LinearOpMode.class">
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/com/qualcomm/robotcore/eventloop/opmode/LinearOpMode.class" />
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/com/qualcomm/robotcore/eventloop/opmode/OpMode.class" />
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/com/qualcomm/robotcore/hardware/Gamepad.class" />
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/org/firstinspires/ftc/robotcore/internal/opmode/TelemetryImpl.class" />
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/org/firstinspires/ftc/robotcore/internal/opmode/OpModeManagerImpl.class" />
+    <entry file="file://$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-499">
-          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+        <state relative-caret-position="191">
+          <caret line="406" column="30" selection-start-line="406" selection-start-column="30" selection-end-line="406" selection-end-column="30" />
           <folding>
-            <element signature="method#waitForStart#0;class#LinearOpMode#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Point.java">
+    <entry file="file://$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/external/samples/BasicOpMode_Iterative.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
+        <state relative-caret-position="-64">
+          <caret line="63" column="7" lean-forward="true" selection-start-line="63" selection-start-column="7" selection-end-line="63" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes/org/firstinspires/ftc/robotcore/internal/opmode/OpModeManagerImpl$OpModeStuckCodeMonitor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/classes/org/firstinspires/ftc/robotcore/internal/system/AppUtil.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="445" column="16" selection-start-line="445" selection-start-column="16" selection-end-line="445" selection-end-column="16" />
           <folding>
-            <element signature="e#1494#1495#0" expanded="true" />
-            <element signature="e#1546#1547#0" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
+            <element signature="e#15736#16279#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Subsystems/Drivetrain.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/classes/org/firstinspires/ftc/robotcore/internal/opmode/OpModeManagerImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
+        <state relative-caret-position="295">
+          <caret line="597" column="51" selection-start-line="597" selection-start-column="51" selection-end-line="597" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashTeleOp.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Vector2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+        <state relative-caret-position="120">
+          <caret line="8" column="52" lean-forward="true" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/SimpleTrashTeleOp.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/classes/org/firstinspires/ftc/robotcore/external/navigation/AngleUnit.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="181" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="181" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Globals/Globals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Hardware/LynxOptimizedI2cFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/SimpleAutoOdometry.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Hardware/TrashHardware.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="287" selection-start-line="287" selection-end-line="387" />
+        <state relative-caret-position="-1581">
+          <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
+          <folding>
+            <element signature="method#init#0;class#TrashHardware#0" expanded="true" />
+            <element signature="method#getAngle#0;class#TrashHardware#0" expanded="true" />
+            <element signature="method#getVOmniPos#0;class#TrashHardware#0" expanded="true" />
+            <element signature="method#getHOmniPos#0;class#TrashHardware#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Circle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="43" column="13" lean-forward="true" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Line.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="33" column="18" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
+        <state relative-caret-position="-52">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding>
             <element signature="e#837#838#0" expanded="true" />
             <element signature="e#883#884#0" expanded="true" />
@@ -598,73 +548,136 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Functions.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashTeleOp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+        <state relative-caret-position="-157">
+          <caret line="25" column="26" lean-forward="true" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
           <folding>
-            <element signature="method#isPassed#0;class#Functions#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#loopOp#0;class#TrashTeleOp#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Globals/Globals.java">
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Subsystems/Drivetrain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="48" selection-start-line="13" selection-start-column="48" selection-end-line="13" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Hardware/TrashHardware.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="132" column="157" selection-start-line="132" selection-start-column="157" selection-end-line="132" selection-end-column="157" />
+        <state relative-caret-position="-1671">
+          <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
           <folding>
-            <element signature="method#init#0;class#TrashHardware#0" expanded="true" />
-            <element signature="method#getVOmniPos#0;class#TrashHardware#0" expanded="true" />
-            <element signature="method#getHOmniPos#0;class#TrashHardware#0" expanded="true" />
+            <element signature="e#588#589#0" expanded="true" />
+            <element signature="e#622#623#0" expanded="true" />
+            <element signature="method#update#0;class#Drivetrain#0" expanded="true" />
+            <element signature="method#calcUpdate#0;class#Drivetrain#0" expanded="true" />
+            <element signature="method#update#4;class#Drivetrain#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Subsystems/Odometry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="71" column="32" selection-start-line="71" selection-start-column="32" selection-end-line="71" selection-end-column="32" />
+        <state relative-caret-position="-1131">
+          <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#getInstance#0;class#Odometry#0" expanded="true" />
+            <element signature="method#update#0;class#Odometry#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/TestTrashAutonomous.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
+        <state relative-caret-position="-771">
           <caret line="91" column="39" selection-start-line="91" selection-start-column="39" selection-end-line="91" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#runOpMode#0;class#TrashAutonomous#0" expanded="true" />
             <element signature="method#backFollow#0;class#TestTrashAutonomous#0" expanded="true" />
-            <element signature="method#turnToPoint#0;class#TrashAutonomous#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/SimpleTrashTeleOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-756">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="method#init#0;class#SimpleTrashTeleOp#0" expanded="true" />
+            <element signature="method#loop#0;class#SimpleTrashTeleOp#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/SimpleAutoOdometry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-82">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/GyroTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#runOpMode#0;class#GyroTest#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Math/Point.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+          <folding>
+            <element signature="method#distance#1;class#Point#0" expanded="true" />
+            <element signature="method#angle#1;class#Point#0" expanded="true" />
+            <element signature="e#1470#1471#0" expanded="true" />
+            <element signature="e#1494#1495#0" expanded="true" />
+            <element signature="e#1546#1547#0" expanded="true" />
+            <element signature="e#1578#1579#0" expanded="true" />
+            <element signature="e#1635#1636#0" expanded="true" />
+            <element signature="method#equals#0;class#Point#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashAutonomous.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="234" column="94" selection-start-line="234" selection-start-column="94" selection-end-line="234" selection-end-column="94" />
+        <state relative-caret-position="910">
+          <caret line="164" column="114" selection-start-line="164" selection-start-column="114" selection-end-line="164" selection-end-column="114" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#runOpMode#0;class#TrashAutonomous#0" expanded="true" />
             <element signature="method#follow#0;class#TrashAutonomous#0" expanded="true" />
             <element signature="method#backFollow#0;class#TrashAutonomous#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/Strafe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="57" column="13" lean-forward="true" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/StrafeTurn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="30" column="27" lean-forward="true" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#strafeTurn#0;class#StrafeTurn#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="hg4idea.settings">
+    <option name="CHECK_INCOMING_OUTGOING" value="true" />
     <option name="RECENT_HG_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
 </project>

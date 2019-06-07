@@ -193,7 +193,6 @@
     <color name="very_very_dark_purple">#14012d</color>
     <color name="very_very_dark_red">#2d0104</color>
     <color name="very_very_dark_teal">#01212d</color>
-    <declare-styleable name="ColorListPreference"><attr format="reference" name="colors"/></declare-styleable>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">5dp</dimen>
     <string name="VUFORIA_INIT_ERROR_DEVICE_NOT_SUPPORTED">Failed to initialize Vuforia. This device is not supported.</string>
@@ -987,4 +986,5 @@
     <style name="OpModeDialogTextAppearance" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">?android:attr/textColorAlertDialogListItem</item>
     </style>
+    <declare-styleable name="ColorListPreference"><attr format="reference" name="colors"/></declare-styleable>
 </resources>

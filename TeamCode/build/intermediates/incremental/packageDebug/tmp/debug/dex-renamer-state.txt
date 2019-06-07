@@ -1,7 +1,7 @@
-#Sat Jun 01 16:41:32 EDT 2019
-base.0=/Users/mgordon/516-Gears-Of-Fire/Experimental-Bot/TeamCode/build/intermediates/transforms/dexMerger/debug/0
+#Thu Jun 06 19:16:07 EDT 2019
+base.0=/Users/mgordon/516-Gears-Of-Fire/Experimental-Bot/TeamCode/build/intermediates/dex/debug/mergeDexDebug/out
 path.1=classes2.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=/Users/mgordon/516-Gears-Of-Fire/Experimental-Bot/TeamCode/build/intermediates/transforms/dexMerger/debug/0
+base.1=/Users/mgordon/516-Gears-Of-Fire/Experimental-Bot/TeamCode/build/intermediates/dex/debug/mergeDexDebug/out

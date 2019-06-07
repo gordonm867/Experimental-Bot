@@ -54,4 +54,15 @@ public class Point {
     public String toString() {
         return "(" + getX() + ", " + getY() + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(!(o instanceof Point)) {
+            return false;
+        }
+        if(((Point)o).getX() == getX() && ((Point)o).getY() == getY()) {
+            return true;
+        }
+        return false;
+    }
 }

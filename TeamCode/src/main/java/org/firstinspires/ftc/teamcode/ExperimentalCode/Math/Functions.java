@@ -45,6 +45,9 @@ public class Functions {
     }
 
     public static boolean isPassed(Line myLine, Point myPoint, Point testPoint) {
+        if(myLine.getYComp() == 0) {
+            return myPoint.getX() * signum(myLine.getXComp()) >= testPoint.getX() * signum(myLine.getXComp());
+        }
         return !(signum(myLine.getYComp()) * (myPoint.getY() - testPoint.getY()) < signum(myLine.getYComp()) * ((-1 / myLine.getSlope()) * (myPoint.getX() - testPoint.getX())));
     }
 }

@@ -9,7 +9,7 @@ public final class Globals {
 
     public static final double MAX_SPEED = 1.0;
 
-    public static final double START_X = -2;
-    public static final double START_Y = 2;
-    public static final double START_THETA = 135;
+    public static double START_X = -2;
+    public static double START_Y = 2;
+    public static double START_THETA = 135;
 }

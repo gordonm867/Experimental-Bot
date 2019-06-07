@@ -32,7 +32,7 @@ public class Odometry {
             robot.resetOmnis();
         }
         else {
-            angleOffset = lastAngle;
+            angleOffset = lastAngle - Globals.START_THETA;
         }
         return thismetry;
     }

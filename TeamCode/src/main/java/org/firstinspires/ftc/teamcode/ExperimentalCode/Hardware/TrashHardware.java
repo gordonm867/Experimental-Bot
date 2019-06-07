@@ -18,7 +18,7 @@ import org.openftc.revextensions2.RevExtensions2;
 
 public class TrashHardware {
     /* Declare OpMode members */
-    private             BNO055IMU       gyro;
+    public              BNO055IMU       gyro;
 
     public              DcMotor         rf;
     public              DcMotor         rb;
@@ -33,8 +33,6 @@ public class TrashHardware {
     private static      TrashHardware   myInstance      = null;
 
     public              boolean         enabled         = true;
-
-    private             Orientation     angles;
 
 
     /* Constructor */

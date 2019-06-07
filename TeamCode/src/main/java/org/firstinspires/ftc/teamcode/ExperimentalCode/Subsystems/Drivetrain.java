@@ -2,8 +2,10 @@ package org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
+import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Point;
 
 import java.util.ArrayList;
 
@@ -109,6 +111,68 @@ public class Drivetrain {
             robot.setDrivePower(0, 0, 0, 0);
         }
     }
+
+    public double[] calcUpdate(Point target, Odometry odometry) {
+        Point myPos = odometry.getPoint();
+        double displacement = Math.abs(Math.sqrt(Math.pow(target.getX() - myPos.getX(), 2) + Math.pow(target.getY() - myPos.getY(), 2)));
+        double angle = 0;
+        double drive = 0;
+        double turn = 0;
+        if(displacement != 0 && !Double.isInfinite(displacement) && !Double.isNaN(displacement)) {
+            double PIDd = -Math.cos(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
+            if(PIDd != -displacement) {
+                angle = Math.sin(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
+                drive = PIDd;
+                if(Math.abs(displacement) <= (Math.sqrt(2) / 10) || (Math.abs(angle) < 0.001 && Math.abs(drive) < 0.001)) {
+                    drive = 0;
+                    angle = 0;
+                }
+            }
+        }
+        double scaleFactor;
+        if(Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))) > 1) {
+            scaleFactor = Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))));
+        } else {
+            scaleFactor = 0.2 / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))));
+        }
+        double[] powers = {scaleFactor * (drive + turn - angle), scaleFactor * (drive + turn + angle), scaleFactor * (drive - turn + angle), scaleFactor * (drive - turn - angle)};
+        odometry.update();
+        return powers;
+    }
+
+    public void update(TrashHardware robot, Point target, Odometry odometry, double myAngle, AngleUnit unit) {
+        Point myPos = odometry.getPoint();
+        double displacement = Math.abs(Math.sqrt(Math.pow(target.getX() - myPos.getX(), 2) + Math.pow(target.getY() - myPos.getY(), 2)));
+        double angle = 0;
+        double drive = 0;
+        double turn = 0;
+        if(displacement != 0 && !Double.isInfinite(displacement) && !Double.isNaN(displacement)) {
+            double PIDd = -Math.cos(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
+            if(PIDd != -displacement) {
+                angle = Math.sin(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
+                drive = PIDd;
+                if(Math.abs(displacement) <= (Math.sqrt(2) / 10) || (Math.abs(angle) < 0.001 && Math.abs(drive) < 0.001)) {
+                    drive = 0;
+                    angle = 0;
+                    if(!Double.isNaN(myAngle)) {
+                        turn = 0.0055 * Math.toDegrees(((myAngle * (unit == AngleUnit.DEGREES ? (Math.PI / 180) : 1)) - Math.toRadians(odometry.getAngle())));
+                        if (Math.abs(turn) < 0.1) {
+                            turn = 0;
+                        }
+                    }
+                }
+            }
+        }
+        double scaleFactor;
+        if(Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))) > 1) {
+            scaleFactor = Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))));
+        } else {
+            scaleFactor = 0.2 / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))));
+        }
+        robot.setDrivePower(scaleFactor * (drive + turn - angle), scaleFactor * (drive + turn + angle), scaleFactor * (drive - turn + angle), scaleFactor * (drive - turn - angle));
+        odometry.update();
+    }
+
 
     private double adjust(double varToAdjust) { // Square-root driving
         if (varToAdjust < 0) {
