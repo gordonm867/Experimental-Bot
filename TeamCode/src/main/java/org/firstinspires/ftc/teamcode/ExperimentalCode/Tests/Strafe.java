@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.ExperimentalCode.Tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -12,8 +13,8 @@ import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Point;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Odometry;
 
-@TeleOp(name="TrashTest",group="Trash")
-
+@TeleOp(name="TrashTest",group="Tests")
+@Disabled
 public class Strafe extends LinearOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();

@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.internal.network.NetworkConnectionHandler
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
 
-@TeleOp(name = "SimpleTrashTeleOp", group = "Trash")
+@TeleOp(name = "NoOdometryTeleOp", group = "Tests")
 public class SimpleTrashTeleOp extends OpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();

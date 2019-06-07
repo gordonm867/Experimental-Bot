@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.ExperimentalCode.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -21,6 +22,7 @@ import org.openftc.revextensions2.RevBulkData;
 import java.util.ArrayList;
 
 @Autonomous(name="TestTrashAuto", group="Tests")
+@Disabled
 public class TestTrashAutonomous extends LinearOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();

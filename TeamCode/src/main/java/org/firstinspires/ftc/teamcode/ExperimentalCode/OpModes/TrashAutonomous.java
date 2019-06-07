@@ -20,7 +20,7 @@ import org.openftc.revextensions2.RevBulkData;
 
 import java.util.ArrayList;
 
-@Autonomous(name="TrashAuto", group="Tests")
+@Autonomous(name="TrashAuto", group="Trash")
 public class TrashAutonomous extends LinearOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();

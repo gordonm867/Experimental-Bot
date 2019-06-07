@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.ExperimentalCode.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -12,7 +13,8 @@ import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Point;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Odometry;
 
-@Autonomous(name="StrafeTurn",group="Trash")
+@Autonomous(name="StrafeTurn",group="Tests")
+@Disabled
 public class StrafeTurn extends LinearOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();
