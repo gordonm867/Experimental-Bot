@@ -10,7 +10,7 @@ import static java.lang.Math.*;
 
 public final class CircleCircleIntersection {
 
-    public static enum Type {
+    public enum Type {
 
         COINCIDENT(-1),
         CONCENTRIC_CONTAINED(0),
@@ -22,7 +22,7 @@ public final class CircleCircleIntersection {
 
         private final int n;
 
-        private Type(int n) {
+        Type(int n) {
             this.n = n;
         }
 

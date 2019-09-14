@@ -55,9 +55,7 @@ public final class Circle implements Serializable {
                 return false;
         } else if (!c.equals(other.c))
             return false;
-        if (Double.doubleToLongBits(r) != Double.doubleToLongBits(other.r))
-            return false;
-        return true;
+        return Double.doubleToLongBits(r) == Double.doubleToLongBits(other.r);
     }
 
     public Point getCenter() {

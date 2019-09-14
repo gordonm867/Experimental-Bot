@@ -4,8 +4,13 @@ import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Circle;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.CircleCircleIntersection;
+import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Functions;
+import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Line;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Point;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Vector2;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Odometry {
 
@@ -79,57 +84,80 @@ public class Odometry {
             angle += Math.toDegrees(Math.atan2(yDist, xDist));
             // double arcAngle = Math.toRadians(angle + Math.toDegrees(Math.atan2(yDist, xDist)));
             if (dTheta != 0 && displacement > 0) {
+                /*
                 CircleCircleIntersection intersection = new CircleCircleIntersection(new Circle(new Vector2(x, y), displacement), new Circle(new Vector2(0, 0), (Math.sqrt(Math.pow(displacement, 2) / (4 * Math.pow(Math.sin(0.5 * dTheta), 2))))));
                 double direction = Math.signum(displacement * Math.cos(Math.toRadians(angle)));
                 Vector2[] points = intersection.getIntersectionPoints();
+                */
+                double direction = Math.signum(displacement * Math.sin(Math.toRadians(angle)));
+                double radius = Math.abs((((360.0 / dTheta) * displacement) / (2.0 * Math.PI)));
+                Circle myCircle = new Circle(new Point(x, y), (((2 * radius * Math.sin(Math.toRadians(dTheta) / 2)))));
+                Line myLine = new Line(new Point(x, y), new Point(x + 1, y + Math.tan(Math.toRadians(angle))));
+                Point[] points;
+                try {
+                    Object[] objs = Functions.infiniteLineCircleIntersection(myCircle, myLine).toArray();
+                    points = new Point[objs == null ? 0 : objs.length];
+                    int co = 0;
+                    if(objs != null) {
+                        for(Object obj : objs) {
+                            if(obj instanceof Point) {
+                                points[co] = (Point)obj;
+                            }
+                            co++;
+                        }
+                    }
+                }
+                catch(Exception p_exception) {
+                    points = new Point[0];
+                }
                 if(points.length == 0) {
                     x += displacement * Math.cos(Math.toRadians(angle));
                     y += displacement * Math.sin(Math.toRadians(angle));
                 }
                 else if(points.length == 1) {
-                    x = points[0].x;
-                    y = points[0].y;
+                    x = points[0].getX();
+                    y = points[0].getY();
                 }
                 else if (direction > 0) {
-                    if(points[0].x >= x) {
-                        x = points[0].x;
-                        y = points[0].y;
+                    if(points[0].getY() >= y) {
+                        x = points[0].getX();
+                        y = points[0].getY();
                     }
                     else {
-                        x = points[1].x;
-                        y = points[1].y;
+                        x = points[1].getX();
+                        y = points[1].getY();
                     }
                 }
                 else if (direction < 0) {
-                    if(points[0].x >= x) {
-                        x = points[1].x;
-                        y = points[1].y;
+                    if(points[0].getY() >= y) {
+                        x = points[1].getX();
+                        y = points[1].getY();
                     }
                     else {
-                        x = points[0].x;
-                        y = points[0].y;
+                        x = points[0].getX();
+                        y = points[0].getY();
                     }
                 }
                 else {
-                    direction = Math.signum(displacement * Math.sin(Math.toRadians(angle)));
+                    direction = Math.signum(displacement * Math.cos(Math.toRadians(angle)));
                     if(direction > 0) {
-                        if(points[0].y >= y) {
-                            x = points[0].x;
-                            y = points[0].y;
+                        if(points[0].getX() >= x) {
+                            x = points[0].getX();
+                            y = points[0].getY();
                         }
                         else {
-                            x = points[1].x;
-                            y = points[1].y;
+                            x = points[1].getX();
+                            y = points[1].getY();
                         }
                     }
                     else if(direction < 0) {
-                        if(points[0].y <= y) {
-                            x = points[0].x;
-                            y = points[0].y;
+                        if(points[0].getX() <= x) {
+                            x = points[0].getX();
+                            y = points[0].getY();
                         }
                         else {
-                            x = points[1].x;
-                            y = points[1].y;
+                            x = points[1].getX();
+                            y = points[1].getY();
                         }
                     }
                     else {

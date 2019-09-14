@@ -31,6 +31,7 @@ public class TrashAutonomous extends LinearOpMode {
     private double turnCoeff = 0.0055;
     private Point stopped;
     private Point stopTarget;
+    private boolean test = false;
 
     public void runOpMode() throws InterruptedException {
 
@@ -47,6 +48,7 @@ public class TrashAutonomous extends LinearOpMode {
         pathNames.add("Rover Ruckus Crater Auto Curve");
         pathNames.add("Circle");
         pathNames.add("S Curve");
+        pathNames.add("Skystone Loading Auto");
         int pathNum = 0;
         while(!isStopRequested() && !gamepad1.a) {
             telemetry.addData("Selected Path", pathNames.get(pathNum % pathNames.size()));
@@ -57,6 +59,16 @@ public class TrashAutonomous extends LinearOpMode {
             }
             if(changed && !gamepad1.b) {
                 changed = false;
+            }
+        }
+        while(gamepad1.a) {}
+        changed = false;
+        while(!isStopRequested() && !gamepad1.a) {
+            telemetry.addData("Experimental", (test ? "YES" : "NO"));
+            telemetry.update();
+            if(!changed && gamepad1.b) {
+                test = !test;
+                changed = true;
             }
         }
 
@@ -76,12 +88,19 @@ public class TrashAutonomous extends LinearOpMode {
             Globals.START_Y = 0;
             Globals.START_THETA = 135;
         }
+        else if(pathNum % pathNames.size() == 3) {
+            Globals.START_X = -5.25;
+            Globals.START_Y = -4;
+            Globals.START_THETA = 0;
+        }
         odometry = Odometry.getInstance(robot);
         robot.enabled = true;
         telemetry.addData("Status", "Initialized");
         telemetry.addData("Mode", pathNames.get(pathNum % pathNames.size()));
         telemetry.update();
+        /* DETECT SKY STONE (DEFAULTS TO RANDOM) */
         waitForStart();
+        long time = System.currentTimeMillis();
         wheels.setState(Drivetrain.State.DRIVING);
 
         ArrayList<Line> path = new ArrayList<>();
@@ -147,6 +166,7 @@ public class TrashAutonomous extends LinearOpMode {
             double displacement = Math.abs(Math.sqrt(Math.pow(odometry.getX() - 1.25, 2) + Math.pow(odometry.getY() - 1.25, 2)));
             while(opModeIsActive() && Math.abs(displacement) > 0.15) {
                 wheels.update(robot, new Point(1.25, 1.25), odometry, Double.NaN, AngleUnit.DEGREES);
+                displacement = Math.abs(Math.sqrt(Math.pow(odometry.getX() - 1.25, 2) + Math.pow(odometry.getY() - 1.25, 2)));
             }
             path.add(new Line(odometry.getPoint(), new Point(1.15, 1.74)));
             for(double x = 1.25 - 0.1; x >= -1.25 + 0.1; x -= 0.1) {
@@ -185,6 +205,128 @@ public class TrashAutonomous extends LinearOpMode {
                 telemetry.addData("Odometry update time", odoUpdate);
                 telemetry.addData("Follower",  "Stopped at " + stopped + " with a target of " + stopTarget + ".");
                 telemetry.update();
+            }
+        }
+        else if(pathNum % pathNames.size() == 3) {
+            radius = 1;
+            turnCoeff = 0.0055;
+            int skystone = (int)(Math.ceil(Math.random() * 3));
+            if(skystone == 1) {
+                turnToPoint(new Point(-3, -3.6));
+                path.add(new Line(odometry.getPoint(), new Point(-3, -3.6)));
+                path.add(new Line(new Point(-3, -3.6), new Point(-1.9, -3.6)));
+                follow(path);
+                path.clear();
+                path.add(new Line(odometry.getPoint(), new Point(-2.5, -3.6)));
+                path.add(new Line(new Point(-2.5, -3.6), new Point(-3.8, -2.3)));
+                path.add(new Line(new Point(-3.8, -2.3), new Point(-3.647, 2)));
+                backFollow(path);
+                path.clear();
+                radius = 0.25;
+                path.add(new Line(odometry.getPoint(), new Point(-3, 2)));
+                // SCAN FOR PLATFORM DURING NEXT MOVEMENT
+                path.add(new Line(new Point(-3, 2), new Point(-3, 1.5)));
+                boolean found = false; // Where is the platform?
+                if (opModeIsActive() && !found) {
+                    path.clear();
+                    turnToPoint(new Point(-2.07, 2.59));
+                    path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
+                    follow(path);
+                    if (System.currentTimeMillis() - time >= 18000) {
+                        path.clear();
+                        path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
+                        path.add(new Line(new Point(-3, 0), new Point(-2.5, -5.25)));
+                        follow(path);
+                        turnToPoint(new Point(-1.75, -5.25));
+                        path.add(new Line(odometry.getPoint(), new Point(-1.75, -5.25)));
+                        follow(path);
+                        path.add(new Line(odometry.getPoint(), new Point(-2.5, -5.25)));
+                        path.add(new Line(new Point(-2.5, -5.25), new Point(-5, 1.75)));
+                        backFollow(path);
+                    }
+                    while (opModeIsActive()) {
+                        robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                        robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                        robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                        robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                        wheels.update(robot, new Point(-5, 0), odometry, Double.NaN, AngleUnit.DEGREES);
+                        odometry.update();
+                    }
+                }
+            }
+            if(skystone == 2) {
+                turnToPoint(new Point(-3, -2.94));
+                path.add(new Line(odometry.getPoint(), new Point(-3, -2.94)));
+                path.add(new Line(new Point(-3, -2.94), new Point(-1.9, -2.94)));
+                follow(path);
+                path.clear();
+                path.add(new Line(odometry.getPoint(), new Point(-2.5, -2.94)));
+                path.add(new Line(new Point(-2.5, -2.94), new Point(-3.8, -1.64)));
+                path.add(new Line(new Point(-3.8, -1.64), new Point(-3.647, 2)));
+                backFollow(path);
+                path.clear();
+                radius = 0.25;
+                path.add(new Line(odometry.getPoint(), new Point(-3, 2)));
+                // SCAN FOR PLATFORM DURING NEXT MOVEMENT
+                path.add(new Line(new Point(-3, 2), new Point(-3, 1.5)));
+                boolean found = false; // Where is the platform?
+                if (opModeIsActive() && !found) {
+                    path.clear();
+                    turnToPoint(new Point(-2.07, 2.59));
+                    path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
+                    follow(path);
+                    if (System.currentTimeMillis() - time >= 18000) {
+                        path.clear();
+                        path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
+                        path.add(new Line(new Point(-3, 0), new Point(-2.5, -4.89)));
+                        follow(path);
+                        turnToPoint(new Point(-1.75, -4.25));
+                        path.add(new Line(odometry.getPoint(), new Point(-1.75, -4.89)));
+                        follow(path);
+                        path.add(new Line(odometry.getPoint(), new Point(-2.5, -4.89)));
+                        path.add(new Line(new Point(-2.5, -4.89), new Point(-5, 2)));
+                        backFollow(path);
+                        path.add(new Line(odometry.getPoint(), new Point(-4.274, 0)));
+                        follow(path);
+                    }
+                }
+            }
+            if(skystone == 3) {
+                turnToPoint(new Point(-3, -2.3));
+                path.add(new Line(odometry.getPoint(), new Point(-3, -2.3)));
+                path.add(new Line(new Point(-3, -2.3), new Point(-1.9, -2.3)));
+                follow(path);
+                path.clear();
+                path.add(new Line(odometry.getPoint(), new Point(-2.5, -2.3)));
+                path.add(new Line(new Point(-2.5, -2.3), new Point(-3.8, -1)));
+                path.add(new Line(new Point(-3.8, -1), new Point(-3.647, 2)));
+                backFollow(path);
+                path.clear();
+                radius = 0.25;
+                path.add(new Line(odometry.getPoint(), new Point(-3, 2)));
+                // SCAN FOR PLATFORM DURING NEXT MOVEMENT
+                path.add(new Line(new Point(-3, 2), new Point(-3, 1.5)));
+                boolean found = false; // Where is the platform?
+                if(opModeIsActive() && !found) {
+                    path.clear();
+                    turnToPoint(new Point(-2.07, 2.59));
+                    path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
+                    follow(path);
+                    if(System.currentTimeMillis() - time >= 18000) {
+                        path.clear();
+                        path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
+                        path.add(new Line(new Point(-3, 0), new Point(-2.5, -4.25)));
+                        follow(path);
+                        turnToPoint(new Point(-1.75, -4.25));
+                        path.add(new Line(odometry.getPoint(), new Point(-1.75, -4.25)));
+                        follow(path);
+                        path.add(new Line(odometry.getPoint(), new Point(-2.5, -4.25)));
+                        path.add(new Line(new Point(-2.5, -4.25), new Point(-5, 2)));
+                        backFollow(path);
+                        path.add(new Line(odometry.getPoint(), new Point(-4.2, 0)));
+                        follow(path);
+                    }
+                }
             }
         }
     }
@@ -228,7 +370,7 @@ public class TrashAutonomous extends LinearOpMode {
                         }
                     }
                     double scaleFactor;
-                    if(Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))) > 1) {
+                    if(test || Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))) > 1) {
                         scaleFactor = Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))));
                     } else {
                         scaleFactor = Globals.MAX_SPEED;

@@ -1,3 +1,7 @@
+// Source repo: https://github.com/angular-ui/ui-ace
+// License: MIT
+// This project is no longer maintained
+
 'use strict';
 
 /**

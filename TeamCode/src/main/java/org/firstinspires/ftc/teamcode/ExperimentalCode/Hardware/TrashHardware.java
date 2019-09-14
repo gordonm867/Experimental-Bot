@@ -3,18 +3,15 @@ package org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.openftc.revextensions2.ExpansionHubEx;
 import org.openftc.revextensions2.RevBulkData;
-import org.openftc.revextensions2.RevExtensions2;
 
 public class TrashHardware {
     /* Declare OpMode members */
@@ -45,7 +42,6 @@ public class TrashHardware {
 
     public void init(HardwareMap hwMap) {
         try {
-            RevExtensions2.init();
             ex2 = hwMap.get(ExpansionHubEx.class, "Expansion Hub 2");
         }
         catch(Exception p_exception) {
@@ -67,7 +63,7 @@ public class TrashHardware {
             gyro = null;
         }
         try { // Left rear wheel
-            lb = hwMap.get(DcMotor.class, "lb");
+            lb = hwMap.get(DcMotor.class, "lr");
             lb.setDirection(DcMotor.Direction.REVERSE);
             lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             lb.setPower(0);
@@ -87,7 +83,7 @@ public class TrashHardware {
         }
 
         try { // Right rear wheel
-            rb = hwMap.get(DcMotor.class, "rb");
+            rb = hwMap.get(DcMotor.class, "rr");
             rb.setDirection(DcMotor.Direction.FORWARD);
             rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             rb.setPower(0);

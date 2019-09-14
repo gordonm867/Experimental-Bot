@@ -16,6 +16,22 @@ function fetchJavaScriptForHardware(callback) {
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     fetchJavaScriptForHardwareViaHttp(callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    fetchJavaScriptForHardwareViaFile(callback);
+  }
+}
+
+function getConfigurationName(callback) {
+  if (typeof blocksIO !== 'undefined') {
+    // html/js is within the WebView component within the Android app.
+    getConfigurationNameViaBlocksIO(callback);
+  } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+    // html/js is in a browser, loaded as an http:// URL.
+    getConfigurationNameViaHttp(callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    getConfigurationNameViaFile(callback);
   }
 }
 
@@ -41,6 +57,16 @@ function fetchJavaScriptForHardwareViaBlocksIO(callback) {
     callback(jsHardware, '');
   } else {
     callback(null, 'Fetch JavaScript for Hardware failed.');
+  }
+}
+
+function getConfigurationNameViaBlocksIO(projectName, callback) {
+  var configName = blocksIO.getConfigurationName();
+  if (configName) {
+    callback(configName, '');
+  } else {
+    // TODO(lizlooney): Provide more information about the error.
+    callback(null, 'Get configuration name failed.');
   }
 }
 
@@ -70,6 +96,24 @@ function fetchJavaScriptForHardwareViaHttp(callback) {
   xhr.send();
 }
 
+function getConfigurationNameViaHttp(callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', URI_GET_CONFIGURATION_NAME, true);
+  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        var className = xhr.responseText;
+        callback(className, '');
+      } else {
+        // TODO(lizlooney): Use specific error messages for various xhr.status values.
+        callback(null, 'Get configuration name failed. Error code ' + xhr.status + '. ' + xhr.statusText);
+      }
+    }
+  };
+  xhr.send();
+}
+
 function sendPingViaHttp(name, callback) {
   var xhr = new XMLHttpRequest();
   xhr.open('POST', URI_PING, true);
@@ -85,4 +129,19 @@ function sendPingViaHttp(name, callback) {
   };
   var params = PARAM_NAME + '=' + encodeURIComponent(name);
   xhr.send(params);
+}
+
+//..........................................................................
+// Code used when html/js is in a browser, loaded as a file:// URL.
+
+function fetchJavaScriptForHardwareViaFile(callback) {
+  setTimeout(function() {
+    callback('// See FtcOfflineBlocks.js', '');
+  }, 0);
+}
+
+function getConfigurationNameViaFile(callback) {
+  setTimeout(function() {
+    callback(getOfflineConfigurationName(), '');
+  }, 0);
 }

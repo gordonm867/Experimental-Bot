@@ -60,9 +60,6 @@ public class Point {
         if(!(o instanceof Point)) {
             return false;
         }
-        if(((Point)o).getX() == getX() && ((Point)o).getY() == getY()) {
-            return true;
-        }
-        return false;
+        return ((Point) o).getX() == getX() && ((Point) o).getY() == getY();
     }
 }

@@ -173,7 +173,6 @@ public class Drivetrain {
         odometry.update();
     }
 
-
     private double adjust(double varToAdjust) { // Square-root driving
         if (varToAdjust < 0) {
             varToAdjust = -Math.sqrt(-varToAdjust);

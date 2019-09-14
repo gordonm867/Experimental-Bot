@@ -27,7 +27,15 @@ Blockly.Blocks['distanceSensor_getDistance'] = {
 Blockly.JavaScript['distanceSensor_getDistance'] = function(block) {
   var identifier = block.getFieldValue('IDENTIFIER');
   var distanceUnit = Blockly.JavaScript.valueToCode(
-        block, 'DISTANCE_UNIT', Blockly.JavaScript.ORDER_COMMA);
+      block, 'DISTANCE_UNIT', Blockly.JavaScript.ORDER_NONE);
   var code = identifier + '.getDistance(' + distanceUnit + ')';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+Blockly.FtcJava['distanceSensor_getDistance'] = function(block) {
+  var identifier = Blockly.FtcJava.importDeclareAssign_(block, 'IDENTIFIER', 'DistanceSensor');
+  var distanceUnit = Blockly.FtcJava.valueToCode(
+      block, 'DISTANCE_UNIT', Blockly.FtcJava.ORDER_NONE);
+  var code = identifier + '.getDistance(' + distanceUnit + ')';
+  return [code, Blockly.FtcJava.ORDER_FUNCTION_CALL];
 };

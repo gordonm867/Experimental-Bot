@@ -12,15 +12,17 @@
   <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
-  <link rel="stylesheet/less" type="text/css" href="/css/FtcSounds.less">
-  <script type="text/javascript" src="/js/less.min.js"></script>
+  <link rel="stylesheet/less" type="text/css" href="/css/blocks_common.less">
+  <link rel="stylesheet" type="text/css" href="css/blocks_common.css">
 
-  <title>FTC - My Sounds</title>
+  <script type="text/javascript" src="/js/less.min.js"></script>
 
   <script type="text/javascript" src="server"></script>
 
   <script type="text/javascript" src="blocks/hardware_util.js"></script>
   <script type="text/javascript" src="blocks/sound_util.js"></script>
+
+  <title>FTC - My Sounds</title>
 </head>
 
 <body onload="initialize()">
@@ -39,12 +41,17 @@
           </td>
         </tr>
         <tr>
-          <td colspan="2">
+          <td style="padding: 2px" colspan="2"></td>
+        </tr>
+        <tr>
+          <td>
             <button id="renameSoundButton" disabled="true" onclick="renameSoundButtonClicked()">Rename Selected Sound</button>
             <button id="copySoundButton" disabled="true" onclick="copySoundButtonClicked()">Copy Selected Sound</button>
             <button id="deleteSoundsButton" disabled="true" onclick="deleteSoundsButtonClicked()">Delete Selected Sounds</button>
             <button id="downloadSoundsButton" disabled="true" onclick="downloadSoundsButtonClicked()">Download Selected Sounds</button>
             <a id="download_link"></a>
+          </td>
+          <td align="right">
           </td>
         </tr>
       </table>
@@ -64,8 +71,8 @@
   <table id="soundsTable" width="100%">
     <tr class="header_tr">
       <td><input type="checkbox" id="checkbox_all" onclick="soundCheckAllChanged()"></td>
-      <td width="20%"><div class="header_td" onclick="toggleSortByName()">Sound Name<span id="sortByNameIndicator">&nbsp;</span></div></td>
-      <td width="80%"><div class="header_td" onclick="toggleSortByDateModified()">Date Modified<span id="sortByDateModifiedIndicator">&nbsp;</span></div></td>
+      <td width="30%"><div class="header_td" onclick="toggleSortByName()">Sound Name<span id="sortByNameIndicator">&nbsp;</span></div></td>
+      <td width="60%"><div class="header_td" onclick="toggleSortByDateModified()">Date Modified<span id="sortByDateModifiedIndicator">&nbsp;</span></div></td>
     </tr>
   </table>
 </div>

@@ -4,6 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script type="text/javascript" src="/js/es5-shim.js"></script>
+    <script type="text/javascript" src="/js/es6-shim.js"></script>
+    <script type="text/javascript" src="/js/websocket-iframe.js"></script>
     <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
@@ -11,31 +14,35 @@
     <script type="text/javascript" src="/js/less.min.js"></script>
 </head>
 <body>
-    <div id="blocker" style="display: none; z-index: 10; width: 100%; height: 200%; background-color: rgba(201,201,201,.7); position: absolute; top: 0; left: 0;">
-        <h2 style="margin:auto; margin-top: 10%; width: 60%; text-align: center; background-color: #ffffff; border: 2px solid black ">Please
-            wait while upload finishes</h2>
+    <div id="blocker" style="display: none; z-index: 10; width: 100%; height: 200%; background-color: rgba(201,201,201,.7); position: fixed; top: 0; left: 0;">
+        <h2 id="blockerText" style="margin:auto; margin-top: 10%; width: 60%; text-align: center; background-color: #ffffff; border: 2px solid black "></h2>
     </div>
 <div class="bordered-text-block">
     <div>
         <h1>Robot Controller Name</h1>
-        <p>Change the name of the robot controller.  If using wireless access point mode this will also be the name of
-           the broadcasting ssid.</p>
+        <p>Change the name of the robot controller.  If using the Control Hub this will also be the name of
+            the broadcasting ssid and changing the ssid disconnects all clients from the Control Hub. You will need to reconnect to the new access point</p>
         <p>
             <input id="id_rc_name" class="centered-feedback" type="text" value="(name)"><button id="id_change_name_button" class="aligned-select-button" onclick="onRenameRC()">Change Name</button>
         </p>
     </div>
-    <div>
+    <div id="id_control_hub_password_block">
         <h1>Access Point Password</h1>
-        <p>Change the password for the wireless access point.  Only applicable for the REV Control Hub</p>
-        <p>
-            <!-- Value chosen to intentionally fail password validation -->
-            <input id="id_ap_password" class="centered-feedback" type="password" value="BADBEEF"><button id="id_change_ap_passowrd" class="aligned-select-button" onclick="onChangeApPassword()">Change Password</button>
+
+        <p>Change the password for the wireless access point.  Changing the password disconnects all clients from the Control Hub. You will need to reconnect using the new password.</p>
+        <p>New Password<br><input id="id_ap_new_password" class="centered-feedback" type="password" value=""> </p>
+        <p>Confirm Password<br><input id="id_ap_confirmed_password" class="centered-feedback" type="password" value="">
+            <br><input type="checkbox" onclick="onShowPasswordCheckbox()">Show Password
         </p>
+        <p><button id="id_change_ap_password" class="aligned-select-button" onclick="onChangeApPassword()">Change Password</button><br></p>
     </div>
-    <div>
+    <div id="id_control_hub_channel_block">
         <h1>Access Point Channel</h1>
-        <p>Change the operating channel for the wireless access point.  Only applicable for the REV Control Hub</p>
+        <p>Change the operating channel for the wireless access point.</p>
         <p>
+            <!-- TODO(CHv1): Update this channel changer to work for both Wifi Direct and the Control Hub -->
+            <!-- TODO(CHv1): Only show 5GHz channels if device supports 5 GHz WiFi AP.
+                             Use rcInfo.supports5GhzAp from within the refreshRCInfo function. -->
             <!-- Value chosen to intentionally choose auto select -->
             <select id="id_ap_channel" class="centered-feedback">
                 <option value="-1" selected></option>
@@ -51,6 +58,15 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
                 <option value="11">11</option>
+                <option value="36">36 (5 GHz)</option>
+                <option value="40">40 (5 GHz)</option>
+                <option value="44">44 (5 GHz)</option>
+                <option value="48">48 (5 GHz)</option>
+                <option value="149">149 (5 GHz)</option>
+                <option value="153">153 (5 GHz)</option>
+                <option value="157">157 (5 GHz)</option>
+                <option value="161">161 (5 GHz)</option>
+                <option value="165">165 (5 GHz)</option>
             </select>
             <button id="id_change_ap_channel" class="aligned-select-button" onclick="onChangeApChannel()">Change Channel</button>
         </p>
@@ -65,7 +81,7 @@
     </div>
     <div id="id_upload_firmware">
         <h1>Upload Expansion Hub Firmware</h1>
-        <p>Upload firmware for the REV Expansion Hub to the robot controller. Once uploaded, the firmware can be 
+        <p>Upload firmware for the REV Expansion Hub to the robot controller. Once uploaded, the firmware can be
         installed on Expansion Hubs using the Advanced Settings menu on the robot controller or driver station.</p>
         <div>
             <p>
@@ -77,15 +93,14 @@
         </div>
     </div>
     <div id="id_update_robot_controller_application">
-        <h1>Update Robot Controller App &amp; Reboot</h1>
-        <p>Upload and install a new Robot Controller App to the REV Control Hub. Once the upload completes, the Control Hub will
-            be rebooted to allow the new app to complete installation.</p>
+        <h1>Update Robot Controller App</h1>
+        <p>Upload and install a new Robot Controller App to the REV Control Hub.</p>
         <div>
             <p>
                 <input id="id_input_file_apk" type="file" class="hidden hidden-input-file">
                 <input id="id_apk_feedback" readonly class="upload-feedback" type="text" value="(apk)"><button id="id_apk_button"
                     class="aligned-select-button">Select App...</button>
-                <button id="id_action_apk" class="aligned-action-button" onclick="updateApk();">Update &amp; Reboot</button>
+                <button id="id_action_apk" class="aligned-action-button" onclick="updateApk();">Update</button>
             </p>
         </div>
     </div>
@@ -102,11 +117,79 @@
             <p id="id_webcam_calibration_upload_complete" class="text-ok"></p>
         </div>
     </div>
+    <div id="id_update_control_hub_operating_system">
+        <h1>Update Control Hub Operating System</h1>
+        <p>Upload an Operating System update file for the REV Control Hub</p>
+        <div>
+            <p>
+                <input id="id_input_file_ota" type="file" class="hidden hidden-input-file">
+                <input id="id_ota_feedback" readonly class="upload-feedback" type="text" value="(zip)">
+                <button id="id_ota_button" class="aligned-select-button">Select Update File...</button>
+                <button id="id_action_ota" class="aligned-action-button" onclick="uploadOta();">Update &amp; Reboot</button>
+            </p>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript" src="/js/rc_config.js"></script>
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript">
+
+    var appUpdateRequiresReboot = false;
+    var mostRecentUploadIdentifier;
+
+    var CH_UPDATER_NAMESPACE = "ControlHubUpdater";
+
+    var updateAbandonmentEventHandler = function(event) { event.preventDefault(); event.returnValue = "Update in progress"; }
+
+    var handleUpdaterNotification = function (webSocketMessage) {
+        var payload = JSON.parse(webSocketMessage.payload);
+        console.log(payload);
+        var message = payload.message;
+
+        if (payload.presentationType === "STATUS") {
+            message = message.replace(/\n/g, "<br>");
+            showUploadBlocker(message);
+        } else {
+            hideUploadBlocker();
+            removeClass(document.documentElement, "wait");
+            window.removeEventListener('beforeunload', updateAbandonmentEventHandler);
+
+            setTimeout(function() {
+                // We put this functionality in a 10 ms timeout, because we want the hiding to finish before we display the alert/confirmation
+                if (payload.presentationType === "PROMPT") {
+                    var confirmationResult = confirm(message);
+                    console.log("Confirmation result: " + confirmationResult);
+                    if (confirmationResult === true) {
+                        var confirmationMessage = new WEBSOCKET_LIB.WebSocketMessage(CH_UPDATER_NAMESPACE, "confirmDangerousAction", mostRecentUploadIdentifier);
+                        WEBSOCKET_LIB.webSocketManager.sendMessage(confirmationMessage);
+                    } else {
+                        // If we aren't going to install the uploaded file, we should delete it.
+                        var deleteUploadedFileMessage = new WEBSOCKET_LIB.WebSocketMessage(CH_UPDATER_NAMESPACE, "deleteUploadedFile", mostRecentUploadIdentifier);
+                        WEBSOCKET_LIB.webSocketManager.sendMessage(deleteUploadedFileMessage);
+                    }
+                } else {
+                    // For now we treat successes and failures the same way. In the future, we can style the messages differently if desired.
+                    alert(message);
+                }
+            }, 10);
+        }
+
+    }
+
+    var bindToControlHubUpdaterTransaction = function (xhr) {
+        var responseObject = JSON.parse(xhr.response);
+        if (responseObject.uploadIdentifier) {
+            addClass(document.documentElement, "wait");
+            window.addEventListener('beforeunload', updateAbandonmentEventHandler);
+            mostRecentUploadIdentifier = responseObject.uploadIdentifier;
+            var bindMessage = new WEBSOCKET_LIB.WebSocketMessage(CH_UPDATER_NAMESPACE, "bind", responseObject.uploadIdentifier);
+            WEBSOCKET_LIB.webSocketManager.sendMessage(bindMessage);
+        }
+    }
+
+    WEBSOCKET_LIB.webSocketManager.subscribeToNamespace(CH_UPDATER_NAMESPACE);
+    WEBSOCKET_LIB.webSocketManager.registerTypeHandler(CH_UPDATER_NAMESPACE, "notification", handleUpdaterNotification);
 
     var initUpload = function (idInput, idFeedback, idButton, ext, idAction) {
         var input = document.getElementById(idInput);
@@ -140,18 +223,30 @@
 
     $('#id_firmware_upload_complete').hide();
     initUpload('id_input_file_firmware', 'id_firmware_feedback', 'id_firmware_button', '.bin', 'id_action_firmware');
-    initUpload('id_input_file_apk',      'id_apk_feedback',      'id_apk_button',      '.apk', 'id_action_apk',);
+    initUpload('id_input_file_apk',      'id_apk_feedback',      'id_apk_button',      '.apk', 'id_action_apk');
+    initUpload('id_input_file_ota',      'id_ota_feedback',      'id_ota_button',      '.zip', 'id_action_ota');
 
     $('#id_id_webcam_calibration_upload_complete').hide();
     initUpload('id_input_file_webcam_calibration', 'id_webcam_calibration_feedback', 'id_webcam_calibration_button', '.xml', 'id_action_webcam_calibration');
 
-    var uploadSuccess = function(file, xhr, e) {
+    var showUploadBlocker = function(text) {
+        if (!text) {
+            text = "Please wait while upload finishes";
+        }
+        $('#blockerText').html(text);
+        $('#blocker').show();
+    }
+
+    var hideUploadBlocker = function() {
         $('#blocker').hide();
     }
 
+    var uploadSuccess = function(file, xhr, e) {
+        hideUploadBlocker();
+    }
+
     var uploadFailure = function(file, xhr, e) {
-        $('#blocker').hide();
-        alert("Failed to upload file: " + file.name);
+        hideUploadBlocker();
     }
 
     var uploadFirmware = function () {
@@ -159,7 +254,7 @@
         var file = feedback.dataFile;
         console.log("uploadFirmware() name=" + file.name);
         var url = URI_UPLOAD_EXPANSION_HUB_FIRMWARE;
-        $('#blocker').show();
+        showUploadBlocker();
         uploadFile(file, url,
             function(xhr, e) {
                 uploadSuccess(file, xhr, e);
@@ -173,10 +268,19 @@
         var file = feedback.dataFile;
         console.log("updateApk() name=" + file.name);
         var url = URI_UPDATE_CONTROL_HUB_APK;
-        $('#blocker').show();
+        showUploadBlocker();
         uploadFile(file, url,
-            function(xhr, e) { uploadSuccess(file, xhr, e); reboot(); },
-            function(xhr, e) { uploadFailure(file, xhr, e); });
+            function(xhr, e) {
+                if (appUpdateRequiresReboot) {
+                    uploadSuccess(file, xhr, e);
+                    reboot();
+                } else {
+                    bindToControlHubUpdaterTransaction(xhr);
+                }
+            },
+            function(xhr, e) {
+                uploadFailure(file, xhr, e);
+            });
     }
 
     var reboot = function() {
@@ -200,7 +304,7 @@
         var file = feedback.dataFile;
         console.log("uploadWebcamCalibration() name=" + file.name);
         var url = URI_UPLOAD_WEBCAM_CALIBRATION_FILE;
-        $('#blocker').show();
+        showUploadBlocker();
         uploadFile(file, url,
             function(xhr, e) {
                 uploadSuccess(file, xhr, e);
@@ -209,11 +313,28 @@
             function(xhr, e) { uploadFailure(file, xhr, e); });
     }
 
+    var uploadOta = function () {
+        var feedback = document.getElementById('id_ota_feedback');
+        var file = feedback.dataFile;
+        console.log("uploadOta() name=" + file.name);
+        var url = URI_UPLOAD_CONTROL_HUB_OTA;
+        showUploadBlocker();
+        uploadFile(file, url,
+            function(xhr, e) {
+                bindToControlHubUpdaterTransaction(xhr);
+            },
+            function(xhr, e) {
+                uploadFailure(file, xhr, e);
+            });
+     }
+
     var onRenameRC = function () {
         console.log("onRenameRC()");
         var newName = document.getElementById("id_rc_name").value.trim();
-        if(newName.length < 2 || newName.length > 40) {
-            alert("RC Name must be between 2 and 20 chars");
+        if (newName.length < 2 || newName.length > 40) {
+            alert("RC Name must be between 2 and 40 chars");
+        } else if (newName.match(/\s/) != null) {
+            alert("RC Name must not include whitespace (space, tab, return, etc..)");
         }
         else {
             console.log("newName=" + newName);
@@ -227,16 +348,38 @@
                 }
             };
             xhr.send(params);
+
+            loadRcInfo(function (rcInfo) {
+                if (rcInfo) {
+                    if (rcInfo.isREVControlHub) {
+                        alert("The Control Hub's name has been changed to " + newName + ". Since the name functions as the WiFi access point name you have been disconnected from the Control Hub's network.  You will need to connect to the new network name and refresh this page.");
+                    }
+                }
+            });
+        }
+    }
+
+    var onShowPasswordCheckbox = function () {
+        var newPw = document.getElementById("id_ap_new_password");
+        var confirmPw = document.getElementById("id_ap_confirmed_password");
+        if (newPw.type === "password") {
+            newPw.type = "text";
+            confirmPw.type = "text";
+        } else {
+            newPw.type = "password";
+            confirmPw.type = "password";
         }
     }
 
     var onChangeApPassword = function () {
         console.log("onChangeApPassword()");
-        var newPw = document.getElementById("id_ap_password").value;
-        if(newPw.length < 8 || newPw.length > 128) {
+        var newPw = document.getElementById("id_ap_new_password").value;
+        var confirmPw = document.getElementById("id_ap_confirmed_password").value;
+        if (newPw.length < 8 || newPw.length > 128) {
             alert("Password must be between 8 and 128 chars");
-        }
-        else {
+        } else if (newPw.localeCompare(confirmPw) != 0) {
+            alert("New password and the confirmation password are different");
+        } else {
             var xhr = new XMLHttpRequest();
             var params = PARAM_NAME + '=' + encodeURIComponent(newPw);
             xhr.open('POST', URI_CHANGE_AP_PASSWORD, true /*async*/);
@@ -246,15 +389,16 @@
                     refreshRCInfo();
                 }
             };
-        xhr.send(params);
+            xhr.send(params);
+            alert("The password has been changed, you have been disconnected from the Control Hub's network.  You will need to login again and refresh this page.");
         }
     }
 
     var onChangeApChannel = function () {
         console.log("onChangeApChannel()");
         var newCh = $("#id_ap_channel").val();
-        if (newCh < 0 || newCh > 11) {
-            alert("Please select Auto or a channel from 1 - 11")
+        if (newCh < 0 ) {
+            alert("Please select Auto or one of the channels")
         }
         else {
             console.log(newCh);
@@ -281,13 +425,21 @@
                 hideElement(document.getElementById("id_download_logs"), uaIsRobotController);
                 hideElement(document.getElementById("id_upload_firmware"), uaIsRobotController);
                 hideElement(document.getElementById("id_update_robot_controller_application"), uaIsRobotController || !rcInfo.isREVControlHub);
+                hideElement(document.getElementById("id_update_control_hub_operating_system"), !rcInfo.supportsOtaUpdate || !rcInfo.isREVControlHub);
+                hideElement(document.getElementById("id_control_hub_password_block"), !rcInfo.isREVControlHub);
+                hideElement(document.getElementById("id_control_hub_channel_block"), !rcInfo.isREVControlHub);
+
+                if (rcInfo.appUpdateRequiresReboot) {
+                    appUpdateRequiresReboot = true;
+                    $('#id_action_apk').html('Update &amp; Reboot');
+                }
             } else {
                 document.getElementById("id_rc_name").value = '(name)';
             }
         });
     };
     refreshRCInfo();
-    
+
     loadJsonObject(URI_LIST_LOG_FILES, function (logFileList) {
         if (logFileList) {
             document.getElementById("id_log_count").innerHTML = " (" + logFileList.length + ")";
