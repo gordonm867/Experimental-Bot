@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.ExperimentalCode.Math;
 import java.util.ArrayList;
 import static java.lang.Math.*;
 
-public class Functions {
+public final class Functions {
 
     public static ArrayList<Point> lineCircleIntersection(Circle circle, Line line) {
         if (abs(line.getYComp()) < 0.003) {
@@ -85,5 +85,9 @@ public class Functions {
             return myPoint.getX() * signum(myLine.getXComp()) >= testPoint.getX() * signum(myLine.getXComp());
         }
         return !(signum(myLine.getYComp()) * (myPoint.getY() - testPoint.getY()) < signum(myLine.getYComp()) * ((-1 / myLine.getSlope()) * (myPoint.getX() - testPoint.getX())));
+    }
+
+    public static double trueMod(double s1, double s2) {
+        return(s1 % s2 + s2) % s2;
     }
 }

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems;
 
+import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.GOFException;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Circle;
@@ -95,6 +96,9 @@ public class Odometry {
                 Line myLine = new Line(new Point(x, y), new Point(x + 1, y + Math.tan(Math.toRadians(angle))));
                 Point[] points;
                 try {
+                    if(Math.abs(Math.cos(Math.toRadians(angle))) <= 0.05) {
+                        throw new GOFException("You have engaged in a movement incompatible with this robot.  If you do that again, prepare to die.");
+                    }
                     Object[] objs = Functions.infiniteLineCircleIntersection(myCircle, myLine).toArray();
                     points = new Point[objs == null ? 0 : objs.length];
                     int co = 0;

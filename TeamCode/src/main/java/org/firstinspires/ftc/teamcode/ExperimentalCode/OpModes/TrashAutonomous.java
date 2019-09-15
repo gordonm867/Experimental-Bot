@@ -214,118 +214,108 @@ public class TrashAutonomous extends LinearOpMode {
             if(skystone == 1) {
                 turnToPoint(new Point(-3, -3.6));
                 path.add(new Line(odometry.getPoint(), new Point(-3, -3.6)));
-                path.add(new Line(new Point(-3, -3.6), new Point(-1.9, -3.6)));
+                path.add(new Line(new Point(-3, -3.6), new Point(-1.9, -3.65)));
                 follow(path);
                 path.clear();
                 path.add(new Line(odometry.getPoint(), new Point(-2.5, -3.6)));
                 path.add(new Line(new Point(-2.5, -3.6), new Point(-3.8, -2.3)));
                 path.add(new Line(new Point(-3.8, -2.3), new Point(-3.647, 2)));
+                path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
                 backFollow(path);
                 path.clear();
-                radius = 0.25;
-                path.add(new Line(odometry.getPoint(), new Point(-3, 2)));
-                // SCAN FOR PLATFORM DURING NEXT MOVEMENT
-                path.add(new Line(new Point(-3, 2), new Point(-3, 1.5)));
-                boolean found = false; // Where is the platform?
-                if (opModeIsActive() && !found) {
-                    path.clear();
-                    turnToPoint(new Point(-2.07, 2.59));
-                    path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
+                if(System.currentTimeMillis() - time >= 18000 || test) {
+                    path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
+                    path.add(new Line(new Point(-3, 0), new Point(-2.5, -5.25)));
                     follow(path);
-                    if (System.currentTimeMillis() - time >= 18000) {
-                        path.clear();
-                        path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
-                        path.add(new Line(new Point(-3, 0), new Point(-2.5, -5.25)));
-                        follow(path);
-                        turnToPoint(new Point(-1.75, -5.25));
-                        path.add(new Line(odometry.getPoint(), new Point(-1.75, -5.25)));
-                        follow(path);
-                        path.add(new Line(odometry.getPoint(), new Point(-2.5, -5.25)));
-                        path.add(new Line(new Point(-2.5, -5.25), new Point(-5, 1.75)));
-                        backFollow(path);
-                    }
-                    while (opModeIsActive()) {
-                        robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                        robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                        robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                        robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                        wheels.update(robot, new Point(-5, 0), odometry, Double.NaN, AngleUnit.DEGREES);
-                        odometry.update();
-                    }
+                    path.clear();
+                    turn(-30 - odometry.getAngle());
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-2.25, -5.25));
+                    path.add(new Line(odometry.getPoint(), new Point(-2.5, -5.2)));
+                    path.add(new Line(new Point(-2.5, -5.2), new Point(-3, 1.75)));
+                    path.add(new Line(new Point(-3, 1.75), new Point(-2.07, 2.59)));
+                    backFollow(path);
+                    path.clear();
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4, 4));
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-5.25, 4));
+                    path.add(new Line(odometry.getPoint(), new Point(-4.5, 0)));
+                }
+                while (opModeIsActive()) {
+                    robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    wheels.update(robot, new Point(-4.5, 0), odometry, Double.NaN, AngleUnit.DEGREES);
+                    odometry.update();
                 }
             }
             if(skystone == 2) {
                 turnToPoint(new Point(-3, -2.94));
                 path.add(new Line(odometry.getPoint(), new Point(-3, -2.94)));
-                path.add(new Line(new Point(-3, -2.94), new Point(-1.9, -2.94)));
+                path.add(new Line(new Point(-3, -3.6), new Point(-1.9, -2.99)));
                 follow(path);
                 path.clear();
                 path.add(new Line(odometry.getPoint(), new Point(-2.5, -2.94)));
                 path.add(new Line(new Point(-2.5, -2.94), new Point(-3.8, -1.64)));
                 path.add(new Line(new Point(-3.8, -1.64), new Point(-3.647, 2)));
+                path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
                 backFollow(path);
                 path.clear();
-                radius = 0.25;
-                path.add(new Line(odometry.getPoint(), new Point(-3, 2)));
-                // SCAN FOR PLATFORM DURING NEXT MOVEMENT
-                path.add(new Line(new Point(-3, 2), new Point(-3, 1.5)));
-                boolean found = false; // Where is the platform?
-                if (opModeIsActive() && !found) {
-                    path.clear();
-                    turnToPoint(new Point(-2.07, 2.59));
-                    path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
+                if(System.currentTimeMillis() - time >= 18000 || test) {
+                    path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
+                    path.add(new Line(new Point(-3, 0), new Point(-2.5, -4.95)));
                     follow(path);
-                    if (System.currentTimeMillis() - time >= 18000) {
-                        path.clear();
-                        path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
-                        path.add(new Line(new Point(-3, 0), new Point(-2.5, -4.89)));
-                        follow(path);
-                        turnToPoint(new Point(-1.75, -4.25));
-                        path.add(new Line(odometry.getPoint(), new Point(-1.75, -4.89)));
-                        follow(path);
-                        path.add(new Line(odometry.getPoint(), new Point(-2.5, -4.89)));
-                        path.add(new Line(new Point(-2.5, -4.89), new Point(-5, 2)));
-                        backFollow(path);
-                        path.add(new Line(odometry.getPoint(), new Point(-4.274, 0)));
-                        follow(path);
-                    }
+                    path.clear();
+                    path.add(new Line(odometry.getPoint(), new Point(-2.5, -5)));
+                    path.add(new Line(new Point(-2.5, -5), new Point(-3, 1.75)));
+                    path.add(new Line(new Point(-3, 1.75), new Point(-2.07, 2.59)));
+                    backFollow(path);
+                    path.clear();
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4, 4));
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-5.25, 4));
+                    path.add(new Line(odometry.getPoint(), new Point(-4.5, 0)));
+                }
+                while (opModeIsActive()) {
+                    robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    wheels.update(robot, new Point(-4.5, 0), odometry, Double.NaN, AngleUnit.DEGREES);
+                    odometry.update();
                 }
             }
             if(skystone == 3) {
                 turnToPoint(new Point(-3, -2.3));
                 path.add(new Line(odometry.getPoint(), new Point(-3, -2.3)));
-                path.add(new Line(new Point(-3, -2.3), new Point(-1.9, -2.3)));
+                path.add(new Line(new Point(-3, -2.3), new Point(-1.9, -2.35)));
                 follow(path);
                 path.clear();
                 path.add(new Line(odometry.getPoint(), new Point(-2.5, -2.3)));
                 path.add(new Line(new Point(-2.5, -2.3), new Point(-3.8, -1)));
                 path.add(new Line(new Point(-3.8, -1), new Point(-3.647, 2)));
+                path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
                 backFollow(path);
                 path.clear();
-                radius = 0.25;
-                path.add(new Line(odometry.getPoint(), new Point(-3, 2)));
-                // SCAN FOR PLATFORM DURING NEXT MOVEMENT
-                path.add(new Line(new Point(-3, 2), new Point(-3, 1.5)));
-                boolean found = false; // Where is the platform?
-                if(opModeIsActive() && !found) {
-                    path.clear();
-                    turnToPoint(new Point(-2.07, 2.59));
-                    path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
+                if(System.currentTimeMillis() - time >= 18000 || test) {
+                    path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
+                    path.add(new Line(new Point(-3, 0), new Point(-2.5, -4.25)));
                     follow(path);
-                    if(System.currentTimeMillis() - time >= 18000) {
-                        path.clear();
-                        path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
-                        path.add(new Line(new Point(-3, 0), new Point(-2.5, -4.25)));
-                        follow(path);
-                        turnToPoint(new Point(-1.75, -4.25));
-                        path.add(new Line(odometry.getPoint(), new Point(-1.75, -4.25)));
-                        follow(path);
-                        path.add(new Line(odometry.getPoint(), new Point(-2.5, -4.25)));
-                        path.add(new Line(new Point(-2.5, -4.25), new Point(-5, 2)));
-                        backFollow(path);
-                        path.add(new Line(odometry.getPoint(), new Point(-4.2, 0)));
-                        follow(path);
-                    }
+                    path.clear();
+                    path.add(new Line(odometry.getPoint(), new Point(-2.5, -4.3)));
+                    path.add(new Line(new Point(-2.5, -4.3), new Point(-3, 1.75)));
+                    path.add(new Line(new Point(-3, 1.75), new Point(-2.07, 2.59)));
+                    backFollow(path);
+                    path.clear();
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4, 4));
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-5.25, 4));
+                    path.add(new Line(odometry.getPoint(), new Point(-4.5, 0)));
+                }
+                while (opModeIsActive()) {
+                    robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    wheels.update(robot, new Point(-4.5, 0), odometry, Double.NaN, AngleUnit.DEGREES);
+                    odometry.update();
                 }
             }
         }
@@ -460,6 +450,28 @@ public class TrashAutonomous extends LinearOpMode {
             angle = 90;
         }
         double turnDistance = angle - robot.getAngle();
+        if(turnDistance > 180) {
+            turnDistance -= 360;
+        }
+        if(turnDistance < -180) {
+            turnDistance += 360;
+        }
+        if(turnDistance != 0) {
+            turn(turnDistance);
+        }
+    }
+
+    private void turnBackToPoint(Point newPoint) {
+        double angle;
+        Point currPoint = odometry.getPoint();
+        try {
+            angle = currPoint.angle(newPoint, AngleUnit.DEGREES);
+        }
+        catch(Exception p_exception) {
+            angle = 90;
+        }
+        double turnDistance = angle - robot.getAngle();
+        turnDistance -= 180 * Math.signum(turnDistance);
         if(turnDistance > 180) {
             turnDistance -= 360;
         }
