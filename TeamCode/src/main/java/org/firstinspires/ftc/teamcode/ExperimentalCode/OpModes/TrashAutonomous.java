@@ -225,13 +225,13 @@ public class TrashAutonomous extends LinearOpMode {
                 path.clear();
                 if(System.currentTimeMillis() - time >= 18000 || test) {
                     path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
-                    path.add(new Line(new Point(-3, 0), new Point(-2.5, -5.25)));
+                    path.add(new Line(new Point(-3, 0), new Point(-2.8, -5)));
                     follow(path);
                     path.clear();
                     turn(-30 - odometry.getAngle());
-                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-2.25, -5.25));
-                    path.add(new Line(odometry.getPoint(), new Point(-2.5, -5.2)));
-                    path.add(new Line(new Point(-2.5, -5.2), new Point(-3, 1.75)));
+                    strafeTurn(0, angleOffset, new Point(-2.25, -5));
+                    path.add(new Line(odometry.getPoint(), new Point(-2.5, -4.95)));
+                    path.add(new Line(new Point(-2.5, -4.95), new Point(-3, 1.75)));
                     path.add(new Line(new Point(-3, 1.75), new Point(-2.07, 2.59)));
                     backFollow(path);
                     path.clear();
@@ -262,9 +262,10 @@ public class TrashAutonomous extends LinearOpMode {
                 path.clear();
                 if(System.currentTimeMillis() - time >= 18000 || test) {
                     path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
-                    path.add(new Line(new Point(-3, 0), new Point(-2.5, -4.95)));
+                    path.add(new Line(new Point(-3, 0), new Point(-2.8, -4.95)));
                     follow(path);
                     path.clear();
+                    turnToPoint(new Point(-2.5, -5));
                     path.add(new Line(odometry.getPoint(), new Point(-2.5, -5)));
                     path.add(new Line(new Point(-2.5, -5), new Point(-3, 1.75)));
                     path.add(new Line(new Point(-3, 1.75), new Point(-2.07, 2.59)));
@@ -297,9 +298,10 @@ public class TrashAutonomous extends LinearOpMode {
                 path.clear();
                 if(System.currentTimeMillis() - time >= 18000 || test) {
                     path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
-                    path.add(new Line(new Point(-3, 0), new Point(-2.5, -4.25)));
+                    path.add(new Line(new Point(-3, 0), new Point(-2.8, -4.25)));
                     follow(path);
                     path.clear();
+                    turnToPoint(new Point(-2.5, -4.3));
                     path.add(new Line(odometry.getPoint(), new Point(-2.5, -4.3)));
                     path.add(new Line(new Point(-2.5, -4.3), new Point(-3, 1.75)));
                     path.add(new Line(new Point(-3, 1.75), new Point(-2.07, 2.59)));
