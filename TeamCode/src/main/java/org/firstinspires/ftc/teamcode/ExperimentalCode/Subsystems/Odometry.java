@@ -10,9 +10,6 @@ import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Line;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Point;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Vector2;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 public class Odometry {
 
     private static TrashHardware robot;
@@ -82,7 +79,7 @@ public class Odometry {
             double xDist = (robot.getHOmniPos() - lastXPos) * Globals.OMNI_FEET_PER_TICK;
             double yDist = (robot.getVOmniPos() - lastYPos) * Globals.OMNI_FEET_PER_TICK;
             double displacement = Math.hypot(xDist, yDist);
-            angle += Math.toDegrees(Math.atan2(yDist, xDist));
+            angle += Math.toDegrees(Math.atan2(yDist, xDist)) - (dTheta / 2);
             // double arcAngle = Math.toRadians(angle + Math.toDegrees(Math.atan2(yDist, xDist)));
             if (dTheta != 0 && displacement > 0) {
                 /*
@@ -90,7 +87,6 @@ public class Odometry {
                 double direction = Math.signum(displacement * Math.cos(Math.toRadians(angle)));
                 Vector2[] points = intersection.getIntersectionPoints();
                 */
-                double direction = Math.signum(displacement * Math.sin(Math.toRadians(angle)));
                 double radius = Math.abs((((360.0 / dTheta) * displacement) / (2.0 * Math.PI)));
                 Circle myCircle = new Circle(new Point(x, y), (((2 * radius * Math.sin(Math.toRadians(dTheta) / 2)))));
                 Line myLine = new Line(new Point(x, y), new Point(x + 1, y + Math.tan(Math.toRadians(angle))));
@@ -114,6 +110,7 @@ public class Odometry {
                 catch(Exception p_exception) {
                     points = new Point[0];
                 }
+                Point approxPoint = new Point(x + (displacement * Math.cos(Math.toRadians(angle))), y + (displacement * Math.sin(Math.toRadians(angle))));
                 if(points.length == 0) {
                     x += displacement * Math.cos(Math.toRadians(angle));
                     y += displacement * Math.sin(Math.toRadians(angle));
@@ -122,46 +119,100 @@ public class Odometry {
                     x = points[0].getX();
                     y = points[0].getY();
                 }
-                else if (direction > 0) {
-                    if(points[0].getY() >= y) {
+                else {
+                    Point testPoint = points[0];
+                    Point testPoint2 = points[1];
+                    int dist1 = testPoint.distance(approxPoint);
+                    int dist2 = testPoint2.distance(approxPoint);
+                    if(Math.abs(dist1) < Math.abs(dist2)) {
                         x = points[0].getX();
                         y = points[0].getY();
                     }
                     else {
                         x = points[1].getX();
                         y = points[1].getY();
+                    }
+                }
+            }
+            else {
+                x += displacement * Math.cos(Math.toRadians(angle));
+                y += displacement * Math.sin(Math.toRadians(angle));
+            }
+            lastXPos = robot.getHOmniPos();
+            lastYPos = robot.getVOmniPos();
+            dTime += System.currentTimeMillis() - lastTime;
+            lastTime = System.currentTimeMillis();
+        }
+
+        /*
+        if(update) {
+            updates++;
+            angle = robot.getAngle() + angleOffset;
+            double dTheta = angle - lastAngle;
+            if(dTheta >= 300) {
+                dTheta -= 360;
+            }
+            if(dTheta <= -300) {
+                dTheta += 360;
+            }
+            lastAngle = angle;
+            double xDist = (robot.getHOmniPos() - lastXPos) * Globals.OMNI_FEET_PER_TICK;
+            double yDist = (robot.getVOmniPos() - lastYPos) * Globals.OMNI_FEET_PER_TICK;
+            double displacement = Math.hypot(xDist, yDist);
+            angle += Math.toDegrees(Math.atan2(yDist, xDist));
+            // double arcAngle = Math.toRadians(angle + Math.toDegrees(Math.atan2(yDist, xDist)));
+            if (dTheta != 0 && displacement > 0) {
+                CircleCircleIntersection intersection = new CircleCircleIntersection(new Circle(new Vector2(x, y), displacement), new Circle(new Vector2(0, 0), (Math.sqrt(Math.pow(displacement, 2) / (4 * Math.pow(Math.sin(0.5 * dTheta), 2))))));
+                double direction = Math.signum(displacement * Math.cos(Math.toRadians(angle)));
+                Vector2[] points = intersection.getIntersectionPoints();
+                if(points.length == 0) {
+                    x += displacement * Math.cos(Math.toRadians(angle));
+                    y += displacement * Math.sin(Math.toRadians(angle));
+                }
+                else if(points.length == 1) {
+                    x = points[0].x;
+                    y = points[0].y;
+                }
+                else if (direction > 0) {
+                    if(points[0].x >= x) {
+                        x = points[0].x;
+                        y = points[0].y;
+                    }
+                    else {
+                        x = points[1].x;
+                        y = points[1].y;
                     }
                 }
                 else if (direction < 0) {
-                    if(points[0].getY() >= y) {
-                        x = points[1].getX();
-                        y = points[1].getY();
+                    if(points[0].x >= x) {
+                        x = points[1].x;
+                        y = points[1].y;
                     }
                     else {
-                        x = points[0].getX();
-                        y = points[0].getY();
+                        x = points[0].x;
+                        y = points[0].y;
                     }
                 }
                 else {
-                    direction = Math.signum(displacement * Math.cos(Math.toRadians(angle)));
+                    direction = Math.signum(displacement * Math.sin(Math.toRadians(angle)));
                     if(direction > 0) {
-                        if(points[0].getX() >= x) {
-                            x = points[0].getX();
-                            y = points[0].getY();
+                        if(points[0].y >= y) {
+                            x = points[0].x;
+                            y = points[0].y;
                         }
                         else {
-                            x = points[1].getX();
-                            y = points[1].getY();
+                            x = points[1].x;
+                            y = points[1].y;
                         }
                     }
                     else if(direction < 0) {
-                        if(points[0].getX() <= x) {
-                            x = points[0].getX();
-                            y = points[0].getY();
+                        if(points[0].y <= y) {
+                            x = points[0].x;
+                            y = points[0].y;
                         }
                         else {
-                            x = points[1].getX();
-                            y = points[1].getY();
+                            x = points[1].x;
+                            y = points[1].y;
                         }
                     }
                     else {
@@ -179,5 +230,7 @@ public class Odometry {
             dTime += System.currentTimeMillis() - lastTime;
             lastTime = System.currentTimeMillis();
         }
+
+        */
     }
 }

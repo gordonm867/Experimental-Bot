@@ -216,17 +216,20 @@ public class TrashAutonomous extends LinearOpMode {
                 path.add(new Line(odometry.getPoint(), new Point(-3, -3.6)));
                 path.add(new Line(new Point(-3, -3.6), new Point(-1.9, -3.65)));
                 follow(path);
+                robot.setDrivePower(0, 0, 0, 0);
                 path.clear();
                 path.add(new Line(odometry.getPoint(), new Point(-2.5, -3.6)));
                 path.add(new Line(new Point(-2.5, -3.6), new Point(-3.8, -2.3)));
                 path.add(new Line(new Point(-3.8, -2.3), new Point(-3.647, 2)));
-                path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
+                path.add(new Line(new Point(-3.647, 2), new Point(-2.07, 2.59)));
                 backFollow(path);
+                robot.setDrivePower(0, 0, 0, 0);
                 path.clear();
-                if(System.currentTimeMillis() - time >= 18000 || test) {
+                if(System.currentTimeMillis() - time <= 18000 || test) {
                     path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
                     path.add(new Line(new Point(-3, 0), new Point(-2.8, -5)));
                     follow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
                     path.clear();
                     turn(-30 - odometry.getAngle());
                     strafeTurn(0, angleOffset, new Point(-2.25, -5));
@@ -234,6 +237,7 @@ public class TrashAutonomous extends LinearOpMode {
                     path.add(new Line(new Point(-2.5, -4.95), new Point(-3, 1.75)));
                     path.add(new Line(new Point(-3, 1.75), new Point(-2.07, 2.59)));
                     backFollow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
                     path.clear();
                     strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4, 4));
                     strafeTurn(-odometry.getAngle(), angleOffset, new Point(-5.25, 4));
@@ -253,23 +257,27 @@ public class TrashAutonomous extends LinearOpMode {
                 path.add(new Line(odometry.getPoint(), new Point(-3, -2.94)));
                 path.add(new Line(new Point(-3, -3.6), new Point(-1.9, -2.99)));
                 follow(path);
+                robot.setDrivePower(0, 0, 0, 0);
                 path.clear();
                 path.add(new Line(odometry.getPoint(), new Point(-2.5, -2.94)));
                 path.add(new Line(new Point(-2.5, -2.94), new Point(-3.8, -1.64)));
                 path.add(new Line(new Point(-3.8, -1.64), new Point(-3.647, 2)));
-                path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
+                path.add(new Line(new Point(-3.647, 2), new Point(-2.07, 2.59)));
                 backFollow(path);
+                robot.setDrivePower(0, 0, 0, 0);
                 path.clear();
-                if(System.currentTimeMillis() - time >= 18000 || test) {
+                if(System.currentTimeMillis() - time <= 18000 || test) {
                     path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
                     path.add(new Line(new Point(-3, 0), new Point(-2.8, -4.95)));
                     follow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
                     path.clear();
                     turnToPoint(new Point(-2.5, -5));
                     path.add(new Line(odometry.getPoint(), new Point(-2.5, -5)));
                     path.add(new Line(new Point(-2.5, -5), new Point(-3, 1.75)));
                     path.add(new Line(new Point(-3, 1.75), new Point(-2.07, 2.59)));
                     backFollow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
                     path.clear();
                     strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4, 4));
                     strafeTurn(-odometry.getAngle(), angleOffset, new Point(-5.25, 4));
@@ -289,23 +297,27 @@ public class TrashAutonomous extends LinearOpMode {
                 path.add(new Line(odometry.getPoint(), new Point(-3, -2.3)));
                 path.add(new Line(new Point(-3, -2.3), new Point(-1.9, -2.35)));
                 follow(path);
+                robot.setDrivePower(0, 0, 0, 0);
                 path.clear();
                 path.add(new Line(odometry.getPoint(), new Point(-2.5, -2.3)));
                 path.add(new Line(new Point(-2.5, -2.3), new Point(-3.8, -1)));
                 path.add(new Line(new Point(-3.8, -1), new Point(-3.647, 2)));
-                path.add(new Line(odometry.getPoint(), new Point(-2.07, 2.59)));
+                path.add(new Line(new Point(-3.647, 2), new Point(-2.07, 2.59)));
                 backFollow(path);
+                robot.setDrivePower(0, 0, 0, 0);
                 path.clear();
                 if(System.currentTimeMillis() - time >= 18000 || test) {
                     path.add(new Line(odometry.getPoint(), new Point(-3, 0)));
                     path.add(new Line(new Point(-3, 0), new Point(-2.8, -4.25)));
                     follow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
                     path.clear();
                     turnToPoint(new Point(-2.5, -4.3));
                     path.add(new Line(odometry.getPoint(), new Point(-2.5, -4.3)));
                     path.add(new Line(new Point(-2.5, -4.3), new Point(-3, 1.75)));
                     path.add(new Line(new Point(-3, 1.75), new Point(-2.07, 2.59)));
                     backFollow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
                     path.clear();
                     strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4, 4));
                     strafeTurn(-odometry.getAngle(), angleOffset, new Point(-5.25, 4));
