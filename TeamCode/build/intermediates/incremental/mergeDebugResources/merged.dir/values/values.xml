@@ -946,17 +946,7 @@
         <item name="feedbackBorder">@color/border_orange</item>
         <item name="feedbackShape">@drawable/feedback_shape_orange</item>
     </style>
-    <style name="AppThemeBlueRC" parent="AppTheme.Blue">
-    </style>
-    <style name="AppThemeGreenRC" parent="AppTheme.Green">
-    </style>
-    <style name="AppThemeOrangeRC" parent="AppTheme.Orange">
-    </style>
-    <style name="AppThemePurpleRC" parent="AppTheme.Purple">
-    </style>
     <style name="AppThemeRedRC" parent="AppTheme.Red">
-    </style>
-    <style name="AppThemeTealRC" parent="AppTheme.Teal">
     </style>
     <style name="ConfigWifiDirectDialog" parent="@android:style/Theme.Dialog">
         <item name="android:background">@color/background_black</item>
@@ -986,5 +976,10 @@
     <style name="OpModeDialogTextAppearance" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">?android:attr/textColorAlertDialogListItem</item>
     </style>
+    <declare-styleable name="CameraBridgeViewBase"><attr format="boolean" name="show_fps"/><attr format="integer" name="camera_id">
+          <enum name="any" value="-1"/>
+          <enum name="back" value="99"/>
+          <enum name="front" value="98"/>
+       </attr></declare-styleable>
     <declare-styleable name="ColorListPreference"><attr format="reference" name="colors"/></declare-styleable>
 </resources>
