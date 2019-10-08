@@ -23,6 +23,7 @@ import java.util.ArrayList;
 @Autonomous(name="TrashAuto", group="Trash")
 public class TrashAutonomous extends LinearOpMode {
 
+<<<<<<< Updated upstream
     private TrashHardware robot = TrashHardware.getInstance();
     private Odometry odometry;
     private Drivetrain wheels = new Drivetrain(Drivetrain.State.STOPPED);
@@ -31,7 +32,22 @@ public class TrashAutonomous extends LinearOpMode {
     private double turnCoeff = 0.0055;
     private Point stopped;
     private Point stopTarget;
+=======
+    private TrashHardware robot = TrashHardware.getInstance(); // Access robot hardware
+    private Odometry odometry; // Access positioning data
+    private Drivetrain wheels = new Drivetrain(Drivetrain.State.STOPPED); // Access wheels, which should begin stopped
+    private double angleOffset = 3; // Turning tolerance
+    private double radius = 1.86; // Pure Pursuit radius coefficient
+    private double turnCoeff = 0.0055; // Turning speed parameter
+    private Point stopped; // Actual Point at which followers stop
+    private Point stopTarget; // Intended Point for followers to stop
+    private boolean test = false; // Is this experimental?
+>>>>>>> Stashed changes
 
+    /**
+     * Main OpMode to control autonomous
+     * @throws InterruptedException Stop running if OpMode is stopped
+     */
     public void runOpMode() throws InterruptedException {
 
         /* Initialize Hardware */
@@ -76,6 +92,14 @@ public class TrashAutonomous extends LinearOpMode {
             Globals.START_Y = 0;
             Globals.START_THETA = 135;
         }
+<<<<<<< Updated upstream
+=======
+        else if(pathNum % pathNames.size() == 3) {
+            Globals.START_X = -5.25;
+            Globals.START_Y = -3;
+            Globals.START_THETA = 0;
+        }
+>>>>>>> Stashed changes
         odometry = Odometry.getInstance(robot);
         robot.enabled = true;
         telemetry.addData("Status", "Initialized");
@@ -187,14 +211,166 @@ public class TrashAutonomous extends LinearOpMode {
                 telemetry.update();
             }
         }
+<<<<<<< Updated upstream
+=======
+        else if(pathNum % pathNames.size() == 3) {
+            radius = 0.75;
+            turnCoeff = 0.0055;
+            // int skystone = (int)(Math.ceil(Math.random() * 3));
+            int skystone = 3;
+            if(skystone == 1) {
+                turnToPoint(new Point(-3.75, -3.6));
+                path.add(new Line(odometry.getPoint(), new Point(-3.75, -3.6)));
+                path.add(new Line(new Point(-3.75, -3.6), new Point(-2.65, -3.61)));
+                follow(path);
+                robot.setDrivePower(0, 0, 0, 0);
+                path.clear();
+                sleep(200);
+                path.add(new Line(odometry.getPoint(), new Point(-3, -3.6)));
+                backFollow(path);
+                robot.setDrivePower(0, 0, 0, 0);
+                strafeTurn(0, angleOffset, new Point(-3, 3));
+                strafeTurn(0, angleOffset, new Point(-2.4, 3));
+                robot.setDrivePower(0, 0, 0, 0);
+                sleep(200);
+                path.clear();
+                if(System.currentTimeMillis() - time <= 18000 || test) {
+                    path.add(new Line(odometry.getPoint(), new Point(-3, 3)));
+                    backFollow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
+                    path.clear();
+                    turn(-robot.getAngle());
+                    strafeTurn(0, angleOffset, new Point(-2.87, -4.98));
+                    robot.setDrivePower(0, 0, 0, 0);
+                    turn(-robot.getAngle() - 25.7142857143);
+                    sleep(200);
+                    turn(-robot.getAngle());
+                    path.add(new Line(odometry.getPoint(), new Point(-3, odometry.getPoint().getY() + 0.01)));
+                    backFollow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
+                    strafeTurn(0, angleOffset, new Point(-3, 3));
+                    strafeTurn(0, angleOffset, new Point(-2.35, 3));
+                    path.clear();
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4, 4));
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4.6, 4));
+                    path.add(new Line(odometry.getPoint(), new Point(-4.5, 0)));
+                }
+                while (opModeIsActive()) {
+                    robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    wheels.update(robot, new Point(-4.5, 0), odometry, Double.NaN, AngleUnit.DEGREES);
+                    odometry.update();
+                }
+            }
+            if(skystone == 2) {
+                turnToPoint(new Point(-3, -3.14));
+                path.add(new Line(odometry.getPoint(), new Point(-3, -3.14)));
+                path.add(new Line(new Point(-3, -3.6), new Point(-2.2, -3.19)));
+                follow(path);
+                robot.setDrivePower(0, 0, 0, 0);
+                path.clear();
+                path.add(new Line(odometry.getPoint(), new Point(-2.35, -2.94)));
+                path.add(new Line(new Point(-2.35, -2.94), new Point(-3.5, -1.64)));
+                path.add(new Line(new Point(-3.5, -1.64), new Point(-3.647, 2)));
+                path.add(new Line(new Point(-3.647, 2), new Point(-2.07, 2.59)));
+                backFollow(path);
+                robot.setDrivePower(0, 0, 0, 0);
+                turn(-robot.getAngle() - 135);
+                path.clear();
+                if(System.currentTimeMillis() - time <= 18000 || test) {
+                    path.add(new Line(odometry.getPoint(), new Point(-3.75, 0)));
+                    path.add(new Line(new Point(-3.75, 0), new Point(-2.81, -5.1)));
+                    follow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
+                    path.clear();
+                    turn(-robot.getAngle());
+                    sleep(200);
+                    turnToPoint(new Point(-2.8, -5));
+                    path.add(new Line(odometry.getPoint(), new Point(-2.8, -5)));
+                    path.add(new Line(new Point(-2.8, -5), new Point(-3, 1.75)));
+                    path.add(new Line(new Point(-3, 1.75), new Point(-2.07, 2.59)));
+                    backFollow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
+                    turn(-robot.getAngle() - 135);
+                    path.clear();
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4, 4));
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4.6, 4));
+                    path.add(new Line(odometry.getPoint(), new Point(-4.5, 0)));
+                }
+                while (opModeIsActive()) {
+                    robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    wheels.update(robot, new Point(-4.5, 0), odometry, Double.NaN, AngleUnit.DEGREES);
+                    odometry.update();
+                }
+            }
+            if(skystone == 3) {
+                turnToPoint(new Point(-3.75, -2.3));
+                path.add(new Line(odometry.getPoint(), new Point(-3.75, -2.3)));
+                path.add(new Line(new Point(-3.75, -2.3), new Point(-2.65, -2.31)));
+                follow(path);
+                robot.setDrivePower(0, 0, 0, 0);
+                path.clear();
+                sleep(200);
+                path.add(new Line(odometry.getPoint(), new Point(-3, -2.3)));
+                backFollow(path);
+                robot.setDrivePower(0, 0, 0, 0);
+                strafeTurn(0, angleOffset, new Point(-3, 3));
+                strafeTurn(0, angleOffset, new Point(-2.4, 3));
+                robot.setDrivePower(0, 0, 0, 0);
+                sleep(200);
+                path.clear();
+                if(System.currentTimeMillis() - time <= 18000 || test) {
+                    path.add(new Line(odometry.getPoint(), new Point(-3, 3)));
+                    backFollow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
+                    path.clear();
+                    turn(-robot.getAngle());
+                    strafeTurn(0, angleOffset, new Point(-3, -4.25));
+                    robot.setDrivePower(0, 0, 0, 0);
+                    path.add(new Line(odometry.getPoint(), new Point(-2.65, -4.251)));
+                    follow(path);
+                    sleep(200);
+                    path.add(new Line(odometry.getPoint(), new Point(-3, odometry.getPoint().getY() + 0.01)));
+                    backFollow(path);
+                    robot.setDrivePower(0, 0, 0, 0);
+                    strafeTurn(0, angleOffset, new Point(-3, 3));
+                    strafeTurn(0, angleOffset, new Point(-2.35, 3));
+                    path.clear();
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4, 4));
+                    strafeTurn(-odometry.getAngle(), angleOffset, new Point(-4.6, 4));
+                    path.add(new Line(odometry.getPoint(), new Point(-4.5, 0)));
+                }
+                while (opModeIsActive()) {
+                    robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    wheels.update(robot, new Point(-4.5, 0), odometry, Double.NaN, AngleUnit.DEGREES);
+                    odometry.update();
+                }
+            }
+        }
+>>>>>>> Stashed changes
     }
 
+    /**
+     * Forward-facing Pure Pursuit follower
+     * @param path Path to follow
+     * @throws InterruptedException Stop running if OpMode is stopped
+     */
     public void follow(ArrayList<Line> path) throws InterruptedException {
         robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        for(Line line : path) {
+        boolean done = false;
+        for(int k = 0; k < path.size(); k++) {
+            Line line = path.get(k);
             if(isStopRequested()) {
                 throw new InterruptedException("OpMode Stopped");
             }
@@ -249,17 +425,27 @@ public class TrashAutonomous extends LinearOpMode {
                 line = new Line(odometry.getPoint(), line.getPoint2());
                 nextPoint = Functions.lineCircleIntersection(new Circle(odometry.getPoint(), radius), line);
                 thing = true;
+                if(k == path.size() - 1 && nextPoint.size() == 0 && !done) {
+                    nextPoint.add(line.getPoint2());
+                    done = true;
+                }
             }
         }
         robot.setDrivePower(0, 0, 0, 0);
     }
 
+    /**
+     * Backward-facing Pure Pursuit follower
+     * @param path Path to follow
+     * @throws InterruptedException Stop running if OpMode is stopped
+     */
     public void backFollow(ArrayList<Line> path) throws InterruptedException {
         robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        for(Line line : path) {
+        for(int k = 0; k < path.size(); k++) {
+            Line line = path.get(k);
             if(isStopRequested()) {
                 throw new InterruptedException("OpMode Stopped");
             }
@@ -304,10 +490,82 @@ public class TrashAutonomous extends LinearOpMode {
                 line = new Line(odometry.getPoint(), line.getPoint2());
                 nextPoint = Functions.lineCircleIntersection(new Circle(odometry.getPoint(), radius), line);
                 thing = true;
+                if(k == path.size() - 1 && nextPoint.size() == 0) {
+                    nextPoint.add(line.getPoint2());
+                }
             }
         }
+        robot.setDrivePower(0, 0, 0, 0);
     }
 
+    /**
+     * Sideways-facing (90º) Pure Pursuit follower
+     * @param path Path to follow
+     * @throws InterruptedException Stop running if OpMode is stopped
+     */
+    public void sideFollow(ArrayList<Line> path) throws InterruptedException {
+        robot.rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.lf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.lb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        for(int k = 0; k < path.size(); k++) {
+            Line line = path.get(k);
+            if(isStopRequested()) {
+                throw new InterruptedException("OpMode Stopped");
+            }
+            // odometry.update();
+            ArrayList<Point> nextPoint = Functions.lineCircleIntersection(new Circle(odometry.getPoint(), radius), line);
+            boolean thing = false;
+            while (opModeIsActive() && nextPoint.size() > 0) {
+                while (opModeIsActive() && !Functions.isPassed(line, odometry.getPoint(), nextPoint.get(0))) {
+                    double relAngle = odometry.getPoint().angle(nextPoint.get(0), AngleUnit.DEGREES) - odometry.getAngle();
+                    if (Math.abs(relAngle + 360) < Math.abs(relAngle)) {
+                        relAngle += 360;
+                    }
+                    if (Math.abs(relAngle - 360) < Math.abs(relAngle)) {
+                        relAngle -= 360;
+                    }
+                    double drive = -Math.cos(Math.toRadians(relAngle));
+                    double turn = turnCoeff * (relAngle - (90 * Math.signum(relAngle)));
+                    double angle = 0;
+                    if(thing) {
+                        Point myPos = odometry.getPoint();
+                        Line perpLine = new Line(odometry.getPoint(), new Point(odometry.getPoint().getX() + 1, (-1.0 / line.getSlope()) + odometry.getPoint().getY()));
+                        double x = (perpLine.getYInt() - line.getYInt()) / (line.getSlope() - perpLine.getSlope());
+                        Point target = new Point(x, (perpLine.getSlope() * x) + perpLine.getYInt());
+                        double displacement = Math.abs(Math.sqrt(Math.pow(target.getX() - myPos.getX(), 2) + Math.pow(target.getY() - myPos.getY(), 2)));
+                        if(displacement != 0 && !Double.isInfinite(displacement) && !Double.isNaN(displacement)) {
+                            double PIDd = -Math.cos((myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) - (Math.toRadians(90) * Math.signum(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())))) * displacement;
+                            if (PIDd != -displacement) {
+                                angle = 0.5 * Math.sin(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
+                                drive += 0.5 * PIDd;
+                            }
+                        }
+                    }
+                    double scaleFactor;
+                    if(Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))) > 1) {
+                        scaleFactor = Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))));
+                    } else {
+                        scaleFactor = Globals.MAX_SPEED;
+                    }
+                    robot.setDrivePower(scaleFactor * (drive + turn - angle), scaleFactor * (drive + turn + angle), scaleFactor * (drive - turn + angle), scaleFactor * (drive - turn - angle));
+                    odometry.update();
+                }
+                line = new Line(odometry.getPoint(), line.getPoint2());
+                nextPoint = Functions.lineCircleIntersection(new Circle(odometry.getPoint(), radius), line);
+                thing = true;
+                if(k == path.size() - 1 && nextPoint.size() == 0) {
+                    nextPoint.add(line.getPoint2());
+                }
+            }
+        }
+        robot.setDrivePower(0, 0, 0, 0);
+    }
+
+    /**
+     * Turn to face a certain point on the field
+     * @param newPoint Point to now face
+     */
     private void turnToPoint(Point newPoint) {
         double angle;
         Point currPoint = odometry.getPoint();
@@ -329,6 +587,39 @@ public class TrashAutonomous extends LinearOpMode {
         }
     }
 
+<<<<<<< Updated upstream
+=======
+    /**
+     * Turn so that the back of the robot faces a certain point on the field
+     * @param newPoint Point to now face backwards
+     */
+    private void turnBackToPoint(Point newPoint) {
+        double angle;
+        Point currPoint = odometry.getPoint();
+        try {
+            angle = currPoint.angle(newPoint, AngleUnit.DEGREES);
+        }
+        catch(Exception p_exception) {
+            angle = 90;
+        }
+        double turnDistance = angle - robot.getAngle();
+        turnDistance -= 180 * Math.signum(turnDistance);
+        if(turnDistance > 180) {
+            turnDistance -= 360;
+        }
+        if(turnDistance < -180) {
+            turnDistance += 360;
+        }
+        if(turnDistance != 0) {
+            turn(turnDistance);
+        }
+    }
+
+    /**
+     * Turn a certain, specified amount
+     * @param angle Amount to turn
+     */
+>>>>>>> Stashed changes
     private void turn(double angle) {
         if(Math.abs(angle) < 0.1 || Math.abs(angle) + 0.1 % 360 < 0.2) { // Detects if turn is too insignificant
             return;
@@ -369,7 +660,7 @@ public class TrashAutonomous extends LinearOpMode {
                         error = lastError;
                     }
                 }
-                robot.setDrivePower(Math.min(-0.03 * error, -0.1), Math.min(-0.03 * error, -0.1), Math.max(0.03 * error, 0.1), Math.max(0.03 * error, 0.1));
+                robot.setDrivePower(Math.min(-0.02 * error, -0.1), Math.min(-0.02 * error, -0.1), Math.max(0.02 * error, 0.1), Math.max(0.02 * error, 0.1));
                 robotAngle = robot.getAngle();
             }
             robot.setDrivePower(0, 0, 0, 0);
@@ -400,7 +691,7 @@ public class TrashAutonomous extends LinearOpMode {
                         error = lastError;
                     }
                 }
-                robot.setDrivePower(Math.max(0.03 * error, 0.1), Math.max(0.03 * error, 0.1), Math.min(-0.03 * error, -0.1), Math.min(-0.03 * error, -0.1));
+                robot.setDrivePower(Math.max(0.02 * error, 0.1), Math.max(0.02 * error, 0.1), Math.min(-0.02 * error, -0.1), Math.min(-0.02 * error, -0.1));
                 robotAngle = robot.getAngle();
             }
             robot.setDrivePower(0, 0, 0, 0);
@@ -424,17 +715,25 @@ public class TrashAutonomous extends LinearOpMode {
         */
     }
 
-    private void resetEncoders() { // Reset encoder values and set encoders to "run to position" mode
+    /**
+     * Reset drive encoders and sets them to RUN_USING_ENCODERS mode
+     */
+    private void resetEncoders() { // Reset encoder values and set encoders to "run using encoder" mode
         robot.rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.rf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.lb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.rb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.lf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.lb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
+    /**
+     * Get the direction in which a certain motor is traveling
+     * @param motor Motor on which to perform check
+     * @return The direction of the motor (-1 = backwards; 1 = forward; 0 = stationary)
+     */
     private double getPower(DcMotor motor) {
         try {
             double power = (Math.abs(motor.getPower()) / motor.getPower()) * (Math.abs(motor.getTargetPosition()) - Math.abs(motor.getCurrentPosition())) / 500.0;
@@ -453,6 +752,10 @@ public class TrashAutonomous extends LinearOpMode {
         }
     }
 
+    /**
+     * Move to a certain point linearly using encoders to assess accuracy
+     * @param newPoint Point to which to travel
+     */
     private void runToPoint(Point newPoint) {
         if(!opModeIsActive()) {
             return;
@@ -480,6 +783,12 @@ public class TrashAutonomous extends LinearOpMode {
         // while(!gamepad1.a && opModeIsActive()) {}
     }
 
+    /**
+     * Move a certain distance using drive encoders
+     * @param pos Distance to move (in encoder ticks)
+     * @param speed Maximum speed for movement
+     * @param timeLimit Maximum time to spend on movement
+     */
     private void encoderMovePreciseTimed(int pos, double speed, double timeLimit) { // Move encoders towards target position until the position is reached, or the time limit expires
         RevBulkData data = robot.bulkRead();
         if(pos == 0 && timeLimit >= 0.1) {
@@ -581,6 +890,12 @@ public class TrashAutonomous extends LinearOpMode {
         }
     }
 
+    /**
+     * Simultaneously strafe to a certain point and turn to a certain angle
+     * @param angle Amount to turn during movement
+     * @param angleOffset Turning tolerance
+     * @param target Point to which to strafe
+     */
     private void strafeTurn(double angle, double angleOffset, Point target) {
         if(Math.abs(angle) < 0.1 || Math.abs(angle) + 0.1 % 360 < 0.2) { // Detects if turn is too insignificant
             double displacement = odometry.getPoint().distance(target) * -Globals.DRIVE_FEET_PER_TICK;
@@ -629,12 +944,12 @@ public class TrashAutonomous extends LinearOpMode {
                     }
                 }
                 double scaleFactor;
-                if(Math.max(Math.abs(strafePows[0] + Math.min(-0.03 * error, -0.1)), Math.max(Math.abs(strafePows[1] + Math.min(-0.03 * error, -0.1)), Math.max(Math.abs((strafePows[2] + Math.max(0.03 * error, 0.1))), Math.abs((strafePows[3] + Math.max(0.03 * error, 0.1)))))) > 1) {
-                    scaleFactor = Globals.MAX_SPEED / Math.max(Math.abs(strafePows[0] + Math.min(-0.03 * error, -0.1)), Math.max(Math.abs(strafePows[1] + Math.min(-0.03 * error, -0.1)), Math.max(Math.abs((strafePows[2] + Math.max(0.03 * error, 0.1))), Math.abs((strafePows[3] + Math.max(0.03 * error, 0.1))))));
+                if(Math.max(Math.abs(strafePows[0] + Math.min(-0.02 * error, -0.1)), Math.max(Math.abs(strafePows[1] + Math.min(-0.02 * error, -0.1)), Math.max(Math.abs((strafePows[2] + Math.max(0.02 * error, 0.1))), Math.abs((strafePows[3] + Math.max(0.02 * error, 0.1)))))) > 1) {
+                    scaleFactor = Globals.MAX_SPEED / Math.max(Math.abs(strafePows[0] + Math.min(-0.02 * error, -0.1)), Math.max(Math.abs(strafePows[1] + Math.min(-0.02 * error, -0.1)), Math.max(Math.abs((strafePows[2] + Math.max(0.02 * error, 0.1))), Math.abs((strafePows[3] + Math.max(0.02 * error, 0.1))))));
                 } else {
                     scaleFactor = Globals.MAX_SPEED;
                 }
-                robot.setDrivePower(scaleFactor * (strafePows[0] + Math.min(-0.03 * error, -0.1)), scaleFactor * (strafePows[1] + Math.min(-0.03 * error, -0.1)), scaleFactor * (strafePows[2] + Math.max(0.03 * error, 0.1)), scaleFactor * (strafePows[3] + Math.max(0.03 * error, 0.1)));
+                robot.setDrivePower(scaleFactor * (strafePows[0] + Math.min(-0.02 * error, -0.1)), scaleFactor * (strafePows[1] + Math.min(-0.02 * error, -0.1)), scaleFactor * (strafePows[2] + Math.max(0.02 * error, 0.1)), scaleFactor * (strafePows[3] + Math.max(0.02 * error, 0.1)));
                 robotAngle = robot.getAngle();
             }
             robot.setDrivePower(0, 0, 0, 0);
@@ -667,12 +982,12 @@ public class TrashAutonomous extends LinearOpMode {
                     }
                 }
                 double scaleFactor;
-                if(Math.max(Math.abs(strafePows[0] + Math.max(0.03 * error, 0.1)), Math.max(Math.abs(strafePows[1] + Math.max(0.03 * error, 0.1)), Math.max(Math.abs((strafePows[2] + Math.min(-0.03 * error, -0.1))), Math.abs((strafePows[3] + Math.min(-0.03 * error, -0.1)))))) > 1) {
-                    scaleFactor = Globals.MAX_SPEED / Math.max(Math.abs(strafePows[0] + Math.max(0.03 * error, 0.1)), Math.max(Math.abs(strafePows[1] + Math.max(0.03 * error, 0.1)), Math.max(Math.abs((strafePows[2] + Math.min(-0.03 * error, -0.1))), Math.abs((strafePows[3] + Math.min(-0.03 * error, -0.1))))));
+                if(Math.max(Math.abs(strafePows[0] + Math.max(0.02 * error, 0.1)), Math.max(Math.abs(strafePows[1] + Math.max(0.02 * error, 0.1)), Math.max(Math.abs((strafePows[2] + Math.min(-0.02 * error, -0.1))), Math.abs((strafePows[3] + Math.min(-0.02 * error, -0.1)))))) > 1) {
+                    scaleFactor = Globals.MAX_SPEED / Math.max(Math.abs(strafePows[0] + Math.max(0.02 * error, 0.1)), Math.max(Math.abs(strafePows[1] + Math.max(0.02 * error, 0.1)), Math.max(Math.abs((strafePows[2] + Math.min(-0.02 * error, -0.1))), Math.abs((strafePows[3] + Math.min(-0.02 * error, -0.1))))));
                 } else {
                     scaleFactor = Globals.MAX_SPEED;
                 }
-                robot.setDrivePower(scaleFactor * (strafePows[0] + Math.max(0.03 * error, 0.1)), scaleFactor * (strafePows[1] + Math.max(0.03 * error, 0.1)), scaleFactor * (strafePows[2] + Math.min(-0.03 * error, -0.1)), scaleFactor * (strafePows[3] + Math.min(-0.03 * error, -0.1)));
+                robot.setDrivePower(scaleFactor * (strafePows[0] + Math.max(0.02 * error, 0.1)), scaleFactor * (strafePows[1] + Math.max(0.02 * error, 0.1)), scaleFactor * (strafePows[2] + Math.min(-0.02 * error, -0.1)), scaleFactor * (strafePows[3] + Math.min(-0.02 * error, -0.1)));
                 robotAngle = robot.getAngle();
             }
             robot.setDrivePower(0, 0, 0, 0);

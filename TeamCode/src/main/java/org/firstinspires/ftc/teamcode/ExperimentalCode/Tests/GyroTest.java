@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
 
 @TeleOp(name="Gyro Test",group="Tests")
-@Disabled
+//@Disabled
 public class GyroTest extends LinearOpMode {
     public void runOpMode() {
         TrashHardware robot = TrashHardware.getInstance();

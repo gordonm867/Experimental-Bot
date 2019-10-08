@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Point;
+import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Clamp;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Odometry;
 
@@ -14,6 +15,7 @@ public class TrashTeleOp extends LinearOpMode {
     private Odometry odometry;
     private TrashHardware robot = TrashHardware.getInstance();
     private Drivetrain dt = new Drivetrain(Drivetrain.State.DRIVING);
+    private Clamp clamp = new Clamp(Clamp.State.OPEN);
 
     private double lastTime = System.nanoTime();
 
@@ -41,6 +43,7 @@ public class TrashTeleOp extends LinearOpMode {
 
     public void loopOp() {
         dt.update(gamepad1, gamepad2, robot);
+
         odometry.update();
         double time = System.nanoTime();
         double dTime = time - lastTime;

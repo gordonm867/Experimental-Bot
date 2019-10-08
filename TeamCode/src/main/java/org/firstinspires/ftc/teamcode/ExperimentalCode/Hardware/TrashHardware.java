@@ -5,6 +5,7 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -29,6 +30,8 @@ public class TrashHardware {
 
     private             ExpansionHubEx  ex2;
 
+    private             Servo           clamp;
+    private             Servo           moveClamp;
 
     private static      TrashHardware   myInstance      = null;
 
@@ -125,6 +128,24 @@ public class TrashHardware {
         } catch (Exception p_exception) {
             vOmni = null;
         }
+
+        try {
+            clamp = hwMap.get(Servo.class, "cl");
+            clamp.setDirection(Servo.Direction.FORWARD);
+            openClamp();
+        }
+        catch(Exception p_exception) {
+            clamp = null;
+        }
+
+        try {
+            moveClamp = hwMap.get(Servo.class, "cl");
+            moveClamp.setDirection(Servo.Direction.FORWARD);
+            moveClamp.setPosition(0.420);
+        }
+        catch(Exception p_exception) {
+            moveClamp = null;
+        }
     }
 
     public double getAngle() {
@@ -178,5 +199,23 @@ public class TrashHardware {
             return -hOmni.getCurrentPosition();
         }
         return 0;
+    }
+
+    public void openClamp() {
+        if(clamp != null) {
+            clamp.setPosition(0.355);
+        }
+    }
+
+    public void closeClamp() {
+        if(clamp != null) {
+            clamp.setPosition(0.14);
+        }
+    }
+
+    public void moveClamp(double newPos) {
+        if(moveClamp != null) {
+            moveClamp.setPosition(newPos);
+        }
     }
 }
