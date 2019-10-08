@@ -1,2 +1,0 @@
-# Referenced at /Users/mgordon/516-Gears-Of-Fire/Experimental-Bot/TeamCode/build/intermediates/merged_manifests/debug/AndroidManifest.xml:83
--keep class org.firstinspires.ftc.robotcore.internal.system.RobotApplication { <init>(); }

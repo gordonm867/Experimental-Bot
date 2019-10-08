@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: :RobotCore-release:@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/libs/gson-extras-0.2.1.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/libs/Vuforia.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/libs/javac.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/libs/gson-2.8.0.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/libs/support-annotations-23.4.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92d947fefd2f21d4c98c6e68816acd36/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92d947fefd2f21d4c98c6e68816acd36/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92d947fefd2f21d4c98c6e68816acd36/jars/libs/javac.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92d947fefd2f21d4c98c6e68816acd36/jars/libs/gson-2.8.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92d947fefd2f21d4c98c6e68816acd36/jars/libs/gson-extras-0.2.1.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92d947fefd2f21d4c98c6e68816acd36/jars/libs/Vuforia.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92d947fefd2f21d4c98c6e68816acd36/jars/libs/support-annotations-23.4.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

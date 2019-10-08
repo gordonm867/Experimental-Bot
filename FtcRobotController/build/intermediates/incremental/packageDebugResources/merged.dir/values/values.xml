@@ -24,16 +24,6 @@
     <string name="toastConfigureRobotBeforeProgrammingMode">You must Configure Robot before starting Programming Mode.</string>
     <string name="toastRestartingRobot">Restarting Robot</string>
     <string name="toastWifiConfigurationComplete">Configuration Complete</string>
-    <style name="AppThemeBlueRC" parent="AppTheme.Blue">
-    </style>
-    <style name="AppThemeGreenRC" parent="AppTheme.Green">
-    </style>
-    <style name="AppThemeOrangeRC" parent="AppTheme.Orange">
-    </style>
-    <style name="AppThemePurpleRC" parent="AppTheme.Purple">
-    </style>
     <style name="AppThemeRedRC" parent="AppTheme.Red">
-    </style>
-    <style name="AppThemeTealRC" parent="AppTheme.Teal">
     </style>
 </resources>

@@ -946,17 +946,7 @@
         <item name="feedbackBorder">@color/border_orange</item>
         <item name="feedbackShape">@drawable/feedback_shape_orange</item>
     </style>
-    <style name="AppThemeBlueRC" parent="AppTheme.Blue">
-    </style>
-    <style name="AppThemeGreenRC" parent="AppTheme.Green">
-    </style>
-    <style name="AppThemeOrangeRC" parent="AppTheme.Orange">
-    </style>
-    <style name="AppThemePurpleRC" parent="AppTheme.Purple">
-    </style>
     <style name="AppThemeRedRC" parent="AppTheme.Red">
-    </style>
-    <style name="AppThemeTealRC" parent="AppTheme.Teal">
     </style>
     <style name="ConfigWifiDirectDialog" parent="@android:style/Theme.Dialog">
         <item name="android:background">@color/background_black</item>

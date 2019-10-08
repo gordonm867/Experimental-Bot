@@ -1123,9 +1123,7 @@ raw cube_mesh_fragment_shader
 raw cube_mesh_vertex_shader
 raw errormessage
 raw format_convert
-raw gold
 raw nxtstartupsound
-raw silver
 raw simple_vertex_shader
 raw texture_fragment_shader
 raw texture_vertex_shader
@@ -1766,12 +1764,7 @@ style Animation_AppCompat_DropDownUp
 style Animation_AppCompat_Tooltip
 style AppBaseTheme
 style AppTheme
-style AppThemeBlueRC
-style AppThemeGreenRC
-style AppThemeOrangeRC
-style AppThemePurpleRC
 style AppThemeRedRC
-style AppThemeTealRC
 style AppTheme_Blue
 style AppTheme_Green
 style AppTheme_Orange

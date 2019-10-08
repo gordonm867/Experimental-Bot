@@ -86,6 +86,10 @@
       <change beforePath="$PROJECT_DIR$/TeamCode/build/intermediates/transforms/dexBuilder/debug/0/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/GyroTest.dex" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/build/intermediates/transforms/dexBuilder/debug/0/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/GyroTest.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TeamCode/build/outputs/apk/debug/TeamCode-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/build/outputs/apk/debug/TeamCode-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Hardware/TrashHardware.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Hardware/TrashHardware.java" afterDir="false" />
+<<<<<<< Updated upstream
+=======
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashAutonomous.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashAutonomous.java" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashTeleOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashTeleOp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/GyroTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/GyroTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/TestHardware.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/Tests/TestHardware.java" afterDir="false" />
@@ -120,9 +124,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashAutonomous.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="1753">
               <caret line="346" column="17" lean-forward="true" selection-start-line="346" selection-start-column="17" selection-end-line="346" selection-end-column="17" />
               <folding>
+=======
+            <state relative-caret-position="1678">
+              <caret line="344" column="17" lean-forward="true" selection-start-line="344" selection-start-column="17" selection-end-line="344" selection-end-column="17" />
+              <folding>
+                <element signature="docComment;method#runOpMode#0;class#TrashAutonomous#0" />
+                <element signature="docComment;method#follow#0;class#TrashAutonomous#0" />
+                <element signature="docComment;method#backFollow#0;class#TrashAutonomous#0" />
+                <element signature="method#backFollow#0;class#TrashAutonomous#0" />
+                <element signature="docComment;method#sideFollow#0;class#TrashAutonomous#0" />
+                <element signature="method#sideFollow#0;class#TrashAutonomous#0" />
+                <element signature="docComment;method#turnToPoint#0;class#TrashAutonomous#0" />
+                <element signature="method#turnToPoint#0;class#TrashAutonomous#0" />
+                <element signature="docComment;method#turnBackToPoint#0;class#TrashAutonomous#0" />
+                <element signature="method#turnBackToPoint#0;class#TrashAutonomous#0" />
+                <element signature="docComment;method#turn#0;class#TrashAutonomous#0" />
+>>>>>>> Stashed changes
                 <element signature="method#turn#0;class#TrashAutonomous#0" />
                 <element signature="docComment;method#resetEncoders#0;class#TrashAutonomous#0" />
                 <element signature="method#resetEncoders#0;class#TrashAutonomous#0" />
@@ -874,9 +895,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/ExperimentalCode/OpModes/TrashAutonomous.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="1753">
           <caret line="346" column="17" lean-forward="true" selection-start-line="346" selection-start-column="17" selection-end-line="346" selection-end-column="17" />
           <folding>
+=======
+        <state relative-caret-position="1678">
+          <caret line="344" column="17" lean-forward="true" selection-start-line="344" selection-start-column="17" selection-end-line="344" selection-end-column="17" />
+          <folding>
+            <element signature="docComment;method#runOpMode#0;class#TrashAutonomous#0" />
+            <element signature="docComment;method#follow#0;class#TrashAutonomous#0" />
+            <element signature="docComment;method#backFollow#0;class#TrashAutonomous#0" />
+            <element signature="method#backFollow#0;class#TrashAutonomous#0" />
+            <element signature="docComment;method#sideFollow#0;class#TrashAutonomous#0" />
+            <element signature="method#sideFollow#0;class#TrashAutonomous#0" />
+            <element signature="docComment;method#turnToPoint#0;class#TrashAutonomous#0" />
+            <element signature="method#turnToPoint#0;class#TrashAutonomous#0" />
+            <element signature="docComment;method#turnBackToPoint#0;class#TrashAutonomous#0" />
+            <element signature="method#turnBackToPoint#0;class#TrashAutonomous#0" />
+            <element signature="docComment;method#turn#0;class#TrashAutonomous#0" />
+>>>>>>> Stashed changes
             <element signature="method#turn#0;class#TrashAutonomous#0" />
             <element signature="docComment;method#resetEncoders#0;class#TrashAutonomous#0" />
             <element signature="method#resetEncoders#0;class#TrashAutonomous#0" />
