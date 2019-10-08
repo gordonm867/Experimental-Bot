@@ -15,6 +15,7 @@ var URI_RENAME_RC;
 var URI_UPLOAD_EXPANSION_HUB_FIRMWARE;
 var URI_UPDATE_CONTROL_HUB_APK;
 var URI_UPLOAD_WEBCAM_CALIBRATION_FILE;
+var URI_UPLOAD_CONTROL_HUB_OTA;
 var PARAM_NAME;
 var PARAM_NEW_NAME;
 var PARAM_AP_PASSWORD;
@@ -125,7 +126,7 @@ var showToast = function(id, message) {
         var toastElement = $('#' + id);
         toastElement.html(message);
         toastElement.fadeIn('slow');
-        window.setTimeout(function() { toastElement.fadeOut('slow'); }, 2000);
+        window.setTimeout(function() { toastElement.fadeOut('slow'); }, 10000);
     } else {
         // Show toast on the Android display
         var url = URI_TOAST + '?' + PARAM_MESSAGE + '=' + encodeURIComponent(message);
@@ -227,36 +228,34 @@ var uploadFile = function (localFile /*a File*/, url, success, failure) {
     var base = localFile.name.substring(0, lastDotIndex);
     var ext = localFile.name.substring(lastDotIndex, localFile.name.length);
     var fileName = makeAndroidSafeFileName(base) + ext;
+    var uploadData = new FormData();
 
     xhr.open("POST", url);
-    xhr.setRequestHeader('Content-type', 'application/octet-stream');
-    xhr.overrideMimeType('application/octet-stream');
-    xhr.setRequestHeader('Content-Disposition', 'attachment; filename=' + '"' + fileName + '"');
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                success();
+                success(xhr);
             }
             else {
-                failure();
-                alert("Failed to upload file: " + localFile.name + " : " + xhr.responseText);
+                failure(xhr);
+                alert("Failed to upload file: " + localFile.name + "\n\n" + xhr.responseText);
             }
         }
     }
 
+    var uploadAbandonmentEventHandler = function(event) { event.preventDefault(); event.returnValue = "Upload in progress"; }
+
     // On Chrome, give the wait cursor a chance to show up, dang it.
     addClass(document.documentElement, "wait");
-    xhr.upload.addEventListener("loadend", function(e) { removeClass(document.documentElement, "wait"); })
-
+    window.addEventListener('beforeunload', uploadAbandonmentEventHandler);
+    xhr.upload.addEventListener("loadend", function(e) {
+        window.removeEventListener('beforeunload', uploadAbandonmentEventHandler);
+        removeClass(document.documentElement, "wait");
+    });
     window.setTimeout(function() {
-        var reader = new FileReader();
-        reader.onload = function (evt) {
-            console.log("sending " + localFile.name);
-            xhr.send(evt.target.result);
-         };
-        console.log("reading " + localFile.name);
-        reader.readAsArrayBuffer(localFile);
+        uploadData.append("file", localFile, fileName);
+        xhr.send(uploadData);
     }, 1000);
 }
 

@@ -28,7 +28,6 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/javac/debugUnitTest/compileDebugUnitTestJavaWithJavac/classes" />
-    <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/aidl_source_output_dir/debug/compileDebugAidl/out" isTestSource="false" generated="true" />
@@ -87,10 +86,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 28 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.android.support:multidex-instrumentation:1.0.2@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:multidex:1.0.2@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.openftc:rev-extensions-2:1.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: :RobotCore-release:@aar" level="project" />
     <orderEntry type="library" name="Gradle: :Hardware-release:@aar" level="project" />
@@ -98,7 +95,6 @@
     <orderEntry type="library" name="Gradle: :WirelessP2p-release:@aar" level="project" />
     <orderEntry type="library" name="Gradle: :tfod-release:@aar" level="project" />
     <orderEntry type="library" name="Gradle: :tensorflow-lite-0.0.0-nightly:@aar" level="project" />
-    <orderEntry type="module" module-name="FtcRobotController" />
     <orderEntry type="module" module-name="FtcRobotController" />
   </component>
 </module>

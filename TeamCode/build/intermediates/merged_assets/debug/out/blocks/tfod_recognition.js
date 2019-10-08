@@ -1,5 +1,5 @@
 /**
- * @fileoverview FTC robot blocks related to Recognitions from Tensor Flow Object Detection.
+ * @fileoverview FTC robot blocks related to Recognitions from TensorFlow Object Detection.
  * @author lizlooney@google.com (Liz Looney)
  */
 

@@ -20,7 +20,7 @@
 
 /**
  * @fileoverview Generating FTC Java for logic blocks.
- * @author lizlooney@gmail.com (Liz Looney)
+ * @author lizlooney@google.com (Liz Looney)
  *
  * based on Generating JavaScript for logic blocks.
  * @author q.neutron@gmail.com (Quynh Neutron)

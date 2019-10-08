@@ -13,6 +13,9 @@ function fetchProjects(callback) {
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     fetchProjectsViaHttp(callback);
+  } else if  (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    fetchProjectsViaFile(callback);
   }
 }
 
@@ -26,6 +29,9 @@ function fetchSamples(callback) {
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     fetchSamplesViaHttp(callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    fetchSamplesViaFile(callback);
   }
 }
 
@@ -39,6 +45,9 @@ function openProjectBlocks(projectName) {
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     openProjectBlocksViaHttp(projectName);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    openProjectBlocksViaFile(projectName);
   }
 }
 
@@ -52,6 +61,9 @@ function fetchBlkFileContent(projectName, callback) {
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     fetchBlkFileContentViaHttp(projectName, callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    fetchBlkFileContentViaFile(projectName, callback);
   }
 }
 
@@ -62,16 +74,22 @@ function newProject(projectName, sampleName, callback) {
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     newProjectViaHttp(projectName, sampleName, callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    newProjectViaFile(projectName, sampleName, callback);
   }
 }
 
-function saveProject(projectName, blkContent, jsFileContent, flavor, group, enable, callback) {
+function saveProject(projectName, blkFileContent, jsFileContent, callback) {
   if (typeof blocksIO !== 'undefined') {
     // html/js is within the WebView component within the Android app.
-    saveProjectViaBlocksIO(projectName, blkContent, jsFileContent, flavor, group, enable, callback);
+    saveProjectViaBlocksIO(projectName, blkFileContent, jsFileContent, callback);
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
-    saveProjectViaHttp(projectName, blkContent, jsFileContent, flavor, group, enable, callback);
+    saveProjectViaHttp(projectName, blkFileContent, jsFileContent, callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    saveProjectViaFile(projectName, blkFileContent, jsFileContent, callback);
   }
 }
 
@@ -82,6 +100,9 @@ function renameProject(oldProjectName, newProjectName, callback) {
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     renameProjectViaHttp(oldProjectName, newProjectName, callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    renameProjectViaFile(oldProjectName, newProjectName, callback);
   }
 }
 
@@ -92,16 +113,22 @@ function copyProject(oldProjectName, newProjectName, callback) {
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     copyProjectViaHttp(oldProjectName, newProjectName, callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    copyProjectViaFile(oldProjectName, newProjectName, callback);
   }
 }
 
-function enableProject(oldProjectName, enable, callback) {
+function enableProject(projectName, enable, callback) {
   if (typeof blocksIO !== 'undefined') {
     // html/js is within the WebView component within the Android app.
-    enableProjectViaBlocksIO(oldProjectName, enable, callback);
+    enableProjectViaBlocksIO(projectName, enable, callback);
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
-    enableProjectViaHttp(oldProjectName, enable, callback);
+    enableProjectViaHttp(projectName, enable, callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    enableProjectViaFile(projectName, enable, callback);
   }
 }
 
@@ -112,6 +139,9 @@ function deleteProjects(starDelimitedProjectNames, callback) {
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     deleteProjectsViaHttp(starDelimitedProjectNames, callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    deleteProjectsViaFile(starDelimitedProjectNames, callback);
   }
 }
 
@@ -122,16 +152,22 @@ function getBlocksJavaClassName(projectName, callback) {
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     getBlocksJavaClassNameViaHttp(projectName, callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    getBlocksJavaClassNameViaFile(projectName, callback);
   }
 }
 
-function saveBlocksJava(relativeFileName, javaContent, callback) {
+function saveBlocksJava(relativeFileName, javaCode, callback) {
   if (typeof blocksIO !== 'undefined') {
     // html/js is within the WebView component within the Android app.
-    saveBlocksJavaViaBlocksIO(relativeFileName, javaContent, callback);
+    saveBlocksJavaViaBlocksIO(relativeFileName, javaCode, callback);
   } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
-    saveBlocksJavaViaHttp(relativeFileName, javaContent, callback);
+    saveBlocksJavaViaHttp(relativeFileName, javaCode, callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    saveBlocksJavaViaFile(relativeFileName, javaCode, callback);
   }
 }
 
@@ -158,6 +194,7 @@ function fetchSamplesViaBlocksIO(callback) {
 }
 
 function openProjectBlocksViaBlocksIO(projectName) {
+  // Go to FtcBlocks.html?project=<projectName>.
   blocksIO.openProjectBlocks(projectName);
 }
 
@@ -180,8 +217,8 @@ function newProjectViaBlocksIO(projectName, sampleName, callback) {
   }
 }
 
-function saveProjectViaBlocksIO(projectName, blkContent, jsFileContent, flavor, group, enable, callback) {
-  var success = blocksIO.saveProject(projectName, blkContent, jsFileContent, flavor, group, enable);
+function saveProjectViaBlocksIO(projectName, blkFileContent, jsFileContent, callback) {
+  var success = blocksIO.saveProject(projectName, blkFileContent, jsFileContent);
   if (success) {
     callback(true, '');
   } else {
@@ -240,8 +277,8 @@ function getBlocksJavaClassNameViaBlocksIO(projectName, callback) {
   }
 }
 
-function saveBlocksJavaViaBlocksIO(relativeFileName, javaContent, callback) {
-  var success = blocksIO.saveBlocksJava(relativeFileName, javaContent);
+function saveBlocksJavaViaBlocksIO(relativeFileName, javaCode, callback) {
+  var success = blocksIO.saveBlocksJava(relativeFileName, javaCode);
   if (success) {
     callback(true, '');
   } else {
@@ -269,8 +306,6 @@ function saveBlocksJavaViaBlocksIO(relativeFileName, javaContent, callback) {
 // PARAM_NEW_NAME
 // PARAM_BLK
 // PARAM_JS
-// PARAM_FLAVOR
-// PARAM_GROUP
 // PARAM_ENABLE
 // PARAM_CONTENT
 
@@ -354,18 +389,11 @@ function newProjectViaHttp(projectName, sampleName, callback) {
   xhr.send(params);
 }
 
-function saveProjectViaHttp(projectName, blkContent, jsFileContent, flavor, group, enable, callback) {
+function saveProjectViaHttp(projectName, blkFileContent, jsFileContent, callback) {
   var xhr = new XMLHttpRequest();
   var params = PARAM_NAME + '=' + encodeURIComponent(projectName) +
-      '&' + PARAM_BLK + '=' + encodeURIComponent(blkContent) +
+      '&' + PARAM_BLK + '=' + encodeURIComponent(blkFileContent) +
       '&' + PARAM_JS + '=' + encodeURIComponent(jsFileContent);
-  if (flavor != null) {
-    params += '&' + PARAM_FLAVOR + '=' + encodeURIComponent(flavor);
-  }
-  if (group != null) {
-    params += '&' + PARAM_GROUP + '=' + encodeURIComponent(group);
-  }
-  params += '&' + PARAM_ENABLE + '=' + (enable ? "true" : "false");
   xhr.open('POST', URI_SAVE_PROJECT, true);
   xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhr.onreadystatechange = function() {
@@ -475,10 +503,10 @@ function getBlocksJavaClassNameViaHttp(projectName, callback) {
   xhr.send(params);
 }
 
-function saveBlocksJavaViaHttp(relativeFileName, javaContent, callback) {
+function saveBlocksJavaViaHttp(relativeFileName, javaCode, callback) {
   var xhr = new XMLHttpRequest();
   var params = PARAM_NAME + '=' + encodeURIComponent(relativeFileName) +
-      '&' + PARAM_JAVA + '=' + encodeURIComponent(javaContent);
+      '&' + PARAM_JAVA + '=' + encodeURIComponent(javaCode);
   xhr.open('POST', URI_SAVE_BLOCKS_JAVA, true);
   xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhr.onreadystatechange = function() {
@@ -492,4 +520,381 @@ function saveBlocksJavaViaHttp(relativeFileName, javaContent, callback) {
     }
   };
   xhr.send(params);
+}
+
+//..........................................................................
+// Code used when html/js is in a browser, loaded as an file:// URL.
+
+var db = false;
+
+function openOfflineDatabase(callback) {
+  var openRequest = window.indexedDB.open('FtcBlocksDatabase', 1);
+  openRequest.onerror = function(event) {
+    callback(false, 'openRequest error');
+  };
+  openRequest.onupgradeneeded = function(event) {
+    var db1 = event.target.result;
+
+    // Create the object store for .blk files.
+    db1.createObjectStore('blkFiles', { keyPath: 'FileName' })
+        .createIndex("name", "name", { unique: true });
+
+    // Create the object store for other files.
+    db1.createObjectStore('otherFiles', { keyPath: 'FileName' });
+
+    event.target.transaction.oncomplete = function(event) {
+      // Fill the blkFiles object store with projects.
+      var blkFilesObjectStore = db1.transaction(['blkFiles'], 'readwrite')
+          .objectStore('blkFiles');
+      var blkFiles = getBlkFiles();
+      for (var i = 0; i < blkFiles.length; i++) {
+        var blkFile = blkFiles[i];
+        blkFilesObjectStore.add(blkFile);
+      }
+
+      // Add a row to the otherFiles object store for the clipboard content.
+      var otherFilesObjectStore = db1.transaction(['otherFiles'], 'readwrite')
+          .objectStore('otherFiles');
+      var value = Object.create(null);
+      value['FileName'] = 'clipboard.xml';
+      value['Content'] = '';
+      otherFilesObjectStore.add(value);
+    };
+  };
+  openRequest.onsuccess = function(event) {
+    db = event.target.result;
+    callback(true, '');
+  };
+}
+
+function fetchProjectsViaFile(callback) {
+  if (!db) {
+    openOfflineDatabase(function(success, errorReason) {
+      if (success) {
+        fetchProjectsViaFile(callback);
+      } else {
+        callback(null, 'Fetch projects failed. (' + errorReason + ')');
+      }
+    });
+    return;
+  }
+  var jsonProjects = '[';
+  var delimiter = '';
+  var openCursorRequest = db.transaction(['blkFiles'], 'readonly')
+      .objectStore('blkFiles')
+      .openCursor();
+  openCursorRequest.onerror = function(event) {
+    callback(null, 'Fetch projects failed. Could not open cursor.');
+  };
+  openCursorRequest.onsuccess = function(event) {
+    var cursor = event.target.result;
+    if (cursor) {
+      var value = cursor.value;
+      jsonProjects += delimiter + '{' +
+          '"name":"' + value['name'] + '", ' +
+          '"escapedName":"' + value['escapedName'] + '", ' +
+          '"dateModifiedMillis":' + value['dateModifiedMillis'] + ', ' +
+          '"enabled":' + value['enabled'] +
+          '}';
+      cursor.continue();
+      delimiter = ',';
+    } else {
+      jsonProjects += ']';
+      callback(jsonProjects, '');
+    }
+  };
+}
+
+function fetchSamplesViaFile(callback) {
+  var jsonSamples = '[';
+  var samples = getSampleNames();
+  var delimiter = '';
+  for (var i = 0; i < samples.length; i++) {
+    jsonSamples += delimiter + '"' + samples[i] + '"';
+    delimiter = ',';
+  }
+  jsonSamples += ']';
+  setTimeout(function() {
+    callback(jsonSamples, '');
+  }, 0);
+}
+
+function openProjectBlocksViaFile(projectName) {
+  // Go to FtcBlocks.html?project=<projectName>.
+  window.location.href = 'FtcOfflineBlocks.html?project=' + encodeURIComponent(projectName);
+}
+
+function fetchBlkFileContentViaFile(projectName, callback) {
+  if (!db) {
+    openOfflineDatabase(function(success, errorReason) {
+      if (success) {
+        fetchBlkFileContentViaFile(projectName, callback);
+      } else {
+        callback(null, 'Fetch blocks failed. (' + errorReason + ')');
+      }
+    });
+    return;
+  }
+  var getRequest = db.transaction(['blkFiles'], 'readonly')
+      .objectStore('blkFiles').index("name").get(projectName);
+  getRequest.onerror = function(event) {
+    callback(null, 'Fetch blocks failed. (getRequest error)');
+  };
+  getRequest.onsuccess = function(event) {
+    if (event.target.result === undefined) {
+      callback(null, 'Fetch blocks failed. (not found)');
+      return;
+    }
+    var value = event.target.result;
+    callback(value['Content'], '');
+  };
+}
+
+function newProjectViaFile(projectName, sampleName, callback) {
+  var blkFileContent = getSampleBlkFileContent(sampleName);
+  setTimeout(function() {
+    callback(blkFileContent, '');
+  }, 0);
+}
+
+function saveProjectViaFile(projectName, blkFileContent, jsFileContent, callback) {
+  if (!db) {
+    openOfflineDatabase(function(success, errorReason) {
+      if (success) {
+        saveProjectViaFile(projectName, blkFileContent, jsFileContent, callback);
+      } else {
+        callback(false, 'Save project failed. (' + errorReason + ')');
+      }
+    });
+    return;
+  }
+  var blkFileName = projectName + '.blk';
+  var extra = parseExtraXml(blkFileContent);
+  var blkFilesObjectStore = db.transaction(['blkFiles'], 'readwrite')
+      .objectStore('blkFiles');
+  var getRequest = blkFilesObjectStore.get(blkFileName);
+  getRequest.onerror = function(event) {
+    callback(false, 'Save project failed. (getRequest error)');
+  };
+  getRequest.onsuccess = function(event) {
+    var value;
+    if (event.target.result === undefined) {
+      var value = Object.create(null);
+      value['FileName'] = blkFileName;
+      value['name'] = projectName;
+      value['escapedName'] = escapeHtml(projectName);
+    } else {
+      value = event.target.result;
+    }
+    value['Content'] = blkFileContent;
+    value['dateModifiedMillis'] = Date.now();
+    value['enabled'] = extra['enabled']
+    var putRequest = blkFilesObjectStore.put(value);
+    putRequest.onerror = function(event) {
+      callback(false, 'Save project failed. (putRequest error)');
+    };
+    putRequest.onsuccess = function(event) {
+      callback(true, '');
+    };
+  };
+}
+
+function renameProjectViaFile(oldProjectName, newProjectName, callback) {
+  if (!db) {
+    openOfflineDatabase(function(success, errorReason) {
+      if (success) {
+        renameProjectViaFile(oldProjectName, newProjectName, callback);
+      } else {
+        callback(false, 'Rename project failed. (' + errorReason + ')');
+      }
+    });
+    return;
+  }
+  var oldFileName = oldProjectName + '.blk';
+  var newFileName = newProjectName + '.blk';
+  var blkFilesObjectStore = db.transaction(['blkFiles'], 'readwrite')
+      .objectStore('blkFiles');
+  var getRequest = blkFilesObjectStore.get(oldFileName);
+  getRequest.onerror = function(event) {
+    callback(false, 'Rename project failed. (getRequest error)');
+  };
+  getRequest.onsuccess = function(event) {
+    if (event.target.result === undefined) {
+      callback(false, 'Rename project failed. (project not found)');
+      return;
+    }
+    var value = event.target.result;
+    value['FileName'] = newFileName;
+    value['name'] = newProjectName;
+    value['escapedName'] = escapeHtml(newProjectName);
+    value['dateModifiedMillis'] = Date.now();
+    var putRequest = blkFilesObjectStore.put(value);
+    putRequest.onerror = function(event) {
+      callback(false, 'Rename project failed. (putRequest error)');
+    };
+    putRequest.onsuccess = function(event) {
+      var deleteRequest = blkFilesObjectStore.delete(oldFileName);
+      deleteRequest.onerror = function(event) {
+        callback(false, 'Rename project failed. (deleteRequest error)');
+      };
+      deleteRequest.onsuccess = function(event) {
+        callback(true, '');
+      };
+    };
+  };
+}
+
+function copyProjectViaFile(oldProjectName, newProjectName, callback) {
+  if (!db) {
+    openOfflineDatabase(function(success, errorReason) {
+      if (success) {
+        copyProjectViaFile(oldProjectName, newProjectName, callback);
+      } else {
+        callback(false, 'Copy project failed. (' + errorReason + ')');
+      }
+    });
+    return;
+  }
+  var oldFileName = oldProjectName + '.blk';
+  var newFileName = newProjectName + '.blk';
+  var blkFilesObjectStore = db.transaction(['blkFiles'], 'readwrite')
+      .objectStore('blkFiles');
+  var getRequest = blkFilesObjectStore.get(oldFileName);
+  getRequest.onerror = function(event) {
+    callback(false, 'Copy project failed. (getRequest error)');
+  };
+  getRequest.onsuccess = function(event) {
+    if (event.target.result === undefined) {
+      callback(false, 'Copy project failed. (project not found)');
+      return;
+    }
+    var value = event.target.result;
+    value['FileName'] = newFileName;
+    value['name'] = newProjectName;
+    value['escapedName'] = escapeHtml(newProjectName);
+    value['dateModifiedMillis'] = Date.now();
+    var putRequest = blkFilesObjectStore.put(value);
+    putRequest.onerror = function(event) {
+      callback(false, 'Copy project failed. (putRequest error)');
+    };
+    putRequest.onsuccess = function(event) {
+      callback(true, '');
+    };
+  };
+}
+
+function enableProjectViaFile(oldProjectName, enable, callback) {
+  if (!db) {
+    openOfflineDatabase(function(success, errorReason) {
+      if (success) {
+        enableProjectViaFile(oldProjectName, enable, callback);
+      } else {
+        callback(false, 'Enable project failed. (' + errorReason + ')');
+      }
+    });
+    return;
+  }
+  var blkFileName = projectName + '.blk';
+
+  var blkFilesObjectStore = db.transaction(['blkFiles'], 'readwrite')
+      .objectStore('blkFiles');
+  var getRequest = blkFilesObjectStore.get(blkFileName);
+  getRequest.onerror = function(event) {
+    callback(false, 'Enable project failed. (getRequest error)');
+  };
+  getRequest.onsuccess = function(event) {
+    if (event.target.result === undefined) {
+      callback(false, 'Enable project failed. (project not found)');
+      return;
+    }
+    var value = event.target.result;
+    var oldContent = value['Content'];
+    var newContent = oldContent.replace(
+        '<Enabled value="' + !enable + '"',
+        '<Enabled value="' + enable + '"');
+    value['Content'] = newContent;
+    value['dateModifiedMillis'] = Date.now();
+    value['enabled'] = enable;
+    var putRequest = blkFilesObjectStore.put(value);
+    putRequest.onerror = function(event) {
+      callback(false, 'Enable project failed. (putRequest error)');
+    };
+    putRequest.onsuccess = function(event) {
+      callback(true, '');
+    };
+  };
+}
+
+function deleteProjectsViaFile(starDelimitedProjectNames, callback) {
+  if (!db) {
+    openOfflineDatabase(function(success, errorReason) {
+      if (success) {
+        deleteProjectsViaFile(starDelimitedProjectNames, callback);
+      } else {
+        callback(false, 'Delete projects failed. (' + errorReason + ')');
+      }
+    });
+    return;
+  }
+  var projectNames = starDelimitedProjectNames.split('*');
+  var errorReasons = [];
+  var successCount = 0;
+
+  for (var i = 0; i < projectNames.length; i++) {
+    deleteOneProjectViaFile(projectNames[i], function(success, errorReason) {
+      if (success) {
+        successCount++;
+      } else {
+        errorReasons.push(errorReason);
+      }
+      if (successCount + errorReasons.length == projectNames.length) {
+        if (errorReasons.length == 0) {
+          callback(true, '');
+        } else {
+          callback(false, 'Delete projects failed. (' + errorReasons.join(', ') + ')');
+        }
+      }
+    });
+  }
+}
+
+function deleteOneProjectViaFile(projectName, callback) {
+  var blkFileName = projectName + '.blk';
+  var deleteRequest = db.transaction(['blkFiles'], 'readwrite')
+      .objectStore('blkFiles')
+      .delete(blkFileName);
+  deleteRequest.onerror = function(event) {
+    callback(false, 'deleteRequest error');
+  };
+  deleteRequest.onsuccess = function(event) {
+    callback(true, '');
+  };
+}
+
+function getBlocksJavaClassNameViaFile(projectName, callback) {
+  var className = [];
+  var ch = projectName.charAt(0);
+  if (isJavaIdentifierStart(ch)) {
+    className.push(ch);
+  } else if (isJavaIdentifierPart(ch)) {
+    className.push('_');
+    className.push(ch);
+  }
+  var length = projectName.length;
+  for (var i = 1; i < length; i++) {
+    ch = projectName.charAt(i);
+    if (isJavaIdentifierPart(ch)) {
+      className.push(ch);
+    }
+  }
+  setTimeout(function() {
+    callback(className.join(''), '');
+  }, 0);
+}
+
+function saveBlocksJavaViaFile(relativeFileName, javaCode, callback) {
+  // In offline blocks, we allow download of java, but not export to OnBotJava.
+  setTimeout(function() {
+    callback(false, 'Save Java code failed.');
+  }, 0);
 }
