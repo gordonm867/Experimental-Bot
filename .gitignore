@@ -1,0 +1,7 @@
+*.class
+*.xml
+FTCSim
+FTCRobotController
+*.iml
+*.DS_Store
+libs
