@@ -23,16 +23,6 @@ import java.util.ArrayList;
 @Autonomous(name="TrashAuto", group="Trash")
 public class TrashAutonomous extends LinearOpMode {
 
-<<<<<<< Updated upstream
-    private TrashHardware robot = TrashHardware.getInstance();
-    private Odometry odometry;
-    private Drivetrain wheels = new Drivetrain(Drivetrain.State.STOPPED);
-    private double angleOffset = 3;
-    private double radius = 1.86;
-    private double turnCoeff = 0.0055;
-    private Point stopped;
-    private Point stopTarget;
-=======
     private TrashHardware robot = TrashHardware.getInstance(); // Access robot hardware
     private Odometry odometry; // Access positioning data
     private Drivetrain wheels = new Drivetrain(Drivetrain.State.STOPPED); // Access wheels, which should begin stopped
@@ -42,7 +32,6 @@ public class TrashAutonomous extends LinearOpMode {
     private Point stopped; // Actual Point at which followers stop
     private Point stopTarget; // Intended Point for followers to stop
     private boolean test = false; // Is this experimental?
->>>>>>> Stashed changes
 
     /**
      * Main OpMode to control autonomous
@@ -92,14 +81,11 @@ public class TrashAutonomous extends LinearOpMode {
             Globals.START_Y = 0;
             Globals.START_THETA = 135;
         }
-<<<<<<< Updated upstream
-=======
         else if(pathNum % pathNames.size() == 3) {
             Globals.START_X = -5.25;
             Globals.START_Y = -3;
             Globals.START_THETA = 0;
         }
->>>>>>> Stashed changes
         odometry = Odometry.getInstance(robot);
         robot.enabled = true;
         telemetry.addData("Status", "Initialized");
@@ -211,8 +197,6 @@ public class TrashAutonomous extends LinearOpMode {
                 telemetry.update();
             }
         }
-<<<<<<< Updated upstream
-=======
         else if(pathNum % pathNames.size() == 3) {
             radius = 0.75;
             turnCoeff = 0.0055;
@@ -355,7 +339,6 @@ public class TrashAutonomous extends LinearOpMode {
                 }
             }
         }
->>>>>>> Stashed changes
     }
 
     /**
@@ -587,8 +570,6 @@ public class TrashAutonomous extends LinearOpMode {
         }
     }
 
-<<<<<<< Updated upstream
-=======
     /**
      * Turn so that the back of the robot faces a certain point on the field
      * @param newPoint Point to now face backwards
@@ -619,7 +600,6 @@ public class TrashAutonomous extends LinearOpMode {
      * Turn a certain, specified amount
      * @param angle Amount to turn
      */
->>>>>>> Stashed changes
     private void turn(double angle) {
         if(Math.abs(angle) < 0.1 || Math.abs(angle) + 0.1 % 360 < 0.2) { // Detects if turn is too insignificant
             return;

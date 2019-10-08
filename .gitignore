@@ -5,3 +5,12 @@ FTCRobotController
 *.iml
 *.DS_Store
 libs
+FTCRobotController/*
+/FTCRobotController
+/FTCRobotController/*
+*.png
+*.jpg
+TeamCode/build
+516-Gears-of-Fire/TeamCode/build
+516-Gears-of-Fire/FTCRobotController
+
