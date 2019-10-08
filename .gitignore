@@ -13,4 +13,6 @@ FTCRobotController/*
 TeamCode/build
 516-Gears-of-Fire/TeamCode/build
 516-Gears-of-Fire/FTCRobotController
-
+*.lock
+*.lock
+*.iml
