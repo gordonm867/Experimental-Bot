@@ -128,7 +128,7 @@ public class TrashHardware {
         } catch (Exception p_exception) {
             vOmni = null;
         }
-
+        /*
         try {
             clamp = hwMap.get(Servo.class, "cl");
             clamp.setDirection(Servo.Direction.FORWARD);
@@ -146,6 +146,8 @@ public class TrashHardware {
         catch(Exception p_exception) {
             moveClamp = null;
         }
+
+         */
     }
 
     public double getAngle() {
