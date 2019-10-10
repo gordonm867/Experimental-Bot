@@ -11,12 +11,14 @@ MERGED from [:FtcCommon-release:] /Users/mgordon/.gradle/caches/transforms-2/fil
 MERGED from [:WirelessP2p-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/11c43ef69ec2dc2c8a0d623760edc9ad/AndroidManifest.xml:2:1-11:12
 MERGED from [:tfod-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/1c9fd34ce87eec91514b8fec671b0791/AndroidManifest.xml:2:1-11:12
 MERGED from [:tensorflow-lite-0.0.0-nightly:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/36869ff4986b4d7daa61283c8e117e3b/AndroidManifest.xml:2:1-6:12
-MERGED from [org.openftc:rev-extensions-2:1.1] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/babe60090f1b4e48e98feb32ddd0b5a9/AndroidManifest.xml:2:1-12:12
+MERGED from [org.openftc:rev-extensions-2:1.2] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/c99229e5e054f102c23c7adca910f0bb/AndroidManifest.xml:2:1-12:12
+MERGED from [org.openftc:easyopencv:1.2] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/db9e5652329655cd044b7a280ebd3a7a/AndroidManifest.xml:2:1-11:12
 MERGED from [:Inspection-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/a23837aad5529146f935218c53742f1a/AndroidManifest.xml:2:1-32:12
 MERGED from [:Blocks-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/13b6de1cf7b2e7da68ec2336b461f276/AndroidManifest.xml:2:1-41:12
 MERGED from [:RobotServer-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/e320ccd4fcc95a26045cc71cb325f743/AndroidManifest.xml:2:1-11:12
 MERGED from [:OnBotJava-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/f66af1f2a2e68df45f1e190230e50dab/AndroidManifest.xml:34:1-43:12
 MERGED from [com.android.support:support-compat:28.0.0] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/d6de7a9b211c48343d6b5abad2a2e2d2/AndroidManifest.xml:17:1-24:12
+MERGED from [org.openftc:opencv-repackaged:4.1.0-A] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/74d4c1ad2e1f919d0055a6486a024f53/AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/74bdf857e5a934c7978add8ab144d0c3/AndroidManifest.xml:17:1-25:12
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/6a81701e9e250d329354db8757010c75/AndroidManifest.xml:17:1-22:12
 INJECTED from /Users/mgordon/516-Gears-Of-Fire/TeamCode/src/main/AndroidManifest.xml:8:1-12:12
@@ -84,8 +86,10 @@ MERGED from [:WirelessP2p-release:] /Users/mgordon/.gradle/caches/transforms-2/f
 MERGED from [:WirelessP2p-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/11c43ef69ec2dc2c8a0d623760edc9ad/AndroidManifest.xml:5:5-7:41
 MERGED from [:tfod-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/1c9fd34ce87eec91514b8fec671b0791/AndroidManifest.xml:7:5-9:41
 MERGED from [:tfod-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/1c9fd34ce87eec91514b8fec671b0791/AndroidManifest.xml:7:5-9:41
-MERGED from [org.openftc:rev-extensions-2:1.1] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/babe60090f1b4e48e98feb32ddd0b5a9/AndroidManifest.xml:8:5-10:41
-MERGED from [org.openftc:rev-extensions-2:1.1] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/babe60090f1b4e48e98feb32ddd0b5a9/AndroidManifest.xml:8:5-10:41
+MERGED from [org.openftc:rev-extensions-2:1.2] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/c99229e5e054f102c23c7adca910f0bb/AndroidManifest.xml:8:5-10:41
+MERGED from [org.openftc:rev-extensions-2:1.2] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/c99229e5e054f102c23c7adca910f0bb/AndroidManifest.xml:8:5-10:41
+MERGED from [org.openftc:easyopencv:1.2] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/db9e5652329655cd044b7a280ebd3a7a/AndroidManifest.xml:7:5-9:41
+MERGED from [org.openftc:easyopencv:1.2] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/db9e5652329655cd044b7a280ebd3a7a/AndroidManifest.xml:7:5-9:41
 MERGED from [:Inspection-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/a23837aad5529146f935218c53742f1a/AndroidManifest.xml:7:5-9:41
 MERGED from [:Inspection-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/a23837aad5529146f935218c53742f1a/AndroidManifest.xml:7:5-9:41
 MERGED from [:Blocks-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/13b6de1cf7b2e7da68ec2336b461f276/AndroidManifest.xml:7:5-9:41
@@ -96,6 +100,8 @@ MERGED from [:OnBotJava-release:] /Users/mgordon/.gradle/caches/transforms-2/fil
 MERGED from [:OnBotJava-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/f66af1f2a2e68df45f1e190230e50dab/AndroidManifest.xml:39:5-41:41
 MERGED from [com.android.support:support-compat:28.0.0] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/d6de7a9b211c48343d6b5abad2a2e2d2/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:28.0.0] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/d6de7a9b211c48343d6b5abad2a2e2d2/AndroidManifest.xml:20:5-44
+MERGED from [org.openftc:opencv-repackaged:4.1.0-A] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/74d4c1ad2e1f919d0055a6486a024f53/AndroidManifest.xml:7:5-9:41
+MERGED from [org.openftc:opencv-repackaged:4.1.0-A] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/74d4c1ad2e1f919d0055a6486a024f53/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/74bdf857e5a934c7978add8ab144d0c3/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/74bdf857e5a934c7978add8ab144d0c3/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/6a81701e9e250d329354db8757010c75/AndroidManifest.xml:20:5-44

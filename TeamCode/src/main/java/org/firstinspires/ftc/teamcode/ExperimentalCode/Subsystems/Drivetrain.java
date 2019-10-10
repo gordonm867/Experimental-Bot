@@ -9,14 +9,9 @@ import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Point;
 
 import java.util.ArrayList;
 
-public class Drivetrain {
+public class Drivetrain implements Subsystem {
 
     private State state;
-
-    public enum State {
-        DRIVING,
-        STOPPED
-    }
 
     public Drivetrain(State state) {
         this.state = state;
@@ -34,7 +29,7 @@ public class Drivetrain {
         double drive = -gamepad1.left_stick_y;
         double turn = gamepad1.right_stick_x;
         double angle = gamepad1.left_stick_x;
-        if(state == State.DRIVING) {
+        if(state == State.ON) {
             /* Precision vertical drive */
             if (gamepad1.dpad_down || gamepad1.dpad_up) {
                 if (gamepad1.left_stick_y != 0) {
@@ -80,34 +75,34 @@ public class Drivetrain {
             scaleFactor *= Math.max(Math.abs(1 - gamepad1.right_trigger), 0.2);
             robot.setDrivePower(scaleFactor * (drive + turn - angle), scaleFactor * (drive + turn + angle), scaleFactor * (drive - turn + angle), scaleFactor * (drive - turn - angle)); // Set motors to values based on gamepad
         }
-        else if(state == State.STOPPED) {
+        else if(state == State.OFF) {
             robot.setDrivePower(0, 0, 0, 0);
         }
     }
 
     public void update(double lr, double lf, double rr, double rf, TrashHardware robot) {
-        if(state == State.DRIVING) {
+        if(state == State.ON) {
             robot.setDrivePower(lr, lf, rr, rf); // Set motors to values based on gamepad
         }
-        else if(state == State.STOPPED) {
+        else if(state == State.OFF) {
             robot.setDrivePower(0, 0, 0, 0);
         }
     }
 
     public void update(ArrayList<Double> powers, TrashHardware robot) {
-        if(state == State.DRIVING) {
+        if(state == State.ON) {
             robot.setDrivePower(powers.get(0), powers.get(1), powers.get(2), powers.get(3)); // Set motors to values based on gamepad
         }
-        else if(state == State.STOPPED) {
+        else if(state == State.OFF) {
             robot.setDrivePower(0, 0, 0, 0);
         }
     }
 
     public void update(double[] powers, TrashHardware robot) {
-        if(state == State.DRIVING) {
+        if(state == State.ON) {
             robot.setDrivePower(powers[0], powers[1], powers[2], powers[3]); // Set motors to values based on gamepad
         }
-        else if(state == State.STOPPED) {
+        else if(state == State.OFF) {
             robot.setDrivePower(0, 0, 0, 0);
         }
     }

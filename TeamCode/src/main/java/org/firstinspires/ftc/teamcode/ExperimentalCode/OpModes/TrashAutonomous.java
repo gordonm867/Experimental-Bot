@@ -25,7 +25,7 @@ public class TrashAutonomous extends LinearOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();
     private Odometry odometry;
-    private Drivetrain wheels = new Drivetrain(Drivetrain.State.STOPPED);
+    private Drivetrain wheels = new Drivetrain(Drivetrain.State.OFF);
     private double angleOffset = 3;
     private double radius = 1.86;
     private double turnCoeff = 0.0055;
@@ -99,7 +99,7 @@ public class TrashAutonomous extends LinearOpMode {
         telemetry.addData("Mode", pathNames.get(pathNum % pathNames.size()));
         telemetry.update();
         waitForStart();
-        wheels.setState(Drivetrain.State.DRIVING);
+        wheels.setState(Drivetrain.State.ON);
 
         ArrayList<Line> path = new ArrayList<>();
         if(pathNum % pathNames.size() == 0) {

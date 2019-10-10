@@ -3,85 +3,52 @@ package org.firstinspires.ftc.teamcode.ExperimentalCode.OpModes;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.robotcontroller.internal.MyOpMode;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Point;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Clamp;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Odometry;
+import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Subsystem;
+
+import java.util.ArrayList;
 
 @TeleOp(name = "TrashTeleOp", group = "Trash")
-public class TrashTeleOp extends LinearOpMode {
+public class TrashTeleOp extends MyOpMode {
 
-    private Odometry odometry;
     private TrashHardware robot = TrashHardware.getInstance();
-    private Drivetrain dt = new Drivetrain(Drivetrain.State.DRIVING);
-    private Clamp clamp = new Clamp(Clamp.State.OPEN);
-
-    private double lastTime = System.nanoTime();
-
-    private double xVel = 0;
-    private double yVel = 0;
-
-    private double x;
-    private double y;
+    private ArrayList<Subsystem> subsystems = new ArrayList<>();
 
     private Point myPoint;
 
     public void initOp() {
+        subsystems.add(new Drivetrain(Subsystem.State.ON));
+        subsystems.add(new Clamp(Clamp.State.CLOSED));
+        subsystems.add(Odometry.getInstance(robot));
         robot.init(hardwareMap);
-        odometry = Odometry.getInstance(robot);
-        x = odometry.getX();
-        y = odometry.getY();
         robot.enabled = true;
+        for(Subsystem subsystem : subsystems) {
+            subsystem.setState(Subsystem.State.ON);
+        }
         telemetry.addData("Status", "Initialized");
         telemetry.update();
     }
 
-    public void initLoop() {
-
-    }
-
     public void loopOp() {
-        dt.update(gamepad1, gamepad2, robot);
-
-        odometry.update();
-        double time = System.nanoTime();
-        double dTime = time - lastTime;
-        lastTime = time;
-        if(robot.gyro != null) {
-            xVel += robot.gyro.getGravity().xAccel * dTime;
-            yVel += robot.gyro.getGravity().yAccel * dTime;
-            x += xVel * dTime;
-            y += yVel * dTime;
-            myPoint = new Point(x, y);
+        for(Subsystem subsystem : subsystems) {
+            subsystem.update(gamepad1, gamepad2, robot);
         }
-        telemetry.addData("Angle", ((odometry.getAngle() + 180) % 360) - 180);
-        telemetry.addData("x", odometry.getX() + " --> " + robot.getHOmniPos());
-        telemetry.addData("y", -odometry.getY() + " --> " + robot.getVOmniPos());
-        telemetry.addData("Accelerometer Estimate", myPoint);
-        telemetry.addData("Odometry", odometry.isUpdating());
+        telemetry.addData("Angle", ((((Odometry)subsystems.get(2)).getAngle() + 180) % 360) - 180);
+        telemetry.addData("x", ((Odometry)subsystems.get(2)).getX() + " --> " + robot.getHOmniPos());
+        telemetry.addData("y", -((Odometry)subsystems.get(2)).getY() + " --> " + robot.getVOmniPos());
+        telemetry.addData("Odometry", ((Odometry)subsystems.get(2)).isUpdating());
         telemetry.update();
     }
 
-    public void startOp() {
-
-    }
-
     public void stopOp() {
-        dt.setState(Drivetrain.State.STOPPED);
+        for(Subsystem subsystem : subsystems) {
+            subsystem.setState(Subsystem.State.OFF);
+        }
         robot.enabled = false;
     }
-
-    public void runOpMode() {
-        initOp();
-        while(!isStarted() && !isStopRequested()) {
-            initLoop();
-        }
-        startOp();
-        while(opModeIsActive()) {
-            loopOp();
-        }
-        stopOp();
-    }
-
 }

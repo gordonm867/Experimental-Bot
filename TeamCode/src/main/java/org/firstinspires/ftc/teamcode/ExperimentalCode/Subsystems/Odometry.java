@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems;
 
+import com.qualcomm.robotcore.hardware.Gamepad;
+
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Circle;
@@ -7,7 +9,7 @@ import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.CircleCircleIntersec
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Point;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Vector2;
 
-public class Odometry {
+public class Odometry implements Subsystem {
 
     private static TrashHardware robot;
     private static double lastAngle;
@@ -23,6 +25,8 @@ public class Odometry {
     private static Odometry thismetry = null;
     private static double angleOffset = 0;
 
+    private State state = State.ON;
+
     public static Odometry getInstance(TrashHardware myRobot) {
         robot = myRobot;
         if(thismetry == null) {
@@ -34,6 +38,7 @@ public class Odometry {
         else {
             angleOffset = lastAngle - Globals.START_THETA;
         }
+        thismetry.setState(State.ON);
         return thismetry;
     }
 
@@ -54,7 +59,7 @@ public class Odometry {
     }
 
     public boolean isUpdating() {
-        return update;
+        return update && state == State.ON;
     }
 
     public double getUpdateTime() {
@@ -62,7 +67,7 @@ public class Odometry {
     }
 
     public void update() {
-        if(update) {
+        if(update && state == State.ON) {
             updates++;
             angle = robot.getAngle() + angleOffset;
             double dTheta = angle - lastAngle;
@@ -147,5 +152,13 @@ public class Odometry {
             dTime += System.currentTimeMillis() - lastTime;
             lastTime = System.currentTimeMillis();
         }
+    }
+
+    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot) {
+        update();
+    }
+
+    public void setState(State newState) {
+        this.state = newState;
     }
 }
