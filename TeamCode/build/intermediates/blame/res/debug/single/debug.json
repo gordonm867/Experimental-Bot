@@ -12,12 +12,12 @@
         "source": "/Users/mgordon/.gradle/caches/transforms-2/files-2.1/f5ab6716349c4e8f1dea2155848cc42c/res/raw/simple_vertex_shader.glsl"
     },
     {
-        "merged": "/Users/mgordon/516-Gears-Of-Fire/TeamCode/build/intermediates/res/merged/debug/raw_texture_vertex_shader.glsl.flat",
-        "source": "/Users/mgordon/.gradle/caches/transforms-2/files-2.1/f5ab6716349c4e8f1dea2155848cc42c/res/raw/texture_vertex_shader.glsl"
-    },
-    {
         "merged": "/Users/mgordon/516-Gears-Of-Fire/TeamCode/build/intermediates/res/merged/debug/drawable-mdpi-v4_notification_bg_normal.9.png.flat",
         "source": "/Users/mgordon/.gradle/caches/transforms-2/files-2.1/d6de7a9b211c48343d6b5abad2a2e2d2/res/drawable-mdpi-v4/notification_bg_normal.9.png"
+    },
+    {
+        "merged": "/Users/mgordon/516-Gears-Of-Fire/TeamCode/build/intermediates/res/merged/debug/raw_texture_vertex_shader.glsl.flat",
+        "source": "/Users/mgordon/.gradle/caches/transforms-2/files-2.1/f5ab6716349c4e8f1dea2155848cc42c/res/raw/texture_vertex_shader.glsl"
     },
     {
         "merged": "/Users/mgordon/516-Gears-Of-Fire/TeamCode/build/intermediates/res/merged/debug/xml_ftc_about_activity.xml.flat",

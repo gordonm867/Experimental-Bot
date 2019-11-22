@@ -27,7 +27,7 @@ public class TestTrashAutonomous extends LinearOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();
     private Odometry odometry;
-    private Drivetrain wheels = new Drivetrain(Drivetrain.State.STOPPED);
+    private Drivetrain wheels = new Drivetrain(Drivetrain.State.OFF);
     private double angleOffset = 3;
     private double radius = 1.5;
 
@@ -42,7 +42,7 @@ public class TestTrashAutonomous extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         waitForStart();
-        wheels.setState(Drivetrain.State.DRIVING);
+        wheels.setState(Drivetrain.State.ON);
         turnToPoint(new Point(-5, -1));
         ArrayList<Line> path = new ArrayList<>();
         /*

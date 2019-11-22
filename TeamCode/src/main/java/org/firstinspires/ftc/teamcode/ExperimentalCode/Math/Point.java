@@ -7,10 +7,18 @@ public class Point {
 
     private double x;
     private double y;
+    private double angle;
 
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
+        this.angle = Double.NaN;
+    }
+
+    public Point(double x, double y, double angle) {
+        this.x = x;
+        this.y = y;
+        this.angle = angle;
     }
 
     public double distance(double newX, double newY) {
@@ -49,6 +57,10 @@ public class Point {
 
     public double getY() {
         return y;
+    }
+
+    public double getAngle() {
+        return angle;
     }
 
     public String toString() {

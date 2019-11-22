@@ -19,7 +19,7 @@ public class StrafeTurn extends LinearOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();
     private Odometry odometry;
-    private Drivetrain wheels = new Drivetrain(Drivetrain.State.STOPPED);
+    private Drivetrain wheels = new Drivetrain(Drivetrain.State.OFF);
 
     public void runOpMode() {
         robot.init(hardwareMap);
@@ -32,7 +32,7 @@ public class StrafeTurn extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         waitForStart();
-        wheels.setState(Drivetrain.State.DRIVING);
+        wheels.setState(Drivetrain.State.ON);
         strafeTurn(90, 3, new Point(-4, 0));
         while(!isStopRequested()) {
             wheels.update(robot, new Point(-4, 0), odometry, Double.NaN, AngleUnit.DEGREES);

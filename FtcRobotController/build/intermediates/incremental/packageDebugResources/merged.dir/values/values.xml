@@ -17,7 +17,7 @@
     <string name="exit_menu_item">Exit</string>
     <string name="inspection_mode_menu_item">Self Inspect</string>
     <string name="packageName">@string/packageNameRobotController</string>
-    <string name="program_and_manage_menu_item">Program &amp; Manage</string>
+    <string name="program_and_manage_menu_item">Program and Manage</string>
     <string name="programming_mode_menu_item">Programming Mode</string>
     <string name="restart_robot_menu_item">Restart Robot</string>
     <string name="settings_menu_item">Settings</string>
