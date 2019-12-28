@@ -7,12 +7,12 @@
  * Saves the clipboard content and calls the callback.
  */
 function saveClipboardContent(clipboardContent, callback) {
-  if (typeof blocksIO !== 'undefined') {
-    // html/js is within the WebView component within the Android app.
-    saveClipboardContentViaBlocksIO(clipboardContent, callback);
-  } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+  if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     saveClipboardContentViaHttp(clipboardContent, callback);
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    saveClipboardContentViaFile(clipboardContent, callback);
   }
 }
 
@@ -20,35 +20,12 @@ function saveClipboardContent(clipboardContent, callback) {
  * Fetches the previously saved clipboard content and calls the callback.
  */
 function fetchClipboardContent(callback) {
-  if (typeof blocksIO !== 'undefined') {
-    // html/js is within the WebView component within the Android app.
-    fetchClipboardContentViaBlocksIO(callback);
-  } else if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+  if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
     // html/js is in a browser, loaded as an http:// URL.
     fetchClipboardContentViaHttp(callback);
-  }
-}
-
-//..........................................................................
-// Code used when html/js is within the WebView component within the
-// Android app.
-
-function saveClipboardContentViaBlocksIO(clipboardContent, callback) {
-  var success = blocksIO.saveClipboardContent(clipboardContent);
-  if (success) {
-    callback(true, '');
-  } else {
-    // TODO(lizlooney): Provide more information about the error.
-    callback(false, 'Save clipboard failed.');
-  }
-}
-
-function fetchClipboardContentViaBlocksIO(callback) {
-  var clipboardContent = blocksIO.fetchClipboardContent();
-  if (clipboardContent) {
-    callback(clipboardContent, '');
-  } else {
-    callback(null, 'Fetch clipboard failed.');
+  } else if (window.location.protocol === 'file:') {
+    // html/js is in a browser, loaded as an file:// URL.
+    fetchClipboardContentViaFile(callback);
   }
 }
 
@@ -94,4 +71,67 @@ function fetchClipboardContentViaHttp(callback) {
     }
   };
   xhr.send();
+}
+
+//..........................................................................
+// Code used when html/js is in a browser, loaded as an file:// URL.
+
+function saveClipboardContentViaFile(clipboardContent, callback) {
+  if (!db) {
+    openOfflineDatabase(function(success, errorReason) {
+      if (success) {
+        saveClipboardContentViaFile(clipboardContent, callback);
+      } else {
+        callback(null, 'Save clipboard content failed. (' + errorReason + ')');
+      }
+    });
+    return;
+  }
+  var otherFilesObjectStore = db.transaction(['otherFiles'], 'readwrite')
+      .objectStore('otherFiles');
+  var getRequest = otherFilesObjectStore.get('clipboard.xml');
+  getRequest.onerror = function(event) {
+    callback(false, 'Save clipboard content failed. (getRequest error)');
+  };
+  getRequest.onsuccess = function(event) {
+    if (event.target.result === undefined) {
+      callback(null, 'Save clipboard content failed. (not found)');
+      return;
+    }
+    var value = event.target.result;
+    value['Content'] = clipboardContent;
+    var putRequest = otherFilesObjectStore.put(value);
+    putRequest.onerror = function(event) {
+      callback(false, 'Save clipboard content failed. (putRequest error)');
+    };
+    putRequest.onsuccess = function(event) {
+      callback(true, '');
+    };
+  };
+}
+
+function fetchClipboardContentViaFile(callback) {
+  if (!db) {
+    openOfflineDatabase(function(success, errorReason) {
+      if (success) {
+        fetchClipboardContentViaFile(callback);
+      } else {
+        callback(null, 'Fetch clipboard content failed. (' + errorReason + ')');
+      }
+    });
+    return;
+  }
+  var getRequest = db.transaction(['otherFiles'], 'readonly')
+      .objectStore('otherFiles').get('clipboard.xml');
+  getRequest.onerror = function(event) {
+    callback(null, 'Fetch clipboard content failed. (getRequest error)');
+  };
+  getRequest.onsuccess = function(event) {
+    if (event.target.result === undefined) {
+      callback(null, 'Fetch clipboard content failed. (not found)');
+      return;
+    }
+    var value = event.target.result;
+    callback(value['Content'], '');
+  };
 }

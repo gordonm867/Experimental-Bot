@@ -114,9 +114,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
     <option name="width" value="1366" />
-    <option name="height" value="768" />
+    <option name="height" value="690" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -185,11 +186,12 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android.sdk.path" value="$PROJECT_DIR$/../Library/Android/sdk" />
     <property name="device.picker.selection" value="ZY223JGB3D" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="sync.plugin.last.upgrade.timestamp" value="1559181342744" />
   </component>
   <component name="RunDashboard">
@@ -229,6 +231,8 @@
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
       <Auto>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
@@ -346,11 +350,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/com/qualcomm/robotcore/eventloop/opmode/LinearOpMode.class" />
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/com/qualcomm/robotcore/eventloop/opmode/OpMode.class" />
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/com/qualcomm/robotcore/hardware/Gamepad.class" />
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/org/firstinspires/ftc/robotcore/internal/opmode/TelemetryImpl.class" />
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/org/firstinspires/ftc/robotcore/internal/opmode/OpModeManagerImpl.class" />
+    <entry file="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/com/qualcomm/robotcore/eventloop/opmode/LinearOpMode.class" />
+    <entry file="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/com/qualcomm/robotcore/eventloop/opmode/OpMode.class" />
+    <entry file="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/com/qualcomm/robotcore/hardware/Gamepad.class" />
+    <entry file="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/org/firstinspires/ftc/robotcore/internal/opmode/TelemetryImpl.class" />
+    <entry file="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/org/firstinspires/ftc/robotcore/internal/opmode/OpModeManagerImpl.class" />
     <entry file="file://$PROJECT_DIR$/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/internal/FtcRobotControllerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
@@ -368,14 +372,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes/org/firstinspires/ftc/robotcore/internal/opmode/OpModeManagerImpl$OpModeStuckCodeMonitor.class">
+    <entry file="file://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes/org/firstinspires/ftc/robotcore/internal/opmode/OpModeManagerImpl$OpModeStuckCodeMonitor.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="127">
           <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/classes/org/firstinspires/ftc/robotcore/internal/system/AppUtil.class">
+    <entry file="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/classes/org/firstinspires/ftc/robotcore/internal/system/AppUtil.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="445" column="16" selection-start-line="445" selection-start-column="16" selection-end-line="445" selection-end-column="16" />
@@ -385,7 +389,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/classes/org/firstinspires/ftc/robotcore/internal/opmode/OpModeManagerImpl.class">
+    <entry file="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/classes/org/firstinspires/ftc/robotcore/internal/opmode/OpModeManagerImpl.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="295">
           <caret line="597" column="51" selection-start-line="597" selection-start-column="51" selection-end-line="597" selection-end-column="51" />
@@ -402,7 +406,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/classes/org/firstinspires/ftc/robotcore/external/navigation/AngleUnit.class">
+    <entry file="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/RobotCore-release.aar/ec5be6048fce24001641d29eb2844dfd/jars/classes.jar!/classes/org/firstinspires/ftc/robotcore/external/navigation/AngleUnit.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="386">
           <caret line="181" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="181" />

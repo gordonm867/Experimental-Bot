@@ -22,7 +22,7 @@ public class SimpleAutoOdometry extends LinearOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();
     private Odometry odometry;
-    private Drivetrain wheels = new Drivetrain(Drivetrain.State.STOPPED);
+    private Drivetrain wheels = new Drivetrain(Drivetrain.State.OFF);
     private double angleOffset = 3;
 
     public void runOpMode() throws InterruptedException {
@@ -36,7 +36,7 @@ public class SimpleAutoOdometry extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         waitForStart();
-        wheels.setState(Drivetrain.State.DRIVING);
+        wheels.setState(Drivetrain.State.ON);
         runToPoint(new Point(1, 1));
         telemetry.addData("Point", odometry.getPoint());
         telemetry.update();

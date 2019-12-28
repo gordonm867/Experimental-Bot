@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.ExperimentalCode.Math;
 
+import android.support.annotation.NonNull;
+
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 
@@ -7,10 +9,18 @@ public class Point {
 
     private double x;
     private double y;
+    private double angle;
 
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
+        this.angle = Double.NaN;
+    }
+
+    public Point(double x, double y, double angle) {
+        this.x = x;
+        this.y = y;
+        this.angle = angle;
     }
 
     public double distance(double newX, double newY) {
@@ -51,6 +61,11 @@ public class Point {
         return y;
     }
 
+    public double getAngle() {
+        return angle;
+    }
+
+    @NonNull
     public String toString() {
         return "(" + getX() + ", " + getY() + ")";
     }

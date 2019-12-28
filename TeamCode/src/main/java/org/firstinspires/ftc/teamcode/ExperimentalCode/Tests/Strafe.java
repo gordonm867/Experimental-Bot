@@ -19,7 +19,7 @@ public class Strafe extends LinearOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();
     private Odometry odometry;
-    private Drivetrain wheels = new Drivetrain(Drivetrain.State.STOPPED);
+    private Drivetrain wheels = new Drivetrain(Drivetrain.State.OFF);
     private Gamepad rest = new Gamepad();
     private boolean automation = false;
     private boolean isTransitioning = false;
@@ -43,7 +43,7 @@ public class Strafe extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         waitForStart();
-        wheels.setState(Drivetrain.State.DRIVING);
+        wheels.setState(Drivetrain.State.ON);
         while(opModeIsActive()) {
             Gamepad gamepad3 = new Gamepad();
 

@@ -68,12 +68,29 @@
             margin: auto;
         }
 
+        .load-hidden {
+            display: none;
+        }
+
         @keyframes progress-indeterminate {
             from { left: -25%; width: 25%; }
             to { left: 100%; width: 25%;}
         }
     </style>
-
+    <script>
+        // Load failure handler
+        window.onerror = function (message, source, line, col) {
+            var loadFailure = document.getElementById('load-failure');
+            var loadHelp = document.getElementById('load-help');
+            var loadFailureMessage = document.getElementById('load-failure-message');
+            var loadFailureSource = document.getElementById('load-failure-source');
+            loadFailure.classList.remove('load-hidden');
+            loadHelp.classList.add('load-hidden');
+            loadFailureMessage.innerText = message;
+            loadFailureSource.innerText = source + ':' + line + ':' + col;
+            return false;
+        }
+    </script>
     <noscript>
         <style>
             #js-disabled {
@@ -93,11 +110,18 @@
         <div class="progress">
             <div class="progress-bar indeterminate"></div>
         </div>
-        <div class="help-block"><p>If OnBotJava doesn't load in a few seconds, try:</p>
+        <div id="load-help" class="help-block"><p>If OnBotJava doesn't load in a few seconds, try:</p>
             <ul>
                 <li>Refreshing the page</li>
                 <li>Verifying the connection to the Robot Controller</li>
             </ul>
+        </div>
+        <div id="load-failure" class="hidden">
+            <p>Something went wrong!</p>
+            <p> Details: <span id="load-failure-message">unknown</span><br />
+                Source: <span id="load-failure-source">unknown</span>
+            </p>
+
         </div>
     </div>
     <div id="js-disabled">
@@ -142,10 +166,11 @@
                             <span class="help-text">New File</span>
                         </a>
                     </li>
+                    <!-- If we again allow zip uploads in the future: ,.zip,application/x-compressed,application/x-zip-compressed,application/zip,multipart/x-zip -->
                     <input type="file" method="post" enctype="multipart/form-data"
                            onchange="angular.element(this).scope().tools.filesSelect(files)"
                            id="file-upload-form" name="file-upload" multiple
-                           accept=".java,.jar,.zip,.txt,.md,text-plain,text/x-java-source,application/x-compressed,application/x-zip-compressed,application/zip,multipart/x-zip"
+                           accept=".java,.jar,.txt,.md,text-plain,text/x-java-source,application/java-archive"
                            style="display: none"/>
                     <li ng-click="tools.upload()">
                         <a class="nav-item nav-link" href="javascript:void(0)"
@@ -454,7 +479,8 @@
 </div>
 <div id="script-container">
     <!-- Normalize the JS engine to not break older browsers -->
-    <script src="/java/js/es6-shim.js"></script>
+    <script src="/js/es5-shim.js"></script>
+    <script src="/js/es6-shim.js"></script>
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/java/js/jquery.position.js"></script>
     <script src="/java/js/tether.min.js"></script>
@@ -479,6 +505,7 @@
     <script type="text/javascript" src="/js/rc_config.js"></script>
     <script type="text/javascript" src="/js/util.js"></script>
     <script src="/java/js/toe.min.js"></script>
+    <script src="/js/websocket-iframe.js"></script>
     <!--suppress HtmlUnknownTarget -->
     <script src="/java/js/settings.js"></script>
     <script src="/java/js/ftclangtools.js"></script>
