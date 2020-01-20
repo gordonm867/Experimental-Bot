@@ -2,14 +2,12 @@ package org.firstinspires.ftc.teamcode.ExperimentalCode.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.SensorREVColorDistance;
 import org.firstinspires.ftc.robotcontroller.internal.MyOpMode;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.BoxLift;
+import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Capper;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Clamp;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Extension;
@@ -29,6 +27,7 @@ public class TrashTeleOp extends MyOpMode {
     private     ArrayList<Subsystem>    subsystems = new ArrayList<>();
 
     private     BoxLift                 boxlift;
+    private     Capper                  capper;
     private     Clamp                   clamp;
     private     Drivetrain              drive;
     private     Extension               extension;
@@ -42,6 +41,7 @@ public class TrashTeleOp extends MyOpMode {
         Globals.boxDown = 0.395;
         robot.init(hardwareMap);
         boxlift = new BoxLift(BoxLift.State.NEUTRAL);
+        capper = new Capper(Capper.State.IDLE);
         clamp = new Clamp(Clamp.State.CLOSED);
         drive = new Drivetrain(Subsystem.State.OFF);
         extension = new Extension(Extension.State.IDLE);
@@ -59,6 +59,7 @@ public class TrashTeleOp extends MyOpMode {
 
         robot.enabled = true;
         subsystems.add(boxlift);
+        subsystems.add(capper);
         subsystems.add(clamp);
         subsystems.add(drive);
         subsystems.add(extension);

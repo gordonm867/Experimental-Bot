@@ -14,9 +14,9 @@ public class Lift implements Subsystem {
     Subsystem.State parentstate; // Parent state (ON/OFF)
     State state; // Child state (enumerated below)
 
-    public static double ACCEL_CONSTANT = 0.05; // Value of constant jerk
+    public static double ACCEL_CONSTANT = 0.1; // Value of constant jerk
 
-    double param = 0.25; // Acceleration value
+    double param = 0.05; // Acceleration value
     double power = 0; // Lift power
 
     boolean wait = false; // Are we done waiting for the clamp?
@@ -121,18 +121,24 @@ public class Lift implements Subsystem {
             first = false;
         }
         if(liftspeed != 0 || (state != State.AUTOMATED && state != State.WAITING && state != State.STILL_AUTOMATED)) {
-            target = Math.min(-500, -335 * level);
-            if(in && robot.lift != null && data1 != null && gamepad2.left_bumper && !bumperPressed) {
-                fakeTarget = -500;
-                goingToFakeTarget = true;
-                bumperPressed = true;
-                in = false;
+            if(Math.abs(robot.clampPose - Clamp.MAX) <= Math.abs(robot.clampPose - Clamp.MIN)) {
+                target = Math.min(-500, -335 * level);
             }
-            else if(robot.lift != null && data1 != null && gamepad2.left_bumper && !bumperPressed) {
-                fakeTarget = -350;
-                goingToFakeTarget = true;
-                bumperPressed = true;
-                in = true;
+            else {
+                target = -335 * level;
+            }
+            if(robot.clampPose == Clamp.MIN) {
+                if (in && robot.lift != null && data1 != null && gamepad2.left_bumper && !bumperPressed) {
+                    fakeTarget = -500;
+                    goingToFakeTarget = true;
+                    bumperPressed = true;
+                    in = false;
+                } else if (robot.lift != null && data1 != null && gamepad2.left_bumper && !bumperPressed) {
+                    fakeTarget = -350;
+                    goingToFakeTarget = true;
+                    bumperPressed = true;
+                    in = true;
+                }
             }
             state = liftspeed == 0 ? State.IDLE : State.LIFTING;
             if(robot.lift != null) {
@@ -167,7 +173,7 @@ public class Lift implements Subsystem {
             }
             if(robot.lift != null && data1 != null) {
                 try {
-                    double currentpos = data1.getMotorCurrentPosition(robot.lift);
+                    double currentpos = -data1.getMotorCurrentPosition(robot.lift);
                     if(target - 10 <= currentpos && target + 10 >= currentpos) {
                         goingToTarget = false;
                     }
@@ -177,7 +183,7 @@ public class Lift implements Subsystem {
                     goingToTarget = false;
                 }
                 try {
-                    double currentpos = data1.getMotorCurrentPosition(robot.lift);
+                    double currentpos = -data1.getMotorCurrentPosition(robot.lift);
                     if(fakeTarget - 10 <= currentpos && fakeTarget + 10 >= currentpos) {
                         goingToFakeTarget = false;
                     }
@@ -194,12 +200,12 @@ public class Lift implements Subsystem {
                 goingToFakeTarget = false;
             }
             try {
-                if (data1 != null && goingToTarget && liftspeed == 0 && robot.lift != null && Math.abs(data1.getMotorCurrentPosition(robot.lift)) < Math.abs(target)) {
-                    double error = Math.abs(data1.getMotorCurrentPosition(robot.lift) - target);
+                if (data1 != null && goingToTarget && liftspeed == 0 && robot.lift != null && Math.abs(-data1.getMotorCurrentPosition(robot.lift)) < Math.abs(target)) {
+                    double error = Math.abs(-data1.getMotorCurrentPosition(robot.lift) - target);
                     liftspeed = Math.max(0.3, 1 * (error / 150f));
                 }
                 else if(data1 != null && goingToTarget && liftspeed == 0 && robot.lift != null) {
-                    double error = Math.abs(data1.getMotorCurrentPosition(robot.lift) - target);
+                    double error = Math.abs(-data1.getMotorCurrentPosition(robot.lift) - target);
                     liftspeed = Math.min(-0.2, -1 * (error / 150f));
                 }
             }
@@ -207,11 +213,11 @@ public class Lift implements Subsystem {
                 isErred = true;
             }
             try {
-                if (data1 != null && goingToFakeTarget && liftspeed == 0 && robot.lift != null && Math.abs(data1.getMotorCurrentPosition(robot.lift)) < Math.abs(fakeTarget)) {
-                    double error = Math.abs(data1.getMotorCurrentPosition(robot.lift) - fakeTarget);
+                if (data1 != null && goingToFakeTarget && liftspeed == 0 && robot.lift != null && Math.abs(-data1.getMotorCurrentPosition(robot.lift)) < Math.abs(fakeTarget)) {
+                    double error = Math.abs(-data1.getMotorCurrentPosition(robot.lift) - fakeTarget);
                     liftspeed = Math.max(0.3, 1 * (error / 150f));                }
                 else if(data1 != null && goingToFakeTarget && liftspeed == 0 && robot.lift != null) {
-                    double error = Math.abs(data1.getMotorCurrentPosition(robot.lift) - fakeTarget);
+                    double error = Math.abs(-data1.getMotorCurrentPosition(robot.lift) - fakeTarget);
                     liftspeed = Math.min(-0.2, -1 * (error / 150f));
                 }
             }
@@ -230,7 +236,7 @@ public class Lift implements Subsystem {
                 power = 0;
             }
             if (power == 0) {
-                param = 0;
+                param = 0.3;
             }
             if(gamepad2.a && !apressed && !isErred) {
                 level++;
@@ -248,11 +254,11 @@ public class Lift implements Subsystem {
         if(state == State.WAITING && System.currentTimeMillis() - time >= 100) {
             state = State.AUTOMATED;
             if(robot.lift != null && data1 != null) {
-                target = data1.getMotorCurrentPosition(robot.lift) - 150;
+                target = -data1.getMotorCurrentPosition(robot.lift) - 150;
             }
         }
         if(state == State.AUTOMATED && robot.lift != null && !checkLift(data1, robot, target) && data1 != null) {
-            liftspeed = 0.6 * Math.signum(data1.getMotorCurrentPosition(robot.lift) - target);
+            liftspeed = 0.6 * Math.signum(-data1.getMotorCurrentPosition(robot.lift) - target);
             param += ACCEL_CONSTANT;
             liftspeed = Range.clip(liftspeed, power - param, power + param);
             robot.lift(-liftspeed);
@@ -272,10 +278,10 @@ public class Lift implements Subsystem {
             moved = true;
         }
         if(data1 != null && state == State.STILL_AUTOMATED && moved && !checkLift(data1, robot, target)) {
-            liftspeed = Math.signum(data1.getMotorCurrentPosition(robot.lift));
+            liftspeed = Math.signum(-data1.getMotorCurrentPosition(robot.lift));
             if(liftspeed == 1) {
                 liftspeed = 0;
-                target = data1.getMotorCurrentPosition(robot.lift);
+                target = -data1.getMotorCurrentPosition(robot.lift);
             }
             param += ACCEL_CONSTANT;
             liftspeed = Range.clip(liftspeed, power - param, power + param);
@@ -320,7 +326,7 @@ public class Lift implements Subsystem {
     public boolean checkLift(RevBulkData data1, TrashHardware robot, double targ) {
         boolean toTarg = true;
         try {
-            double currentpos = data1.getMotorCurrentPosition(robot.lift);
+            double currentpos = -data1.getMotorCurrentPosition(robot.lift);
             if(targ - 10 <= currentpos && targ + 10 >= currentpos) {
                 toTarg = false;
             }

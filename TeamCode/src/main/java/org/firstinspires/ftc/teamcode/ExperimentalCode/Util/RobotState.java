@@ -48,4 +48,8 @@ public class RobotState extends Point {
     public void setDelay(double newDelay) {
         delay = newDelay;
     }
+
+    public void setExact(boolean ex) {
+        exact = ex;
+    }
 }

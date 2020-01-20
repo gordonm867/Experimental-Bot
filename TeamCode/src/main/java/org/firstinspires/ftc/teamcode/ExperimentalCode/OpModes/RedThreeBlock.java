@@ -26,7 +26,6 @@ import org.openftc.revextensions2.RevBulkData;
 import java.util.ArrayList;
 
 @Autonomous(name="RED Three Stone Autonomous", group="Trash")
-@Config
 @Disabled
 public class RedThreeBlock extends MyOpMode {
 

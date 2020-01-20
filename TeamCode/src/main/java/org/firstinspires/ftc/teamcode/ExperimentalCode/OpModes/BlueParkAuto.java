@@ -36,6 +36,8 @@ public class BlueParkAuto extends LinearOpMode {
 
         /* Initialize Hardware */
         robot.init(hardwareMap);
+        robot.dropOdometry();
+        robot.resetOmnis();
         robot.unlockFoundation();
         Globals.MAX_SPEED = 0.5;
         Globals.START_THETA = 90;
@@ -46,6 +48,7 @@ public class BlueParkAuto extends LinearOpMode {
         robot.lf.setDirection(DcMotorSimple.Direction.FORWARD);
         resetAllEncoders();
         odometry = Odometry.getInstance(robot);
+        odometry.reset();
 
         /* Initialize Subsystems */
         robot.enabled = true;

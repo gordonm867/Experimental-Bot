@@ -12,13 +12,13 @@
 12
 13    <uses-sdk
 14        android:minSdkVersion="19"
-14-->/Users/mgordon/516-Gears-Of-Fire/TeamCode/src/main/AndroidManifest.xml
+14-->/Users/mgordon/Experimental-Bot/TeamCode/src/main/AndroidManifest.xml
 15        android:targetSdkVersion="26" />
-15-->/Users/mgordon/516-Gears-Of-Fire/TeamCode/src/main/AndroidManifest.xml
+15-->/Users/mgordon/Experimental-Bot/TeamCode/src/main/AndroidManifest.xml
 16
 17    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-17-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-81
-17-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:22-78
+17-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-81
+17-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:22-78
 18    <uses-permission
 18-->[:RobotCore-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/2fddf7d2e75d56f26627824ca58c83b8/RobotCore-release/AndroidManifest.xml:11:5-13:35
 19        android:name="android.permission.ACCESS_WIFI_STATE"
@@ -128,92 +128,92 @@
 77-->[:Inspection-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/de33108b08aea730f6ad7551982b5810/Inspection-release/AndroidManifest.xml:12:22-71
 78
 79    <application
-79-->/Users/mgordon/516-Gears-Of-Fire/TeamCode/src/main/AndroidManifest.xml:11:5-19
+79-->/Users/mgordon/Experimental-Bot/TeamCode/src/main/AndroidManifest.xml:11:5-19
 80        android:name="org.firstinspires.ftc.robotcore.internal.system.RobotApplication"
 80-->[:RobotCore-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/2fddf7d2e75d56f26627824ca58c83b8/RobotCore-release/AndroidManifest.xml:78:18-97
 81        android:allowBackup="true"
-81-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:9-35
+81-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:9-35
 82        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
 82-->[com.android.support:support-compat:28.0.0] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/dd1cf78f22bdd94f550130b281f27c97/support-compat-28.0.0/AndroidManifest.xml:22:18-91
 83        android:debuggable="true"
 84        android:icon="@drawable/ic_launcher"
-84-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:9-45
+84-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:9-45
 85        android:label="@string/app_name"
-85-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:9-41
+85-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:9-41
 86        android:largeHeap="true"
-86-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:9-33
+86-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:9-33
 87        android:testOnly="true"
 88        android:theme="@style/AppThemeRedRC" > <!-- Indicates to the ControlHubUpdater what the latest version of the Control Hub is that this app supports -->
-88-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:19:9-45
+88-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:19:9-45
 89        <meta-data
-89-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:22:9-24:33
+89-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:22:9-24:33
 90            android:name="org.firstinspires.latestSupportedControlHubVersion"
-90-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:23:13-78
+90-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:23:13-78
 91            android:value="1" /> <!-- The main robot controller activity -->
-91-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:24:13-30
+91-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:24:13-30
 92        <activity
-92-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:27:9-38:20
+92-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:27:9-38:20
 93            android:name="org.firstinspires.ftc.robotcontroller.internal.PermissionValidatorWrapper"
-93-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:28:13-101
+93-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:28:13-101
 94            android:configChanges="orientation|screenSize"
-94-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:29:13-59
+94-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:29:13-59
 95            android:label="@string/app_name"
-95-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:30:13-45
+95-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:30:13-45
 96            android:launchMode="singleTask"
-96-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:13-44
+96-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:13-44
 97            android:screenOrientation="fullUser" >
-97-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:32:13-49
+97-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:32:13-49
 98            <intent-filter>
-98-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:33:13-37:29
+98-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:33:13-37:29
 99                <category android:name="android.intent.category.LAUNCHER" />
-99-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:34:17-77
-99-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:34:27-74
+99-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:34:17-77
+99-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:34:27-74
 100
 101                <action android:name="android.intent.action.MAIN" />
-101-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:17-69
-101-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:25-66
+101-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:17-69
+101-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:25-66
 102            </intent-filter>
 103        </activity>
 104        <activity
-104-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:39:9-57:20
+104-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:39:9-57:20
 105            android:name="org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity"
-105-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:40:13-101
+105-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:40:13-101
 106            android:configChanges="orientation|screenSize"
-106-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:41:13-59
+106-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:41:13-59
 107            android:label="@string/app_name"
-107-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:42:13-45
+107-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:42:13-45
 108            android:launchMode="singleTask"
-108-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:43:13-44
+108-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:43:13-44
 109            android:screenOrientation="fullUser" >
-109-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:44:13-49
+109-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:44:13-49
 110            <intent-filter>
-110-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:45:13-47:29
+110-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:45:13-47:29
 111                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
-111-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:46:17-90
-111-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:46:25-87
+111-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:46:17-90
+111-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:46:25-87
 112            </intent-filter>
 113
 114            <meta-data
-114-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:49:13-51:57
+114-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:49:13-51:57
 115                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
-115-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:50:17-79
+115-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:50:17-79
 116                android:resource="@xml/device_filter" />
-116-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:51:17-54
+116-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:51:17-54
 117
 118            <!-- org.firstinspires.main.entry indicates that this app is compatible with the Dragonboard Control Hub -->
 119            <meta-data
-119-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:54:13-56:40
+119-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:54:13-56:40
 120                android:name="org.firstinspires.main.entry"
-120-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:55:17-60
+120-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:55:17-60
 121                android:value="true" />
-121-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:56:17-37
+121-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:56:17-37
 122        </activity> <!-- The robot controller service in which most of the robot functionality is managed -->
 123        <service
-123-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:60:9-62:38
+123-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:60:9-62:38
 124            android:name="com.qualcomm.ftccommon.FtcRobotControllerService"
-124-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:61:13-76
+124-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:61:13-76
 125            android:enabled="true" /> <!-- Service that keeps desktop folders up to date with respect to actual phone file system contents -->
-125-->[:FtcRobotController] /Users/mgordon/516-Gears-Of-Fire/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:62:13-35
+125-->[:FtcRobotController] /Users/mgordon/Experimental-Bot/FtcRobotController/build/intermediates/library_manifest/debug/AndroidManifest.xml:62:13-35
 126        <service
 126-->[:RobotCore-release:] /Users/mgordon/.gradle/caches/transforms-2/files-2.1/2fddf7d2e75d56f26627824ca58c83b8/RobotCore-release/AndroidManifest.xml:81:9-83:38
 127            android:name="org.firstinspires.ftc.robotcore.internal.files.MediaTransferProtocolMonitorService"

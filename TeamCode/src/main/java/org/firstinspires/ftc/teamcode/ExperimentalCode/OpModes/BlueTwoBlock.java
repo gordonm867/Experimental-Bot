@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.ExperimentalCode.OpModes;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
@@ -24,9 +25,9 @@ import org.openftc.revextensions2.RevBulkData;
 
 import java.util.ArrayList;
 
-@Autonomous(name="BLUE Two Stone Autonomous", group="Trash")
-@Config
-//@Disabled
+@Autonomous(name="BLUE Old Two Stone Autonomous", group="Trash")
+@Disabled
+//@Config
 public class BlueTwoBlock extends MyOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();

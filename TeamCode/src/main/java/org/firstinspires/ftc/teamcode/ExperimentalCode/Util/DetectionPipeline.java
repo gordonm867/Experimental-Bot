@@ -73,15 +73,15 @@ public class DetectionPipeline extends OpenCvPipeline {
                 else {
                     if(x < input.rows() / 3f) {
                         double[] dispArr = disp.get(x, y);
-                        totLight[2] += dispArr[0] + dispArr[1] + dispArr[2];
+                        totLight[2] += dispArr[0] + dispArr[1];
                     }
                     else if(x < 2 * input.rows() / 3f) {
                         double[] dispArr = disp.get(x, y);
-                        totLight[1] += dispArr[0] + dispArr[1] + dispArr[2];
+                        totLight[1] += dispArr[0] + dispArr[1];
                     }
                     else {
                         double[] dispArr = disp.get(x, y);
-                        totLight[0] += dispArr[0] + dispArr[1] + dispArr[2];
+                        totLight[0] += dispArr[0] + dispArr[1];
                     }
                 }
             }

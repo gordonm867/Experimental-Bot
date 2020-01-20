@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.ExperimentalCode.OpModes;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcontroller.internal.MyOpMode;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Drivetrain;
@@ -14,6 +15,7 @@ import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.OLDExtension;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.OLDLift;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Odometry;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Subsystem;
+import org.firstinspires.ftc.teamcode.ExperimentalCode.Util.RGBA;
 import org.openftc.revextensions2.RevBulkData;
 
 import java.util.ArrayList;
@@ -70,6 +72,10 @@ public class TrashTrashTeleOp extends MyOpMode {
         for(Subsystem subsystem : subsystems) {
             subsystem.update(gamepad1, gamepad2, robot, data, data2);
         }
+        telemetry.addData("color", new RGBA(robot.moresense.red(), robot.moresense.green(), robot.moresense.blue(), robot.moresense.alpha()));
+        telemetry.addData("distance", robot.sense.getDistance(DistanceUnit.CM));
+        telemetry.addData("block", robot.hasBlock());
+        telemetry.update();
     }
 
     public void stopOp() {

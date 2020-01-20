@@ -41,9 +41,12 @@ public class BlueEdgeParkAuto extends LinearOpMode {
         robot.rf.setDirection(DcMotorSimple.Direction.REVERSE);
         robot.lb.setDirection(DcMotorSimple.Direction.FORWARD);
         robot.lf.setDirection(DcMotorSimple.Direction.FORWARD);
+        robot.resetOmnis();
         resetAllEncoders();
         Globals.START_Y = 2;
         odometry = Odometry.getInstance(robot);
+        robot.dropOdometry();
+        odometry.reset();
 
         /* Initialize Subsystems */
         robot.enabled = true;

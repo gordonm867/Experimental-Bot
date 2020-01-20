@@ -65,6 +65,18 @@ public class Point {
         return angle;
     }
 
+    public void setX(double newX) {
+        x = newX;
+    }
+
+    public void setY(double newY) {
+        y = newY;
+    }
+
+    public void setTheta(double newO) {
+        angle = newO;
+    }
+
     @NonNull
     public String toString() {
         return "(" + getX() + ", " + getY() + ")";

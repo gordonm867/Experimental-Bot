@@ -2,12 +2,14 @@ package org.firstinspires.ftc.teamcode.ExperimentalCode.OpModes;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcontroller.internal.MyOpMode;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.GOFException;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Functions;
@@ -25,8 +27,7 @@ import org.openftc.revextensions2.RevBulkData;
 import java.util.ArrayList;
 
 @Autonomous(name="BLUE Three Stone Autonomous", group="Trash")
-@Config
-//@Disabled
+@Disabled
 public class BlueThreeBlock extends MyOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();
@@ -145,7 +146,9 @@ public class BlueThreeBlock extends MyOpMode {
     }
 
     public void startOp() {
+        opTime = System.currentTimeMillis();
         wheels.setState(Drivetrain.State.ON);
+        skystone = 1;
         if(skystone == 0) {
             targets.add(new RobotState(-5.25, -3.2, 180, 0, 0, true, Globals.boxNeutral, 0, true));
             targets.add(new RobotState(-2.6, -3.7 + (2f/3f), 135, Globals.EXTEND_POS, -1, true, Globals.boxDown, 500, true));
@@ -179,45 +182,45 @@ public class BlueThreeBlock extends MyOpMode {
         else if(skystone == 1) {
             /* First Block */
             targets.add(new RobotState(-5.25, -3.2, 180, 0, 0, true, Globals.boxNeutral, 0, true)); // 0
-            targets.add(new RobotState(-2.6, -3.7, 135, Globals.EXTEND_POS, -1, true, Globals.boxDown, 5000, true)); // 1
-            targets.add(new RobotState(-3.5, -2.8, 135, 0, 0, false, Globals.boxNeutral, 0, true)); // 2
+            targets.add(new RobotState(-2.7, -3.4, 135, Globals.EXTEND_POS, -1, true, Globals.boxDown, 5000, true)); // 1
+            targets.add(new RobotState(-3.4, -2.7, 135, 0, 0, false, Globals.boxNeutral, 0, false)); // 2
 
             /* Place */
-            targets.add(new RobotState(-3.5, -1, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 3
-            targets.add(new RobotState(-3.5, 1, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 4
-            targets.add(new RobotState(-3.5, 3.25, 180, 0, 0.01, false, Globals.boxNeutral, 0, false)); // 5
-            targets.add(new RobotState(-3.15, 3.25, 180, Globals.EXTEND_POS / 5, 1, true, Globals.boxNeutral, 2000, true)); // 6
+            targets.add(new RobotState(-3.6, -1, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 3
+            targets.add(new RobotState(-3.6, 1, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 4
+            targets.add(new RobotState(-3.6, 3, 180, Globals.EXTEND_POS, 0.01, false, Globals.boxNeutral, 0, false)); // 5
+            targets.add(new RobotState(-3.4, 3, 180, Globals.EXTEND_POS, 1, true, 0.43, 2000, true)); // 6
 
             /* Second Block */
-            targets.add(new RobotState(-3.5, 1, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 7
-            targets.add(new RobotState(-3.5, -1, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 8
+            targets.add(new RobotState(-3.6, 1, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 7
+            targets.add(new RobotState(-3.6, -1.25, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 8
             targets.add(new RobotState(-3, -1.27, 135, Globals.EXTEND_POS, 0, false, Globals.boxDown , 0, true)); // 9
-            targets.add(new RobotState(-2.6, -2, 135, Globals.EXTEND_POS, -1, true, Globals.boxDown, 5000, true)); // 10
+            targets.add(new RobotState(-2.5, -2, 135, Globals.EXTEND_POS, -1, true, Globals.boxDown, 5000, true)); // 10
 
             /* Place */
-            targets.add(new RobotState(3.4, -1, 90, 0, 1, true, Globals.boxNeutral, 0, false)); // 11
-            targets.add(new RobotState(3.4, 1, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 12
-            targets.add(new RobotState(3.4, 3.875, 180, 0, 0, false, Globals.boxNeutral, 0, false)); // 13
-            targets.add(new RobotState(3, 3.875, 180, Globals.EXTEND_POS / 5, 1, false, Globals.boxNeutral, 2000, false)); // 14
+            targets.add(new RobotState(-3.6, -1, 90, 0, 1, true, Globals.boxNeutral, 0, false)); // 11
+            targets.add(new RobotState(-3.6, 1, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 12
+            targets.add(new RobotState(-3.6, 4, 180, Globals.EXTEND_POS, 0, false, Globals.boxNeutral, 0, false)); // 13
+            targets.add(new RobotState(-3.4, 4, 180, Globals.EXTEND_POS, 1, false, 0.43, 2000, false)); // 14
 
             /* Third Block */
-            targets.add(new RobotState(-1.82, -1.92, 90, Globals.EXTEND_POS, -1, true, Globals.boxDown, 0, false)); // 15
-            targets.add(new RobotState(-1.62, -4.5, 90, Globals.EXTEND_POS, -1, true, Globals.boxDown, 0, false)); // 16
+            targets.add(new RobotState(-3.6, 1, 90, 0, 1, false, Globals.boxNeutral, 0, false)); // 15
+            targets.add(new RobotState(-3.6, -1, 90, 0, 1, false, Globals.boxNeutral, 0, false)); // 16
+            targets.add(new RobotState(-3, -3, 135, Globals.EXTEND_POS, -1, true, Globals.boxDown, 5000, false)); // 17
 
             /* Place */
-            targets.add(new RobotState(-3.4, -1, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 17
-            targets.add(new RobotState(-3.4, 1, 90, 0, 0.01, true, Globals.boxNeutral, 0, false)); // 18
-            targets.add(new RobotState(-3.4, 4.5, 180, 0, 0.01, false, Globals.boxNeutral, 0, false)); // 19
-            targets.add(new RobotState(-3, 4.5, 180, Globals.EXTEND_POS / 5, 1, true, Globals.boxNeutral, 500.01, false)); // 20
+            targets.add(new RobotState(-3.75, -1.3, 90, 0, 0, true, Globals.boxNeutral, 0, false)); // 18
+            targets.add(new RobotState(-3.75, 1, 90, 0, 0.01, true, Globals.boxNeutral, 0, false)); // 19
+            targets.add(new RobotState(-3.6, 4.5, 180, 0, 0.01, false, Globals.boxNeutral, 0, false)); // 20
+            targets.add(new RobotState(-2.5, 4.5, 180, 0, 1, true, 0.43, 500.01, false)); // 21
 
             /* Reposition */
-            targets.add(new RobotState(-5.2, 4.5, 180, 0, 1, true, Globals.boxNeutral, 500.02, true)); // 21
-            targets.add(new RobotState(-5.25, 3, 180, 0, 0, false, Globals.boxNeutral, 0, false)); // 22
-            targets.add(new RobotState(-3.25, 0.75, 180, 0, 0, true, Globals.boxNeutral, 0, true)); // 23
-            targets.add(new RobotState(-3.25, 2.1, 180, 0, 0, true, Globals.boxNeutral, 0, true)); // 24
+            targets.add(new RobotState(-5.5, 4.8, 180, 0, 1, true, Globals.boxNeutral, 500.02, true)); // 22
+            targets.add(new RobotState(-5.55, 2.3, 180, 0, 0, false, Globals.boxNeutral, 0, false)); // 23
+            targets.add(new RobotState(-3.5, 2.3, 180, 0, 0, false, Globals.boxNeutral, 0, false)); // 24
 
             /* Park */
-            targets.add(new RobotState(-3.25, 0, 90, Globals.EXTEND_POS, 0, true, Globals.boxNeutral, 0, true)); // 25
+            targets.add(new RobotState(-3.5, 0, 90, Globals.EXTEND_POS, 0, true, Globals.boxNeutral, 0, true)); // 26
         }
         else {
             targets.add(new RobotState(-5.25, -3.2, 180, 0, 0, true, Globals.boxNeutral, 0, true));
@@ -262,35 +265,42 @@ public class BlueThreeBlock extends MyOpMode {
             }
             Point startPoint = odometry.getPoint();
             double itertime = System.currentTimeMillis();
-            if(skystone == 0 && System.currentTimeMillis() - time >= 3000 && target.getY() < 0 && target.getY() > -2) {
-                robot.liftbox(target.getBoxPos());
-                robot.setInPower(target.getIntakePower());
-                if(target.getDelay() != 0) {
-                    robot.setDrivePower(0, 0, 0, 0);
-                    double nowTime = System.currentTimeMillis();
-                    while(Math.abs(System.currentTimeMillis() - nowTime) <= target.getDelay()) {
-                        if(target.getIntakePower() < 0.2) { // PICKING UP STONE
-                            Globals.MAX_SPEED = 0.15;
-                            wheels.update(robot, new Point(odometry.getX() + (0.5 * Math.cos(Math.toRadians(odometry.getAngle()))), odometry.getY() - (0.5 * Math.sin(Math.toRadians(odometry.getAngle())))), odometry, odometry.getAngle(), AngleUnit.DEGREES);
-                        }
-                        Globals.MAX_SPEED = 1.0;
-                    }
-                }
-                index++;
-                time = System.currentTimeMillis();
-                iterations = 0;
-                if(index != targets.size() && Math.abs(targets.get(index).getX()) > 4.5) {
-                    robot.moveClamp(Clamp.MIN);
-                }
-                if(index == targets.size()) {
-                    double nowTime = System.currentTimeMillis();
-                    while(opModeIsActive()) {
+            if(System.currentTimeMillis() - time >= 3000 && ((target.getY() < 0 && target.getY() > -2) || (odometry.getY() < 0 && odometry.getY() > -2))) {
+                if(skystone == 0 && index < 11) {
+                    robot.liftbox(target.getBoxPos());
+                    robot.setInPower(target.getIntakePower());
+                    if (target.getDelay() != 0) {
                         robot.setDrivePower(0, 0, 0, 0);
-                        telemetry.addData("Time elapsed", nowTime - opTime);
-                        telemetry.update();
+                        double nowTime = System.currentTimeMillis();
+                        while (Math.abs(System.currentTimeMillis() - nowTime) <= target.getDelay()) {
+                            if (target.getIntakePower() < 0.2) { // PICKING UP STONE
+                                Globals.MAX_SPEED = 0.35;
+                                wheels.update(robot, new Point(odometry.getX() + (0.5 * Math.cos(Math.toRadians(odometry.getAngle()))), odometry.getY() - (0.5 * Math.sin(Math.toRadians(odometry.getAngle())))), odometry, odometry.getAngle(), AngleUnit.DEGREES);
+                            }
+                            Globals.MAX_SPEED = 1.0;
+                        }
                     }
+                    index++;
+                    time = System.currentTimeMillis();
+                    iterations = 0;
+                    if (index != targets.size() && Math.abs(targets.get(index).getX()) > 4.5) {
+                        robot.moveClamp(Clamp.MIN);
+                    }
+                    if (index == targets.size()) {
+                        double nowTime = System.currentTimeMillis();
+                        while (opModeIsActive()) {
+                            robot.setDrivePower(0, 0, 0, 0);
+                            telemetry.addData("Time elapsed", (nowTime - opTime) / 1000f);
+                            telemetry.update();
+                        }
+                    }
+                    target = targets.get(index);
                 }
-                target = targets.get(index);
+                else {
+                    target.setX(target.getX() > 0 && target.getX() < 3.8 ? 4 : target.getX() > 0 && target.getX() >= 3.8 ? 3.75 : target.getX() > -3.8 ? -4 : -3.75);
+                    target.setY(odometry.getY() - 0.3);
+                    target.setTheta(90);
+                }
             }
             if(iterations > 50 && odometry.getY() > 0 && Math.abs((startPoint.distance(lastPoint) * -Globals.DRIVE_FEET_PER_TICK) / ((lasttime - itertime) / 1000.0)) <= 0.015) { // Move on....
                 robot.liftbox(target.getBoxPos());
@@ -300,7 +310,7 @@ public class BlueThreeBlock extends MyOpMode {
                     double nowTime = System.currentTimeMillis();
                     while(Math.abs(System.currentTimeMillis() - nowTime) <= target.getDelay()) {
                         if(target.getIntakePower() < 0.2) { // PICKING UP STONE
-                            Globals.MAX_SPEED = 0.15;
+                            Globals.MAX_SPEED = 0.35;
                             wheels.update(robot, new Point(odometry.getX() + (0.5 * Math.cos(Math.toRadians(odometry.getAngle()))), odometry.getY() - (0.5 * Math.sin(Math.toRadians(odometry.getAngle())))), odometry, odometry.getAngle(), AngleUnit.DEGREES);
                         }
                         Globals.MAX_SPEED = 1.0;
@@ -316,31 +326,29 @@ public class BlueThreeBlock extends MyOpMode {
                     double nowTime = System.currentTimeMillis();
                     while(opModeIsActive()) {
                         robot.setDrivePower(0, 0, 0, 0);
-                        telemetry.addData("Time elapsed", nowTime - opTime);
+                        telemetry.addData("Time elapsed", (nowTime - opTime) / 1000f);
                         telemetry.update();
                     }
                 }
                 target = targets.get(index);
             }
-            if(index == 20 || index == 21) {
+            if(index == 21 || index == 22) {
                 Globals.MAX_SPEED = 0.75;
-                if(index == 21) {
-                    Globals.MAX_SPEED = 0.5;
+                if(index == 22) {
                     robot.moveClamp(Clamp.MIN);
                 }
             }
-            else if(target.getIntakePower() == -1 && Math.abs(odometry.getX()) <= 3.5 && index < 13) {
-                Globals.MAX_SPEED = 0.15;
+            else if(target.getIntakePower() == -1 && Math.abs(odometry.getX()) <= 4 && index < 13) {
+                Globals.MAX_SPEED = 0.35;
             }
             else {
                 Globals.MAX_SPEED = 1;
             }
             wheels.update(robot, target, odometry, target.getAngle(), AngleUnit.DEGREES);
-            odometry.update(robot.bulkRead());
             if(target.getIntakePower() > 0) {
                 robot.moveClamp(Clamp.MIN);
             }
-            else if(index <= 20 && (target.getIntakePower() < 0.2 || (index + 1 < targets.size() && (targets.get(index + 1).getExtendPos() != 0 || targets.get(index + 1).getIntakePower() == -1)))) {
+            else if(index <= 19 && (target.getIntakePower() < 0.2 || (index + 1 < targets.size() && (targets.get(index + 1).getExtendPos() != 0 || targets.get(index + 1).getIntakePower() == -1)))) {
                 robot.moveClamp(Clamp.MAX);
             }
             if(robot.ex != null) {
@@ -351,29 +359,32 @@ public class BlueThreeBlock extends MyOpMode {
             if(target.getIntakePower() <= 0) {
                 robot.setInPower(target.getIntakePower());
             }
-            if((index == 15 || index == 16) && robot.hasBlock()) {
-                robot.setDrivePower(0, 0, 0, 0);
-                robot.setInPower(-0.5);
-                sleep(500);
-                index++;
-                if(index == 16) {
+            /*
+            if((index == 17 || index == 18) && robot.hasBlock()) {
+                sleep(200);
+                if(robot.hasBlock()) {
+                    robot.setInPower(-0.75);
+                    sleep(1000);
                     index++;
-                }
-                time = System.currentTimeMillis();
-                iterations = 0;
-                if(index != targets.size() && Math.abs(targets.get(index).getX()) > 4.5) {
-                    robot.moveClamp(Clamp.MIN);
-                }
-                if(index == targets.size()) {
-                    double nowTime = System.currentTimeMillis();
-                    while(opModeIsActive()) {
-                        robot.setDrivePower(0, 0, 0, 0);
-                        telemetry.addData("Time elapsed", nowTime - opTime);
-                        telemetry.update();
+                    if (index == 18) {
+                        index++;
                     }
+                    time = System.currentTimeMillis();
+                    iterations = 0;
+                    if (index != targets.size() && Math.abs(targets.get(index).getX()) > 4.5) {
+                        robot.moveClamp(Clamp.MIN);
+                    }
+                    if (index == targets.size()) {
+                        double nowTime = System.currentTimeMillis();
+                        while (opModeIsActive()) {
+                            robot.setDrivePower(0, 0, 0, 0);
+                            telemetry.addData("Time elapsed", (nowTime - opTime) / 1000f);
+                            telemetry.update();
+                        }
+                    }
+                    target = targets.get(index);
                 }
-                target = targets.get(index);
-            }
+            } */
             robot.liftbox(target.getBoxPos());
             iterations++;
             lastPoint = startPoint;
@@ -389,35 +400,41 @@ public class BlueThreeBlock extends MyOpMode {
                     if(target.getIntakePower() < -0.2) {
                         if(robot.hasBlock() || Math.abs(odometry.getX()) < 0.5) {
                             robot.setDrivePower(0, 0, 0, 0);
-                            robot.setInPower(-0.5);
+                            robot.setInPower(-0.75);
                             target.setDelay(0);
-                            sleep(500);
+                            sleep(1000);
                             Globals.MAX_SPEED = 1.0;
                             break;
                         }
                         else {
-                            Globals.MAX_SPEED = 0.25;
+                            Globals.MAX_SPEED = 0.35;
                             wheels.update(robot, new Point(odometry.getX() + 0.5, odometry.getY() - 0.5), odometry, odometry.getAngle(), AngleUnit.DEGREES);
                         }
                     }
                     if(target.getIntakePower() > 0.5) {
                         if(robot.hasBlock()) {
-                            robot.setInPower(0.3);
-                            if(target.getDelay() == 500.01) {
+                            robot.setInPower(0.4);
+                            if(target.getDelay() == 500.01 || index == 21) {
                                 robot.lockFoundation();
                             }
-                            else if(target.getDelay() == 500.02) {
+                            else if(target.getDelay() == 500.02 || index == 22) {
                                 robot.unlockFoundation();
                             }
+                            while(robot.hasBlock()) {
+                                sleep(100);
+                            }
                             sleep(500);
-                            while(robot.hasBlock()) {}
+                            if(robot.hasBlock()) {
+                                while(robot.hasBlock());
+                                sleep(500);
+                            }
                             break;
                         }
                     }
-                    if(target.getDelay() == 500.01) {
+                    if(target.getDelay() == 500.01 || index == 21) {
                         robot.lockFoundation();
                     }
-                    else if(target.getDelay() == 500.02) {
+                    else if(target.getDelay() == 500.02 || index == 22) {
                         robot.unlockFoundation();
                     }
                     Globals.MAX_SPEED = 1.0;

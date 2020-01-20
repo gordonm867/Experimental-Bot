@@ -3,10 +3,8 @@ package org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -16,7 +14,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Functions;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Util.RGBA;
@@ -26,10 +23,10 @@ import org.openftc.revextensions2.RevBulkData;
 /**
  * HUB 2
  *  MOTORS
- *   •
- *   •
- *   •
- *   •
+ *   • ex
+ *   • lw
+ *   • in1
+ *   • in2
  *  SERVOS
  *   •
  *   •
@@ -43,9 +40,17 @@ import org.openftc.revextensions2.RevBulkData;
  *
  * HUB 3
  *  MOTORS
+ *   • lf
+ *   • rf
+ *   • lb
+ *   • rb
  *  SERVOS
- *   • Port 1: cl (clamp open/close)
- *   • Port 2: mc (clamp slide)
+ *   • fm1
+ *   • cl (clamp open/close)
+ *   • mc (clamp slide)
+ *   • fm2
+ *   • odo
+ *   • cap
  *  ANALOG
  */
 @Config
@@ -76,16 +81,22 @@ public class TrashHardware {
     public              Servo           moveClamp;
     public              Servo           clampRotate;
     public              Servo           odometry;
+    public              Servo           cap;
 
 
     private static      TrashHardware   myInstance      = null;
 
     public              boolean         enabled         = true;
 
-    public static       double          fm1Open         = 0.500;
-    public static       double          fm1Closed       = 0.150;
-    public static       double          fm2Open         = 0.050;
-    public static       double          fm2Closed       = 0.400;
+    public              double          clampPose       = 0;
+
+    public static       double          cappose         = 0.8;
+    public static       double          uncap           = 0;
+
+    public static       double          fm1Open         = 0.440; // OLD: 0.500
+    public static       double          fm1Closed       = 0.225; // OLD: 0.150
+    public static       double          fm2Open         = 0.070; // OLD: 0.050
+    public static       double          fm2Closed       = 0.325; // OLD: 0.400
 
 
     /* Constructor */
@@ -205,6 +216,14 @@ public class TrashHardware {
         }
         catch(Exception p_exception) {
             clamp = null;
+        }
+
+        try {
+            cap = hwMap.get(Servo.class, "cap");
+            cap.setDirection(Servo.Direction.FORWARD);
+        }
+        catch(Exception p_exception) {
+            cap = null;
         }
 
         try {
@@ -381,7 +400,8 @@ public class TrashHardware {
      */
     public void moveClamp(double newPos) {
         if(moveClamp != null) {
-            moveClamp.setPosition(Range.clip(newPos, 0, 1));
+            clampPose = Range.clip(newPos, 0, 1);
+            moveClamp.setPosition(clampPose);
         }
     }
 
@@ -446,8 +466,8 @@ public class TrashHardware {
     public void setInPower(double power) {
         if(in1 != null && in2 != null) {
             power = Range.clip(power, -1, 1);
-            in1.setPower(power);
-            in2.setPower(power);
+            in1.setPower(-power);
+            in2.setPower(-power);
         }
     }
 
@@ -487,6 +507,18 @@ public class TrashHardware {
         return Double.NaN;
     }
 
+    public void cap() {
+        if(cap != null) {
+            cap.setPosition(cappose);
+        }
+    }
+
+    public void uncap() {
+        if(cap != null) {
+            cap.setPosition(uncap);
+        }
+    }
+
     public RGBA getRGB() {
         if(moresense != null) {
             return new RGBA (moresense.red(), moresense.green(), moresense.blue(), moresense.alpha());
@@ -506,7 +538,7 @@ public class TrashHardware {
     }
 
     public boolean hasBlock() {
-        double dist = getDistance(DistanceUnit.CM);
-        return (!Double.isNaN(dist));
+        double distance = sense.getDistance(DistanceUnit.CM);
+        return(!Double.isNaN(distance) && distance < 13);
     }
 }

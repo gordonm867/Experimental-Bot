@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.ExperimentalCode.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -17,6 +18,7 @@ import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Odometry;
 import org.openftc.revextensions2.RevBulkData;
 
 @Autonomous(name="RED Wall Park Auto",group="Trash")
+@Disabled
 public class RedParkAuto extends LinearOpMode {
 
     private TrashHardware robot = TrashHardware.getInstance();
@@ -43,7 +45,10 @@ public class RedParkAuto extends LinearOpMode {
         robot.lb.setDirection(DcMotorSimple.Direction.FORWARD);
         robot.lf.setDirection(DcMotorSimple.Direction.FORWARD);
         resetAllEncoders();
+        robot.resetOmnis();
         odometry = Odometry.getInstance(robot);
+        robot.dropOdometry();
+        odometry.reset();
 
         /* Initialize Subsystems */
         robot.enabled = true;

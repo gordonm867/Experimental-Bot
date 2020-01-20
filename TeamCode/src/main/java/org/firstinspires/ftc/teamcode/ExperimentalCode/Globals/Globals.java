@@ -22,8 +22,8 @@ public final class Globals {
     public static double clampClose = 0;
     public static int EXTEND_POS = -1030;
 
-    public static double xOffset = 2;
-    public static double yOffset = 0.5;
+    public static double xOffset = 2.175;
+    public static double yOffset = 1.9125;
 
     public static double minB = 6;
     public static double minG = 170;
