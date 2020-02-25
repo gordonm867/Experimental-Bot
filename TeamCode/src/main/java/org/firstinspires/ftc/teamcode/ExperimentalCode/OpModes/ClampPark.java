@@ -17,7 +17,7 @@ public class ClampPark extends MyOpMode {
         robot.moveClamp(Clamp.MIN);
         robot.ex.setTargetPosition(500);
         robot.ex.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.ex.setPower(1);
+        robot.ex.setPower(0.3);
     }
 
     public void startOp() {

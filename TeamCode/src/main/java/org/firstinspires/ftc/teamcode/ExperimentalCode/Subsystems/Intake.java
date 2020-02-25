@@ -164,7 +164,7 @@ public class Intake implements Subsystem {
     //   • GAMEPAD2.A (INTAKE)
     //   • GAMEPAD2.B (OUTTAKE)
     //   • GAMEPAD2.left_bumper (BOX DOWN)
-    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2) {
+    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2, Odometry odometry) {
         double power = 0;
         if (gamepad2.left_bumper && !xchanged && state != State.AUTO && seconded) {
             seconded = false;
@@ -200,13 +200,13 @@ public class Intake implements Subsystem {
             state = State.IDLE;
         }
         if(gamepad2.y) {
-            power = 0.5;
+            power = 0.75;
         }
         if(gamepad2.b) {
             power = -1;
         }
         if(robot.hasBlock() && power == -1) {
-            power = -0.5;
+            power = -0.75;
         }
         robot.setInPower(power);
     }

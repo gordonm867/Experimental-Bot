@@ -49,7 +49,7 @@ public class BoxLift implements Subsystem {
     //   • GAMEPAD2.A (INTAKE)
     //   • GAMEPAD2.B (OUTTAKE)
     //   • gamepad2.left_bumper (TOGGLE BOX)
-    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2) {
+    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2, Odometry odometry) {
         if(parState == Subsystem.State.ON) {
             if(gamepad2.left_bumper && !xchanged) {
                 this.state = state == State.DOWN ? State.NEUTRAL : State.DOWN;

@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Hardware.TrashHardware;
@@ -16,6 +18,8 @@ public class Drivetrain implements Subsystem {
     private State state;
     private boolean field = false;
     private boolean changed = false;
+
+    private boolean backwards = false;
 
     public Drivetrain(State state) {
         this.state = state;
@@ -57,7 +61,7 @@ public class Drivetrain implements Subsystem {
     //   • GAMEPAD2.B (OUTTAKE)
     //   • GAMEPAD2.X (BOX DOWN)
     //   • GAMEPAD2.Y (BOX NEUTRAL)
-    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2) {
+    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2, Odometry odometry) {
         double drive = gamepad1.left_stick_y;
         double turn = gamepad1.right_stick_x;
         double angle = -gamepad1.left_stick_x;
@@ -159,52 +163,48 @@ public class Drivetrain implements Subsystem {
         }
     }
 
-    public double[] calcUpdate(Point target, Odometry odometry) {
+    public void update(TrashHardware robot, Point target, Odometry odometry, double myAngle, double current, RevBulkData data) {
         Point myPos = odometry.getPoint();
         double displacement = Math.abs(Math.sqrt(Math.pow(target.getX() - myPos.getX(), 2) + Math.pow(target.getY() - myPos.getY(), 2)));
         double angle = 0;
         double drive = 0;
         double turn = 0;
         if(displacement != 0 && !Double.isInfinite(displacement) && !Double.isNaN(displacement)) {
-            double PIDd = -Math.cos(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
+            double PIDd = -Math.cos(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(current)) * displacement;
             if(PIDd != -displacement) {
-                angle = Math.sin(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
+                angle = (1f / 0.95f) * Math.sin(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(current)) * displacement;
                 drive = PIDd;
-                if(Math.abs(displacement) <= (Math.sqrt(2) / 10) || (Math.abs(angle) < 0.001 && Math.abs(drive) < 0.001)) {
-                    drive = 0;
-                    angle = 0;
+                if(!Double.isNaN(myAngle)) {
+                    double error = Functions.normalize(myAngle - current);
+                    if(Math.abs(error) >= 1.0) {
+                        error = Functions.normalize(myAngle - current);
+                        if (Math.abs(error + 360) < Math.abs(error)) {
+                            error += 360;
+                        }
+                        if (Math.abs(error - 360) < Math.abs(error)) {
+                            error -= 360;
+                        }
+                        double Kp = 0.0325;
+                        double pow = (Kp * error);
+                        turn = Math.max(Math.abs(pow), Globals.MIN_SPEED) * Math.signum(pow);
+                    }
                 }
-            }
-        }
-        double scaleFactor;
-        if(Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))) > 1) {
-            scaleFactor = Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))));
-        } else {
-            scaleFactor = 0.2 / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))));
-        }
-        double[] powers = {scaleFactor * (drive + turn - angle), scaleFactor * (drive + turn + angle), scaleFactor * (drive - turn + angle), scaleFactor * (drive - turn - angle)};
-        odometry.update();
-        return powers;
-    }
-
-    public void update(double Kp, TrashHardware robot, Point target, Odometry odometry, double myAngle, AngleUnit unit) {
-        Point myPos = odometry.getPoint();
-        double displacement = Math.abs(Math.sqrt(Math.pow(target.getX() - myPos.getX(), 2) + Math.pow(target.getY() - myPos.getY(), 2)));
-        double angle = 0;
-        double drive = 0;
-        double turn = 0;
-        if(displacement != 0 && !Double.isInfinite(displacement) && !Double.isNaN(displacement)) {
-            double PIDd = -Math.cos(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
-            if(PIDd != -displacement) {
-                angle = Math.sin(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
-                drive = PIDd;
                 if(Math.abs(displacement) <= (Math.sqrt(2) / 10) || (Math.abs(angle) < 0.001 && Math.abs(drive) < 0.001)) {
                     drive = 0;
                     angle = 0;
                     if(!Double.isNaN(myAngle)) {
-                        turn = 0.0055 * Math.toDegrees(((myAngle * (unit == AngleUnit.DEGREES ? (Math.PI / 180) : 1)) - Math.toRadians(odometry.getAngle())));
-                        if (Math.abs(turn) < 0.1) {
-                            turn = 0;
+                        double error = Functions.normalize(myAngle - current);
+                        if(Math.abs(error) >= 1.0) {
+                            error = Functions.normalize(myAngle - current);
+                            if (Math.abs(error + 360) < Math.abs(error)) {
+                                error += 360;
+                            }
+                            if (Math.abs(error - 360) < Math.abs(error)) {
+                                error -= 360;
+                            }
+                            double Kp = 0.0325;
+                            double pow = (Kp * error);
+                            turn = Math.max(Math.abs(pow), Globals.MIN_SPEED) * Math.signum(pow);
                         }
                     }
                 }
@@ -212,29 +212,187 @@ public class Drivetrain implements Subsystem {
         }
         double scaleFactor;
         if(Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))) > 1) {
-            scaleFactor = Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))));
+            scaleFactor = Math.abs(Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))));
         } else {
-            scaleFactor = displacement * Kp / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))));
+            if(displacement >= 0.5) {
+                scaleFactor = Math.abs(Math.max(displacement * 2, Globals.MIN_SPEED) / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))));
+            }
+            else {
+                scaleFactor = Math.abs(Math.max(displacement / 2.5, Globals.MIN_SPEED) / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))));
+            }
         }
+        odometry.update(data, current);
         robot.setDrivePower(scaleFactor * (drive + turn - angle), scaleFactor * (drive + turn + angle), scaleFactor * (drive - turn + angle), scaleFactor * (drive - turn - angle));
-        odometry.update(robot.bulkRead());
     }
 
-    public void update(TrashHardware robot, Point target, Odometry odometry, double myAngle, AngleUnit unit) {
+    public void update(TrashHardware robot, Point target, Odometry odometry, double myAngle, double velocity, double delta, double current, RevBulkData data) {
         Point myPos = odometry.getPoint();
         double displacement = Math.abs(Math.sqrt(Math.pow(target.getX() - myPos.getX(), 2) + Math.pow(target.getY() - myPos.getY(), 2)));
         double angle = 0;
         double drive = 0;
         double turn = 0;
         if(displacement != 0 && !Double.isInfinite(displacement) && !Double.isNaN(displacement)) {
-            double PIDd = -Math.cos(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
+            double PIDd = -Math.cos(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(current)) * displacement;
             if(PIDd != -displacement) {
-                angle = (1f / 0.95f) * Math.sin(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
+                angle = (1f / 0.95f) * Math.sin(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(current)) * displacement;
                 drive = PIDd;
                 if(!Double.isNaN(myAngle)) {
-                    double error = Functions.normalize(myAngle - odometry.getAngle());
+                    double error = Functions.normalize(myAngle - current);
                     if(Math.abs(error) >= 1.0) {
-                        error = Functions.normalize(myAngle - odometry.getAngle());
+                        error = Functions.normalize(myAngle - current);
+                        if (Math.abs(error + 360) < Math.abs(error)) {
+                            error += 360;
+                        }
+                        if (Math.abs(error - 360) < Math.abs(error)) {
+                            error -= 360;
+                        }
+                        double Kp = 0.0325;
+                        double pow = (Kp * error);
+                        turn = Math.max(Math.abs(pow), Globals.MIN_SPEED) * Math.signum(pow);
+                    }
+                }
+                if(Math.abs(displacement) <= (Math.sqrt(2) / 10) || (Math.abs(angle) < 0.001 && Math.abs(drive) < 0.001)) {
+                    drive = 0;
+                    angle = 0;
+                    if(!Double.isNaN(myAngle)) {
+                        double error = Functions.normalize(myAngle - current);
+                        if(Math.abs(error) >= 1.0) {
+                            error = Functions.normalize(myAngle - current);
+                            if (Math.abs(error + 360) < Math.abs(error)) {
+                                error += 360;
+                            }
+                            if (Math.abs(error - 360) < Math.abs(error)) {
+                                error -= 360;
+                            }
+                            double Kp = 0.0325;
+                            double pow = (Kp * error);
+                            turn = Math.max(Math.abs(pow), Globals.MIN_SPEED) * Math.signum(pow);
+                        }
+                    }
+                }
+            }
+        }
+        double scaleFactor;
+        if(Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))) > 1) { // If our highest speed is greater than one
+            backwards = false; // The robot is moving forward
+            scaleFactor = Math.abs(Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))))); // Scale speed to max at our maximum speed parameter
+        } else {
+            if(displacement >= 0.5) { // If we are not within six inches of our target
+                backwards = false; // The robot should move forward
+                scaleFactor = Math.abs(Math.max(displacement * 2, Globals.MIN_SPEED) / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))))); // Scale speed to equal double our displacement from our target in feet
+            }
+            else { // If we have to decelerate
+                if(delta < 0 || Math.abs(velocity) < 1) { // If our distance to our target increases or our velocity is sufficiently slow
+                    backwards = false; // The robot should move forward
+                    scaleFactor = Math.abs((Globals.MIN_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))))); // Move robot at minimum non-stall speed
+                }
+                else { // If our distance to our target is still decreasing and our velocity is still too high
+                    backwards = true;
+                    scaleFactor = Range.clip(((-1.25 * velocity) + 0.25), -Globals.MAX_SPEED, Globals.MIN_SPEED) / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))); // Force the wheels backwards based on the current robot velocity
+                }
+            }
+            if(Math.abs(scaleFactor) < Globals.MIN_SPEED) { // If the scale factor is particularly low
+                scaleFactor = Globals.MIN_SPEED * Math.signum(scaleFactor); // Move it higher to ensure that we will not stall the robot
+            }
+        }
+        odometry.update(data, current); // Update the odometry pose estimate
+        robot.setDrivePower(scaleFactor * (drive + turn - angle), scaleFactor * (drive + turn + angle), scaleFactor * (drive - turn + angle), scaleFactor * (drive - turn - angle)); // Power the motors
+    }
+
+    public void clupdate(TrashHardware robot, Point target, Odometry odometry, double myAngle, double velocity, double delta, double current, RevBulkData data) {
+        Point myPos = odometry.getPoint();
+        double displacement = Math.abs(Math.sqrt(Math.pow(target.getX() - myPos.getX(), 2) + Math.pow(target.getY() - myPos.getY(), 2)));
+        double angle = 0;
+        double drive = 0;
+        double turn = 0;
+        if(displacement != 0 && !Double.isInfinite(displacement) && !Double.isNaN(displacement)) {
+            double PIDd = -Math.cos(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(current)) * displacement;
+            if(PIDd != -displacement) {
+                angle = (1f / 0.95f) * Math.sin(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(current)) * displacement;
+                drive = PIDd;
+                if(!Double.isNaN(myAngle)) {
+                    double error = Functions.normalize(myAngle - current);
+                    if(Math.abs(error) >= 1.0) {
+                        error = Functions.normalize(myAngle - current);
+                        if (Math.abs(error + 360) < Math.abs(error)) {
+                            error += 360;
+                        }
+                        if (Math.abs(error - 360) < Math.abs(error)) {
+                            error -= 360;
+                        }
+                        double Kp = 0.0325;
+                        double pow = (Kp * error);
+                        turn = Math.max(Math.abs(pow), Globals.MIN_SPEED) * Math.signum(pow);
+                    }
+                }
+                if(Math.abs(displacement) <= (Math.sqrt(2) / 100) || (Math.abs(angle) < 0.00001 && Math.abs(drive) < 0.00001)) {
+                    drive = 0;
+                    angle = 0;
+                    if(!Double.isNaN(myAngle)) {
+                        double error = Functions.normalize(myAngle - current);
+                        if(Math.abs(error) >= 1.0) {
+                            error = Functions.normalize(myAngle - current);
+                            if (Math.abs(error + 360) < Math.abs(error)) {
+                                error += 360;
+                            }
+                            if (Math.abs(error - 360) < Math.abs(error)) {
+                                error -= 360;
+                            }
+                            double Kp = 0.0325;
+                            double pow = (Kp * error);
+                            turn = Math.max(Math.abs(pow), Globals.MIN_SPEED) * Math.signum(pow);
+                        }
+                    }
+                }
+            }
+        }
+        double scaleFactor;
+        if(displacement >= 0.5 && Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))) > 1) {
+            backwards = false;
+            scaleFactor = Math.abs(Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))));
+        } else {
+            if(displacement >= 0.5) {
+                backwards = false;
+                scaleFactor = Math.abs(Math.max(displacement * 2, Globals.MIN_SPEED) / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))));
+            }
+            else {
+                if(delta < 0 || Math.abs(velocity) < 1) {
+                    backwards = false;
+                    scaleFactor = Math.abs((Globals.MIN_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))))));
+                }
+                else {
+                    backwards = true;
+                    scaleFactor = Range.clip(((-1.25 * velocity) + 0.25), -Globals.MAX_SPEED, Globals.MIN_SPEED) / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle)))));
+                }
+            }
+            if(Math.abs(scaleFactor) < Globals.MIN_SPEED) {
+                scaleFactor = Globals.MIN_SPEED * Math.signum(scaleFactor);
+            }
+        }
+        /*
+        telemetry.addData("Backwards", backwards);
+        telemetry.update();
+
+         */
+        odometry.update(data, current);
+        robot.setDrivePower(scaleFactor * (drive + turn - angle), scaleFactor * (drive + turn + angle), scaleFactor * (drive - turn + angle), scaleFactor * (drive - turn - angle));
+    }
+
+    public double[] calcUpdate(Point target, Odometry odometry, double myAngle, double current) {
+        Point myPos = odometry.getPoint();
+        double displacement = Math.abs(Math.sqrt(Math.pow(target.getX() - myPos.getX(), 2) + Math.pow(target.getY() - myPos.getY(), 2)));
+        double angle = 0;
+        double drive = 0;
+        double turn = 0;
+        if(displacement != 0 && !Double.isInfinite(displacement) && !Double.isNaN(displacement)) {
+            double PIDd = -Math.cos(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(current)) * displacement;
+            if(PIDd != -displacement) {
+                angle = (1f / 0.95f) * Math.sin(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(current)) * displacement;
+                drive = PIDd;
+                if(!Double.isNaN(myAngle)) {
+                    double error = Functions.normalize(myAngle - current);
+                    if(Math.abs(error) >= 1.0) {
+                        error = Functions.normalize(myAngle - current);
                         if (Math.abs(error + 360) < Math.abs(error)) {
                             error += 360;
                         }
@@ -250,9 +408,9 @@ public class Drivetrain implements Subsystem {
                     drive = 0;
                     angle = 0;
                     if(!Double.isNaN(myAngle)) {
-                        double error = Functions.normalize(myAngle - odometry.getAngle());
+                        double error = Functions.normalize(myAngle - current);
                         if(Math.abs(error) >= 1.0) {
-                            error = Functions.normalize(myAngle - odometry.getAngle());
+                            error = Functions.normalize(myAngle - current);
                             if (Math.abs(error + 360) < Math.abs(error)) {
                                 error += 360;
                             }
@@ -278,74 +436,15 @@ public class Drivetrain implements Subsystem {
                 scaleFactor = Math.abs(Math.max(displacement / 2.5, Globals.MIN_SPEED) / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))));
             }
         }
-        robot.setDrivePower(scaleFactor * (drive + turn - angle), scaleFactor * (drive + turn + angle), scaleFactor * (drive - turn + angle), scaleFactor * (drive - turn - angle));
-        RevBulkData data = robot.bulkRead();
-        odometry.update(data);
+        double[] mylist = new double[4];
+        mylist[0] = scaleFactor * (drive + turn - angle);
+        mylist[1] = scaleFactor * (drive + turn + angle);
+        mylist[2] = scaleFactor * (drive - turn + angle);
+        mylist[3] = scaleFactor * (drive - turn - angle);
+        return mylist;
     }
 
-    public void fastUpdate(TrashHardware robot, Point target, Odometry odometry, double myAngle, AngleUnit unit) {
-        Point myPos = odometry.getPoint();
-        double displacement = Math.abs(Math.sqrt(Math.pow(target.getX() - myPos.getX(), 2) + Math.pow(target.getY() - myPos.getY(), 2)));
-        double angle = 0;
-        double drive = 0;
-        double turn = 0;
-        if(displacement != 0 && !Double.isInfinite(displacement) && !Double.isNaN(displacement)) {
-            double PIDd = -Math.cos(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
-            if(PIDd != -displacement) {
-                angle = (1f / 0.95f) * Math.sin(myPos.angle(target, AngleUnit.RADIANS) - Math.toRadians(odometry.getAngle())) * displacement;
-                drive = PIDd;
-                if(!Double.isNaN(myAngle)) {
-                    double error = Functions.normalize(myAngle - odometry.getAngle());
-                    if(Math.abs(error) >= 1.0) {
-                        error = Functions.normalize(myAngle - odometry.getAngle());
-                        if (Math.abs(error + 360) < Math.abs(error)) {
-                            error += 360;
-                        }
-                        if (Math.abs(error - 360) < Math.abs(error)) {
-                            error -= 360;
-                        }
-                        double Kp = 0.0325;
-                        double pow = (Kp * error);
-                        turn = Math.max(Math.abs(pow), 0.15) * Math.signum(pow);
-                    }
-                }
-                if(Math.abs(displacement) <= (Math.sqrt(2) / 10) || (Math.abs(angle) < 0.001 && Math.abs(drive) < 0.001)) {
-                    drive = 0;
-                    angle = 0;
-                    if(!Double.isNaN(myAngle)) {
-                        double error = Functions.normalize(myAngle - odometry.getAngle());
-                        if(Math.abs(error) >= 1.0) {
-                            error = Functions.normalize(myAngle - odometry.getAngle());
-                            if (Math.abs(error + 360) < Math.abs(error)) {
-                                error += 360;
-                            }
-                            if (Math.abs(error - 360) < Math.abs(error)) {
-                                error -= 360;
-                            }
-                            double Kp = 0.0325;
-                            double pow = (Kp * error);
-                            turn = Math.max(Math.abs(pow), 0.15) * Math.signum(pow);
-                        }
-                    }
-                }
-            }
-        }
-        double scaleFactor;
-        if(Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))) > 1) {
-            scaleFactor = Math.abs(Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))));
-        } else {
-            if(displacement >= 0.5) {
-                scaleFactor = Math.abs(Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))));
-            }
-            else {
-                scaleFactor = Math.abs(Globals.MAX_SPEED / Math.max(Math.abs(drive + turn - angle), Math.max(Math.abs(drive - turn + angle), Math.max(Math.abs((drive + turn + angle)), Math.abs((drive - turn - angle))))));
-            }
-        }
-        robot.setDrivePower(scaleFactor * (drive + turn - angle), scaleFactor * (drive + turn + angle), scaleFactor * (drive - turn + angle), scaleFactor * (drive - turn - angle));
-        RevBulkData data = robot.bulkRead();
-        odometry.update(data);
-    }
-
+    /*
     private double adjust(double varToAdjust) { // Square-root driving
         if (varToAdjust < 0) {
             varToAdjust = -Math.sqrt(-varToAdjust);
@@ -353,6 +452,12 @@ public class Drivetrain implements Subsystem {
             varToAdjust = Math.sqrt(varToAdjust);
         }
         return varToAdjust;
+    }
+
+     */
+
+    public double adjust(double varToAdjust) {
+        return (Math.atan(5 * varToAdjust) / Math.atan(5));
     }
 
 }

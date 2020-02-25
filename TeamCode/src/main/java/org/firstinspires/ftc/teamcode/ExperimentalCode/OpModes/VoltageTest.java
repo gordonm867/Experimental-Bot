@@ -14,17 +14,19 @@ import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Lift;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Odometry;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Subsystem;
+import org.openftc.revextensions2.ExpansionHubEx;
+import org.openftc.revextensions2.ExpansionHubMotor;
 import org.openftc.revextensions2.RevBulkData;
 
 import java.util.ArrayList;
 
-@TeleOp(name = "Debugger", group = "Scrimmage")
-public class Debugger extends MyOpMode {
+@TeleOp(name = "Current Draw", group = "Scrimmage")
+public class VoltageTest extends MyOpMode {
 
     private     TrashHardware           robot       = TrashHardware.getInstance();
     private     ArrayList<Subsystem>    subsystems  = new ArrayList<>();
 
-    private     BoxLift boxlift;
+    private     BoxLift                 boxlift;
     private     Clamp                   clamp;
     private     Drivetrain              drive;
     private     Extension               extension;
@@ -62,107 +64,56 @@ public class Debugger extends MyOpMode {
     }
 
     public void loopOp() {
-        robot.lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        robot.lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        robot.rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        robot.rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        robot.in1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        robot.in2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        robot.ex.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         RevBulkData data = robot.bulkRead();
         RevBulkData data2 = robot.bulkReadTwo();
         odometry.update(data);
         try {
-            telemetry.addData("Pose estimate", odometry.getPoint());
-        }
-        catch(Exception p_exception) {
-            telemetry.addData("Pose estimate", "null");
-        }
-        try {
-            telemetry.addData("Angle estimate", robot.getAngle());
-            telemetry.addData("Angle estimate 2", robot.getXAngle());
-            telemetry.addData("Angle estimate 3", robot.getYAngle());
-        }
-        catch(Exception p_exception) {
-            telemetry.addData("Angle estimates", "null");
-        }
-        try {
-            telemetry.addData("lb", data2.getMotorCurrentPosition(robot.lb));
+            telemetry.addData("lb", ((ExpansionHubMotor)(robot.lb)).getCurrentDraw(ExpansionHubEx.CurrentDrawUnits.AMPS));
         }
         catch(Exception p_exception) {
             telemetry.addData("lb", "null");
         }
         try {
-            telemetry.addData("lf", data2.getMotorCurrentPosition(robot.lf));
+            telemetry.addData("lf", ((ExpansionHubMotor)(robot.lf)).getCurrentDraw(ExpansionHubEx.CurrentDrawUnits.AMPS));
         }
         catch(Exception p_exception) {
             telemetry.addData("lf", "null");
         }
         try {
-            telemetry.addData("rb", data2.getMotorCurrentPosition(robot.rb));
+            telemetry.addData("rb", ((ExpansionHubMotor)(robot.rb)).getCurrentDraw(ExpansionHubEx.CurrentDrawUnits.AMPS));
         }
         catch(Exception p_exception) {
             telemetry.addData("rb", "null");
         }
         try {
-            telemetry.addData("rf", data2.getMotorCurrentPosition(robot.rf));
+            telemetry.addData("rf", ((ExpansionHubMotor)(robot.rf)).getCurrentDraw(ExpansionHubEx.CurrentDrawUnits.AMPS));
         }
         catch(Exception p_exception) {
             telemetry.addData("rf", "null");
         }
         try {
-            telemetry.addData("in1", data.getMotorCurrentPosition(robot.in1));
+            telemetry.addData("in1", ((ExpansionHubMotor)(robot.in1)).getCurrentDraw(ExpansionHubEx.CurrentDrawUnits.AMPS));
         }
         catch(Exception p_exception) {
             telemetry.addData("in1", "null");
         }
         try {
-            telemetry.addData("in2", data.getMotorCurrentPosition(robot.in2));
+            telemetry.addData("in2", ((ExpansionHubMotor)(robot.in2)).getCurrentDraw(ExpansionHubEx.CurrentDrawUnits.AMPS));
         }
         catch(Exception p_exception) {
             telemetry.addData("in1", "null");
         }
         try {
-            telemetry.addData("ex", data.getMotorCurrentPosition(robot.ex));
+            telemetry.addData("ex", ((ExpansionHubMotor)(robot.ex)).getCurrentDraw(ExpansionHubEx.CurrentDrawUnits.AMPS));
         }
         catch(Exception p_exception) {
             telemetry.addData("ex", "null");
         }
         try {
-            telemetry.addData("lw", data.getMotorCurrentPosition(robot.lift));
+            telemetry.addData("lw", ((ExpansionHubMotor)(robot.lift)).getCurrentDraw(ExpansionHubEx.CurrentDrawUnits.AMPS));
         }
         catch(Exception p_exception) {
             telemetry.addData("lw", "null");
-        }
-        try {
-            telemetry.addData("cl", robot.clamp.getPosition());
-        }
-        catch(Exception p_exception) {
-            telemetry.addData("cl", "null");
-        }
-        try {
-            telemetry.addData("mc", robot.moveClamp.getPosition());
-        }
-        catch(Exception p_exception) {
-            telemetry.addData("mc", "null");
-        }
-        try {
-            telemetry.addData("fm1", robot.mover1.getPosition());
-        }
-        catch(Exception p_exception) {
-            telemetry.addData("fm1", "null");
-        }
-        try {
-            telemetry.addData("fm2", robot.mover2.getPosition());
-        }
-        catch(Exception p_exception) {
-            telemetry.addData("fm2", "null");
-        }
-        try {
-            telemetry.addData("fl", robot.boxlift.getPosition());
-        }
-        catch(Exception p_exception) {
-            telemetry.addData("fl", "null");
         }
         telemetry.update();
         for(Subsystem subsystem : subsystems) {

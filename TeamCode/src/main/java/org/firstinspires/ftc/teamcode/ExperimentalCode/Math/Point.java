@@ -79,7 +79,7 @@ public class Point {
 
     @NonNull
     public String toString() {
-        return "(" + getX() + ", " + getY() + ")";
+        return "(" + Math.round(100 * getX()) / 100f + ", " + Math.round(100 * getY()) / 100f + ")";
     }
 
     @Override

@@ -50,7 +50,7 @@ public class FoundationMover implements Subsystem {
     //   • GAMEPAD2.B (OUTTAKE)
     //   • GAMEPAD2.X (BOX DOWN)
     //   • GAMEPAD2.Y (BOX NEUTRAL)
-    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2) {
+    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2, Odometry odometry) {
         if(parState != Subsystem.State.OFF) {
             if((gamepad1.a && !gamepad1.start) && !changed) {
                 changed = true;

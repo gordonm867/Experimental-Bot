@@ -38,7 +38,7 @@ public class StoneLocalizer implements Subsystem {
         this.state = state;
     }
 
-    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2) {
+    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2, Odometry odometry) {
         update();
     }
 

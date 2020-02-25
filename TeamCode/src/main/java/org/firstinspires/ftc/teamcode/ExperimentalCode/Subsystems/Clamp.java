@@ -12,8 +12,8 @@ public class Clamp implements Subsystem {
     private State state;
     private Subsystem.State parState;
 
-    public static double MIN = 0.08;
-    public static double MAX = 0.32;
+    public static double MIN = 0;
+    public static double MAX = 1;
 
     public enum State {
         OPEN,
@@ -50,7 +50,7 @@ public class Clamp implements Subsystem {
     //   • GAMEPAD2.DPAD_LEFT (SLOW RETRACT EXTENSION)
     //   • GAMEPAD2.DPAD_RIGHT (SLOW EXTEND)
     //   • GAMEPAD2.X (TOGGLE BOX)
-    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2) {
+    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2, Odometry odometry) {
         if(parState == Subsystem.State.ON) {
             if(gamepad2.right_trigger >= 0.1) {
                 state = State.CLOSED;

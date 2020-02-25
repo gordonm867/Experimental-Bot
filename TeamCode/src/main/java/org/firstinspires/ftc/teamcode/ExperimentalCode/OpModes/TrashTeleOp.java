@@ -15,6 +15,7 @@ import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.FoundationMove
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Intake;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Lift;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Odometry;
+import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.StoneClamp;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.Subsystem;
 import org.openftc.revextensions2.RevBulkData;
 
@@ -51,6 +52,7 @@ public class TrashTeleOp extends MyOpMode {
         odometry = Odometry.getInstance(robot);
 
         robot.liftOdometry();
+        robot.moveStoneBase(StoneClamp.UP);
         if(robot.ex != null) {
             robot.ex.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.ex.setTargetPosition(100);
@@ -77,13 +79,8 @@ public class TrashTeleOp extends MyOpMode {
         RevBulkData data = robot.bulkRead();
         RevBulkData data2 = robot.bulkReadTwo();
         for(Subsystem subsystem : subsystems) {
-            subsystem.update(gamepad1, gamepad2, robot, data, data2);
+            subsystem.update(gamepad1, gamepad2, robot, data, data2, odometry);
         }
-        telemetry.addData("LEVEL", lift.level);
-        if(lift.isErred) {
-            telemetry.addData("WARNING", "Whoever wired this robot, great job, you can't automate your lift and you're about to lose a match because of it");
-        }
-        telemetry.update();
     }
 
     public void stopOp() {

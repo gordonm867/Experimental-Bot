@@ -49,6 +49,10 @@ public class RobotState extends Point {
         delay = newDelay;
     }
 
+    public void setExtendPos(int newpos) {
+        extend_pos = newpos;
+    }
+
     public void setExact(boolean ex) {
         exact = ex;
     }

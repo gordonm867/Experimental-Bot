@@ -106,15 +106,8 @@ public class Lift implements Subsystem {
      * @param data1 Bulk read for Expansion Hub 2
      * @param data2 Bulk read for Expansion Hub 3
      */
-    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2) {
-        double liftspeed = -gamepad2.right_stick_y * ((gamepad2.dpad_up || gamepad2.dpad_down) ? 0.25 : 1);
-        if (liftspeed == 0 && ((gamepad2.dpad_up || gamepad2.dpad_down))) {
-            if (gamepad2.dpad_up) {
-                liftspeed = 0.25;
-            } else {
-                liftspeed = -0.25;
-            }
-        }
+    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2, Odometry odometry) {
+        double liftspeed = -gamepad2.right_stick_y * 1;
         if(first && robot.lift != null) {
             robot.lift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             robot.lift(0);
@@ -272,7 +265,7 @@ public class Lift implements Subsystem {
             wait = true;
             time = System.currentTimeMillis();
         }
-        if(wait && state == State.STILL_AUTOMATED && System.currentTimeMillis() - time >= 4000) {
+        if(wait && state == State.STILL_AUTOMATED && System.currentTimeMillis() - time >= 1000) {
             wait = false;
             target = -350;
             moved = true;
@@ -290,6 +283,7 @@ public class Lift implements Subsystem {
         }
         if(data1 != null && state == State.STILL_AUTOMATED && moved && robot.lift != null && checkLift(data1, robot, target)) {
             robot.lift(0);
+            robot.moveClamp(Clamp.MIN);
             state = State.IDLE;
         }
     }
@@ -401,9 +395,9 @@ public class Lift implements Subsystem {
     //   • GAMEPAD2.DPAD_RIGHT (SLOW EXTEND)
     //   • GAMEPAD2.X (TOGGLE BOX)
     public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2) {
-        double liftspeed = -gamepad2.right_stick_y * ((gamepad2.dpad_up || gamepad2.dpad_down) ? 0.25 : 1);
-        if(liftspeed == 0 && ((gamepad2.dpad_up || gamepad2.dpad_down))) {
-            if(gamepad2.dpad_up) {
+        double liftspeed = -gamepad2.right_stick_y * ((false || false) ? 0.25 : 1);
+        if(liftspeed == 0 && ((false || false))) {
+            if(false) {
                 liftspeed = 0.25;
             }
             else {

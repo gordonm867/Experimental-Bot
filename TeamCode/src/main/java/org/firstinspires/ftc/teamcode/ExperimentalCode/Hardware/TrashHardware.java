@@ -16,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Globals.Globals;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Math.Functions;
+import org.firstinspires.ftc.teamcode.ExperimentalCode.Subsystems.StoneClamp;
 import org.firstinspires.ftc.teamcode.ExperimentalCode.Util.RGBA;
 import org.openftc.revextensions2.ExpansionHubEx;
 import org.openftc.revextensions2.RevBulkData;
@@ -71,10 +72,11 @@ public class TrashHardware {
 
     public              DistanceSensor  sense;
 
-    private             ExpansionHubEx  ex2;
-    private             ExpansionHubEx  ex3;
+    public              ExpansionHubEx  ex2;
+    public              ExpansionHubEx  ex3;
 
     public              Servo           clamp;
+    public              Servo           stoneBase;
     public              Servo           mover1;
     public              Servo           mover2;
     public              Servo           boxlift;
@@ -82,6 +84,7 @@ public class TrashHardware {
     public              Servo           clampRotate;
     public              Servo           odometry;
     public              Servo           cap;
+    public              Servo           claw;
 
 
     private static      TrashHardware   myInstance      = null;
@@ -236,6 +239,22 @@ public class TrashHardware {
         }
 
         try {
+            stoneBase = hwMap.get(Servo.class, "bs");
+            stoneBase.setDirection(Servo.Direction.FORWARD);
+        }
+        catch(Exception p_exception) {
+            stoneBase = null;
+        }
+
+        try {
+            claw = hwMap.get(Servo.class, "claw");
+            claw.setDirection(Servo.Direction.FORWARD);
+        }
+        catch(Exception p_exception) {
+            claw = null;
+        }
+
+        try {
             mover1 = hwMap.get(Servo.class, "fm1");
             mover1.setDirection(Servo.Direction.FORWARD);
         }
@@ -351,6 +370,21 @@ public class TrashHardware {
      */
     public void setDrivePower(double leftBackDrivePower, double leftFrontDrivePower, double rightBackDrivePower, double rightFrontDrivePower) { // Send power to wheels
         if(enabled) {
+            /*
+            if(Math.abs(leftBackDrivePower) < Globals.MIN_SPEED && leftBackDrivePower != 0) {
+                leftBackDrivePower = Globals.MIN_SPEED * Math.signum(leftBackDrivePower);
+            }
+            if(Math.abs(leftFrontDrivePower) < Globals.MIN_SPEED && leftFrontDrivePower != 0) {
+                leftFrontDrivePower = Globals.MIN_SPEED * Math.signum(leftFrontDrivePower);
+            }
+            if(Math.abs(rightBackDrivePower) < Globals.MIN_SPEED && rightBackDrivePower != 0) {
+                rightBackDrivePower = Globals.MIN_SPEED * Math.signum(rightBackDrivePower);
+            }
+            if(Math.abs(rightFrontDrivePower) < Globals.MIN_SPEED && rightFrontDrivePower != 0) {
+                rightFrontDrivePower = Globals.MIN_SPEED * Math.signum(rightFrontDrivePower);
+            }
+
+             */
             if (lb != null) {
                 leftBackDrivePower = Range.clip(leftBackDrivePower, -Globals.MAX_SPEED, Globals.MAX_SPEED);
                 lb.setPower(leftBackDrivePower);
@@ -472,6 +506,12 @@ public class TrashHardware {
         }
     }
 
+    public void moveStoneBase(double newPos) {
+        if(stoneBase != null) {
+            stoneBase.setPosition(newPos);
+        }
+    }
+
     public void setInPower(double power) {
         if(in1 != null && in2 != null) {
             power = Range.clip(power, -1, 1);
@@ -546,8 +586,39 @@ public class TrashHardware {
         return 0;
     }
 
+    public void closeClaw() {
+        if(claw != null) {
+            claw.setPosition(StoneClamp.CLOSED);
+        }
+    }
+
+    public void openClaw() {
+        if(claw != null) {
+            claw.setPosition(StoneClamp.OPEN);
+        }
+    }
+
     public boolean hasBlock() {
         double distance = sense.getDistance(DistanceUnit.CM);
         return(!Double.isNaN(distance) && distance < 13);
     }
+
+    /*
+    if(target.getIntakePower() < 0 && index < 15) {
+            if(data.getMotorCurrentPosition(robot.lift) < 300) {
+                robot.lift.setPower(-0.25);
+            }
+            else {
+                robot.lift.setPower(0);
+            }
+        }
+        else if(index > 0 && targets.get(index - 1).getIntakePower() < 0) {
+            if(data.getMotorCurrentPosition(robot.lift) > -300) {
+                robot.lift.setPower(1);
+            }
+        }
+        else {
+            robot.lift.setPower(0);
+        }
+     */
 }

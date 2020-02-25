@@ -84,7 +84,7 @@ public class PIDTuner extends MyOpMode {
             zerozero = !zerozero;
             double displacement = odometry.getPoint().distance(target) * -Globals.DRIVE_FEET_PER_TICK;
             while (Math.abs(displacement) > 0.15 && !(System.currentTimeMillis() - time >= 5000)) {
-                wheels.update(tuneCoeff, robot, target, odometry, Double.NaN, AngleUnit.DEGREES);
+                //wheels.update(tuneCoeff, robot, target, odometry, Double.NaN, AngleUnit.DEGREES);
                 displacement = odometry.getPoint().distance(target) * -Globals.DRIVE_FEET_PER_TICK;
             }
             robot.setDrivePower(0, 0, 0, 0);

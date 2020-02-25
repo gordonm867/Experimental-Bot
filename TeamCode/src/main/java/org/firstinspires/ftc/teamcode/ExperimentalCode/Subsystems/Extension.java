@@ -67,35 +67,44 @@ public class Extension implements Subsystem {
     //   • GAMEPAD2.A (INTAKE)
     //   • GAMEPAD2.B (OUTTAKE)
     //   • gamepad2.left_bumper (BOX DOWN)
-    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2) {
-        if(gamepad2.left_bumper && !xchanged && state != State.AUTO && seconded) {
-            seconded = false;
-            released = false;
-            aboutToAutomate = true;
-            xchanged = true;
-            time = System.currentTimeMillis();
+    public void update(Gamepad gamepad1, Gamepad gamepad2, TrashHardware robot, RevBulkData data1, RevBulkData data2, Odometry odometry) {
+        if(gamepad2.dpad_up) {
+            robot.ex.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            robot.ex.setPower(0.6);
         }
-        if(!gamepad2.left_bumper && xchanged) {
-            xchanged = false;
+        else if(gamepad2.dpad_down) {
+            robot.ex.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            robot.ex.setPower(-0.6);
         }
-        if(aboutToAutomate && System.currentTimeMillis() - time >= 200) {
-            seconded = false;
-            aboutToAutomate = false;
-            state = State.AUTO;
-        }
-        if((state == State.AUTO || aboutToAutomate) && !gamepad2.left_bumper) {
-            released = true;
-        }
-        if(gamepad2.left_bumper && state == State.AUTO && released && !xsecondchanged) {
-            state = State.TRANSITIONING;
-            xsecondchanged = true;
-        }
-        if(xsecondchanged && !gamepad2.left_bumper) {
-            xsecondchanged = false;
-        }
-        if(!seconded && !gamepad2.left_bumper && state != State.AUTO) {
-            seconded = true;
-        }
+        else{
+            if (gamepad2.left_bumper && !xchanged && state != State.AUTO && seconded) {
+                seconded = false;
+                released = false;
+                aboutToAutomate = true;
+                xchanged = true;
+                time = System.currentTimeMillis();
+            }
+            if (!gamepad2.left_bumper && xchanged) {
+                xchanged = false;
+            }
+            if (aboutToAutomate && System.currentTimeMillis() - time >= 200) {
+                seconded = false;
+                aboutToAutomate = false;
+                state = State.AUTO;
+            }
+            if ((state == State.AUTO || aboutToAutomate) && !gamepad2.left_bumper) {
+                released = true;
+            }
+            if (gamepad2.left_bumper && state == State.AUTO && released && !xsecondchanged) {
+                state = State.TRANSITIONING;
+                xsecondchanged = true;
+            }
+            if (xsecondchanged && !gamepad2.left_bumper) {
+                xsecondchanged = false;
+            }
+            if (!seconded && !gamepad2.left_bumper && state != State.AUTO) {
+                seconded = true;
+            }
         /*
         if(parState == Subsystem.State.ON && (gamepad2.left_stick_y != 0 || state != State.AUTO && state != State.TRANSITIONING)) {
             if(gamepad2.left_stick_y == 0 && !(gamepad2.dpad_right || gamepad2.dpad_left)) {
@@ -113,23 +122,28 @@ public class Extension implements Subsystem {
             }
         }
          */
-        if(state == State.AUTO) {
-            if(robot.ex != null) {
-                robot.ex.setTargetPosition(Globals.EXTEND_POS);
-                target = Globals.EXTEND_POS;
-                robot.ex.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.ex.setPower(0.75);
-            }
-        }
-        else if(state == State.TRANSITIONING) {
-            if(robot.ex != null) {
-                target = 0;
-                robot.ex.setTargetPosition(0);
-                robot.ex.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.ex.setPower(1);
-                if(!robot.ex.isBusy()) {
-                    state = State.IDLE;
+            if (state == State.AUTO) {
+                if (robot.ex != null) {
+                    robot.ex.setTargetPosition(Globals.EXTEND_POS);
+                    target = Globals.EXTEND_POS;
+                    robot.ex.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    robot.ex.setPower(Math.min(1, Math.max(Math.abs(target - data1.getMotorCurrentPosition(robot.ex)) / 300f, 0.25)));
                 }
+            } else if (state == State.TRANSITIONING) {
+                if (robot.ex != null) {
+                    target = 0;
+                    robot.ex.setTargetPosition(0);
+                    robot.ex.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    if (!robot.ex.isBusy()) {
+                        robot.ex.setPower(0.4);
+                        state = State.IDLE;
+                    } else {
+                        robot.ex.setPower(Math.min(1, Math.max(Math.abs(target - data1.getMotorCurrentPosition(robot.ex)) / 300f, 0.25)));
+                    }
+                }
+            }
+            else {
+                robot.ex.setPower(0);
             }
         }
     }
